@@ -1,10 +1,14 @@
+=====================
+My .vim configuration
+=====================
+
 --------------------------------
 Installation in three easy steps
 --------------------------------
 
 Clone repo::
 
-    git clone git://github.com/USERNAME/REPONAME.git ~/.vim
+    git clone git://github.com/saliola/dotvim.git ~/.vim
 
 Create symlinks (for vim version < 7.4)::
 
