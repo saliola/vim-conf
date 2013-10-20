@@ -68,7 +68,7 @@ set iskeyword=@,48-57,_,192-255
 set formatoptions+=1n
 
 " spell-checking
-set nospell " no spell checking (in terminal only; it's reactivated in gvimrc)
+set nospell
 set spellsuggest=5
 
 " no swap files or backups
@@ -99,9 +99,9 @@ command! Notes :browse ~/Dropbox/notes/
 " command! FullScreenEditing :vertical new readonly | :vertical resize 120 | :wincmd w
 command! FullScreenEditing :vertical new | :vertical resize 120 | :wincmd w
 
-" show trailing spaces as dots
+" show trailing spaces as dots, highlight tabs, etc.
 set listchars=tab:>-,extends:»,precedes:«,trail:·
-"set listchars=
+match ErrorMsg /\t/
 
 " wild card settings
 set wildmenu
