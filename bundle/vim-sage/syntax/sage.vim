@@ -19,7 +19,7 @@ let b:current_syntax = "sage"
 " some new highlight groups
 hi Prompt ctermfg=33 guifg=#80a0ff
 hi link PyDocString Comment
-hi SageDocStringKeywords cterm=bold,underline ctermfg=245 guifg=LightGray gui=underline,bold
+hi SageDocStringKeywords cterm=bold,underline gui=underline,bold
 
 " By using the nextgroup argument below, we are giving priority to
 " pythonDocString over all other groups. This means that a pythonDocString
