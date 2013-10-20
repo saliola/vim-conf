@@ -2,11 +2,8 @@
 execute pathogen#infect()
 
 " shortcut to edit this file
-map ,rc :tabnew $MYVIMRC<CR><C-W>
+map ,rc :tabnew $MYVIMRC<CR>
 map ,src :source $MYVIMRC<CR>
-
-" shorten an often typed command
-imap <C-s> <esc>:w<CR>a
 
 " command line editing
 cnoremap <C-a> <Home>
@@ -40,7 +37,6 @@ endif
 " colors for folded blocks
 " -- defaults, except that I turned off underlining " in the terminal
 hi Folded term=none cterm=none ctermfg=240 ctermbg=254 gui=underline guifg=#585858 guibg=#e4e4e4 guisp=#ffffd7
-
 
 " Crosshair
 hi CursorColumn ctermbg=187 guibg=#eee8d5
@@ -107,26 +103,11 @@ command! FullScreenEditing :vertical new | :vertical resize 120 | :wincmd w
 set listchars=tab:>-,extends:»,precedes:«,trail:·
 "set listchars=
 
-" undo janus keybindings
-"nunmap <C-k>
-"nunmap <C-j>
-"vunmap <C-k>
-"vunmap <C-j>
-
 " wild card settings
 set wildmenu
 set wildmode=list:full
 " ignore these filenames during tab completion
 set wildignore+=*.out,*.synctex.gz,*.aux,*.ilg,*.log,*.nls,*.idx,*.ind,*.blg,*.nlo,*.pdf,*.toc
-
-" [old way] List of recent files
-" :bro[wse] ol[dfiles][!]
-" List file names as with |:oldfiles|, and then prompt
-" for a number.  When the number is valid that file from
-" the list is edited.
-" If you get the |press-enter| prompt you can press "q"
-" and still get the prompt to enter a file number.
-"command! Recent :browse oldfiles
 
 " List of recent files, using CtrlP <https://github.com/kien/ctrlp.vim>
 let g:ctrlp_cmd = 'CtrlPMRUFiles'
@@ -138,11 +119,6 @@ let g:ctrlp_prompt_mappings = {
     \ }
 nmap <C-p> :<C-U>CtrlPMRUFiles<CR>
 
-
-" TaskList.vim --- activiate wtih :TaskList
-"map <Leader>td <Plug>TaskList
-let g:tlTokenList = ['TODO', 'FIXME', 'XXX']
-
 " Use ReStructuredText syntax highlighting for .notes and .txt files
 "autocmd BufRead,BufNewFile *.notes set filetype=rst
 "autocmd BufRead,BufNewFile *.txt set filetype=rst | set nowrap
@@ -151,31 +127,6 @@ let g:tlTokenList = ['TODO', 'FIXME', 'XXX']
 autocmd BufRead,BufNewFile *.sage set filetype=python
 autocmd BufRead,BufNewFile *.chevie set filetype=python
 autocmd BufRead,BufNewFile *.g set filetype=python
-
-"" vim2sage
-"if has("python")
-"command! -range SageIt :py vim2sage(<line1>,<line2>)
-"map <S-CR> :SageIt<CR><CR>
-"imap <S-CR> <C-o><S-CR>
-"python << EOL
-"import vim
-"def vim2sage(line1,line2):
-"    import vim, subprocess
-"    range = vim.current.buffer.range(line1,line2)
-"    args = ['/usr/bin/screen', '-x', 'sagescreen', '-p', '0', '-X', 'stuff']
-"    for line in range:
-"        sp = subprocess.Popen(args+[line+r""""""])
-"        ## For debugging : in order to read stdout and stderr
-"        #sp = subprocess.Popen(args+["'%s%s'"%(line,"\n")],
-"        #    stdout=subprocess.PIPE,
-"        #    stderr=subprocess.PIPE,
-"        #    close_fds=True)
-"        #if not sp.poll():
-"        #    b=vim.current.buffer
-"        #    curline=vim.current.range.start
-"        #    b.append(("STDOUT:\n"+sp.stdout.read()+"\nSTDERR:\n"+sp.stderr.read()).split("\n"), curline)
-"EOL
-"endif
 
 " vim2sage
 if has("python")
@@ -211,41 +162,10 @@ function! OpenRejectFile()
 endfunction
 command! Rejects :call OpenRejectFile()
 
-" external make window
-if has("python")
-"command ExternalMakeWindow :py externalmakewindow
-python << EOL
-def externalmakewindow():
-    import vim, subprocess
-    # get current working directory
-    filename = vim.current.buffer.name
-    cwd = filename[:filename.rfind('/')]
-    # change to directory and run make
-    commands = ('cd %s; make' % cwd,)
-    command_prefix = ['/usr/bin/screen', '-x', 'makewindow', '-p', '0', '-X', 'stuff']
-    enter = r""""""
-    for command in commands:
-        args = command_prefix + [command+enter]
-        sp = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        # For debugging : in order to read stdout and stderr
-        print sp.communicate()[0]
-EOL
-endif
-"set makeprg=:py externalmakewindow
-
-
-" Tasklist settings
-autocmd BufRead,BufNewFile tasklist.rst set filetype=tasklist | imap <buffer> <S-CR> → | set comments=b:→ | set formatoptions+=o | set iskeyword+=#,@ | imap <buffer> -> →
-command! Tasks :tabnew ~/Dropbox/tasklists/tasklist.rst
-
 command! Notes :tabnew ~/Dropbox/notes/
-
 
 " Scratchpad settings
 command! ScratchPad :tabnew ~/Dropbox/scratchpad.rst
-
-" LaTeX
-"autocmd BufRead,BufNewFile *.tex source ~/Dropbox/configs/vim/vimrcfiles/latexsuite.vim
 
 """""""""""""""""""""""""""""""
 " latexbox configuration on mac
@@ -301,14 +221,6 @@ function! RunTeXShop()
    "write the file
    :w
 
-   "Previous Script:
-   " tell app \"TeXShop\"
-   "    set theDoc to open ((POSIX file \"'.expand("%:p").'\") as alias)
-   "    tell theDoc to latexinteractive
-   " end tell
-   "let execString = 'osascript -e "tell app \"TeXShop\"" -e "set theDoc to open ((POSIX file \"'.expand("%:p").'\") as alias)" -e "tell theDoc to latexinteractive" -e "end tell"'
-
-
    "New Script:
    " tell app \"TeXShop\"
    "    set theDoc to open ((POSIX file \"'.thePath.'\") as alias)
@@ -328,49 +240,6 @@ function! RunTeXShop()
 endfunction
 
 noremap  <D-t> :call RunTeXShop()<CR>
-"inoremap <D-t> <C-o>:call RunTeXShop()<CR>
-"noremap  <D-t> <Leader>ll
-
-""""""""""""""
-" TeXShop 2.47
-""""""""""""""
-"
-" VimScript:
-"
-" exec '!osascript -e "tell app \"TeXShop\"" -e "set theDoc to open ((POSIX file \"'.expand("%:p").'\") as alias)" -e "tell theDoc to latexinteractive" -e "end tell"'
-"
-" AppleScript:
-"
-" tell application "TeXShop"
-" 	set theDoc to open ((POSIX file "/Users/saliola/Dropbox/Mathematics/articles/NonCommutativeHallLittlewood/arXivDraftMNrule.tex") as alias)
-" 	tell theDoc to latexinteractive
-" end tell
-"
-" AppleScript Output:
-"
-" tell application "TeXShop"
-" 	open alias "Macintosh HD:Users:saliola:Dropbox:Mathematics:articles:NonCommutativeHallLittlewood:arXivDraftMNrule.tex"
-" 		--> document 1
-" 	latexinteractive document 1
-" end tell
-"
-""""""""""""""""""
-" End TeXShop 2.47
-""""""""""""""""""
-
-
-
-" ConqueTerm
-" leave Conque buffer using <C-w> commands while still in insert mode
-"let s:ConqueTerm_CWInsert = 1
-" send currently selected text to the most recently created Conque buffer
-"let g:ConqueTerm_SendVisKey = <S-CR>
-" toggle terminal input mode : pause terminal input and output display 
-"let g:ConqueTerm_ToggleKey = '`<F8>`'
-" Conque will continue to update after you've switched to another buffer
-"let g:ConqueTerm_ReadUnfocused = 1
-" close buffer when program exists
-"let g:ConqueTerm_CloseOnEnd = 0
 
 " Diff current file with the version on disk
 " [From Hacking Vim, Chapter 4, by Kim Schulz]
@@ -390,7 +259,6 @@ endfunction
 " For the French keyboard on the MacBook: map the key §/± key to `/~
 map! § `
 map! ± ~
-
 
 """"""
 "" From Hacking Vim, Chapter 4, by Kim Schulz
@@ -422,33 +290,6 @@ map! ± ~
 "" binds SuperCleverTab to Tab
 "inoremap <Tab> <C-R>=SuperCleverTab()<CR>
 
-" tasklist : filenames are added as :
-function! HandleFilename()
-  let s:uri = matchstr(getline("."), ' :[^ ]*')
-  let s:uri = s:uri[2:]
-  echo s:uri
-  if s:uri != ""
-      echo "found the filename " . s:uri
-      execute "tabnew " . s:uri
-  else
-      echo "No filename found in line."
-  endif
-endfunction
-map <Leader>gf :call HandleFilename()<CR><CR>
-
-"" Mac OS X : open a url
-"" http://vim.wikia.com/wiki/Open_a_web-browser_with_the_URL_in_the_current_line
-"function! HandleURI()
-"  let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;:]*')
-"  echo s:uri
-"  if s:uri != ""
-"      exec "!open \"" . s:uri . "\""
-"  else
-"      echo "No URI found in line."
-"  endif
-"endfunction
-"map <Leader>gw :call HandleURI()<CR><CR>
-
 " OpenURL function
 " http://www.vim.org/scripts/script.php?script_id=3291
 function! OpenURL()
@@ -470,65 +311,6 @@ EOM
 endfunction
 " set a command for OpenURL function
 map <Leader>gw :call OpenURL()<CR><CR>
-
-" Syntastic Warning / Error codes, broken out by component.
-" see: http://pypi.python.org/pypi/flake8
-"
-" pep8:
-" E101: indentation contains mixed spaces and tabs
-" E111: indentation is not a multiple of four
-" E112: expected an indented block
-" E113: unexpected indentation
-" E201: whitespace after char
-" E202: whitespace before char
-" E203: whitespace before char
-" E211: whitespace before text
-" E223: tab / multiple spaces before operator
-" E224: tab / multiple spaces after operator
-" E225: missing whitespace around operator
-" E225: missing whitespace around operator
-" E231: missing whitespace after char
-" E241: multiple spaces after separator
-" E242: tab after separator
-" E251: no spaces around keyword / parameter equals
-" E262: inline comment should start with '# '
-" E301: expected 1 blank line, found 0
-" E302: expected 2 blank lines, found <n>
-" E303: too many blank lines (<n>)
-" E304: blank lines found after function decorator
-" E401: multiple imports on one line
-" E501: line too long (<n> characters)
-" E701: multiple statements on one line (colon)
-" E702: multiple statements on one line (semicolon)
-" W191: indentation contains tabs
-" W291: trailing whitespace
-" W292: no newline at end of file
-" W293: blank line contains whitespace
-" W391: blank line at end of file
-" W601: .has_key() is deprecated, use 'in'
-" W602: deprecated form of raising exception
-" W603: '<>' is deprecated, use '!='
-" W604: backticks are deprecated, use 'repr()'
-"
-" pyflakes
-" W402: <module> imported but unused
-" W403: import <module> from line <n> shadowed by loop variable
-" W404: 'from <module> import *' used; unable to detect undefined names
-" W405: future import(s) <name> after other statements
-" W801: redefinition of unused <name> from line <n>
-" W802: undefined name <name>
-" W803: undefined name <name> in __all__
-" W804: local variable <name> (defined in enclosing scope on line <n>) referenced before assignment
-" W805: duplicate argument <name> in function definition
-" W806: redefinition of function <name> from line <n>
-" W806: local variable <name> is assigned to but never used
-"
-" McCabe
-" W901: '<function_name>' is too complex ('<complexity_level>')
-let g:syntastic_python_checker_args='--ignore=E501,E302'
-
-" Syntastic: disable marking of syntax errors for terminal (re-enabled in .gvimrc)
-let g:syntastic_enable_signs=0
 
 " Show the highlight group syntax under the cursor
 " http://vim.wikia.com/wiki/Showing_syntax_highlight_group_in_statusline
