@@ -8,7 +8,7 @@ Installation in three easy steps
 
 Clone repo::
 
-    git clone git://github.com/saliola/dotvim.git ~/.vim
+    git clone https://github.com/saliola/dotvim.git ~/.vim
 
 Create symlinks (for vim version < 7.4)::
 
