@@ -6,6 +6,8 @@ My .vim configuration
 Installation in three easy steps
 --------------------------------
 
+The included script ``install.sh`` automates the steps below.
+
 Clone repo::
 
     git clone https://github.com/saliola/dotvim.git ~/.vim
