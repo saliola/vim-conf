@@ -1,11 +1,11 @@
 " let pathogen do its thing
 execute pathogen#infect()
 
-" shortcut to edit this file
+" Edit vimrc
 map ,rc :tabnew $MYVIMRC<CR>
 map ,src :source $MYVIMRC<CR>
 
-" command line editing
+" cursor movement in command line mode
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-h> <Left>
@@ -34,13 +34,10 @@ else
     colorscheme solarized
 endif
 
-" colors for folded blocks
-" -- defaults, except that I turned off underlining " in the terminal
-hi Folded term=none cterm=none ctermfg=240 ctermbg=254 gui=underline guifg=#585858 guibg=#e4e4e4 guisp=#ffffd7
+" syntax colouring for folded blocks: turn off underlining in the terminal
+highlight Folded term=none cterm=none
 
 " Crosshair
-hi CursorColumn ctermbg=187 guibg=#eee8d5
-hi CursorLine ctermbg=187 guibg=#eee8d5
 set cursorline
 set cursorcolumn
 set colorcolumn=80
@@ -75,10 +72,6 @@ set spellsuggest=5
 set nobackup         " no backup files
 set nowritebackup    " only in case you don't want a backup file while editing
 set noswapfile       " no swap files
-
-" Set C-Tab to switch tabs
-map <C-Tab> gt
-map <C-S-Tab> gt
 
 " Insert the current directory into a command-line path
 " Notes:
