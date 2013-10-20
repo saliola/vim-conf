@@ -116,11 +116,6 @@ nmap <C-p> :<C-U>CtrlPMRUFiles<CR>
 "autocmd BufRead,BufNewFile *.notes set filetype=rst
 "autocmd BufRead,BufNewFile *.txt set filetype=rst | set nowrap
 
-" Sage / Python settings
-autocmd BufRead,BufNewFile *.sage set filetype=python
-autocmd BufRead,BufNewFile *.chevie set filetype=python
-autocmd BufRead,BufNewFile *.g set filetype=python
-
 " vim2sage
 if has("python")
 python << EOL

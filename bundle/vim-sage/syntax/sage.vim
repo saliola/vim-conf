@@ -1,31 +1,25 @@
+if version < 600
+  syntax clear
+elseif exists("b:current_syntax")
+  finish
+endif
+
+" Read the Python and RST syntax files
+" (we will use the RST syntax highlighting for docstrings)
+if version < 600
+    source <sfile>:p:h/python.vim
+else
+    runtime! syntax/python.vim
+    unlet b:current_syntax " (otherwise rst.vim does nothing)
+    syntax include @ReST syntax/rst.vim
+endif
+
+let b:current_syntax = "sage"
+
 " some new highlight groups
 hi Prompt ctermfg=33 guifg=#80a0ff
-"hi PyDocString ctermfg=245 guifg=DarkGray
 hi link PyDocString Comment
-hi SageDocStringKeywords cterm=bold,underline ctermfg=245 ctermbg=187 guifg=LightGray gui=underline,bold
-
-"""""" BEGIN VERSION 7.3
-"" Load the ReST syntax file; but first we clear the current syntax
-"" definition, as rst.vim does nothing if b:current_syntax is defined.
-"let s:current_syntax=b:current_syntax
-"unlet b:current_syntax
-"" Load the ReST syntax file
-"syntax include @ReST $VIMRUNTIME/syntax/rst.vim
-"let b:current_syntax=s:current_syntax
-"unlet s:current_syntax
-"" clear the rstLiteralBlock
-"" TODO: improve this; this should apply to all
-"" pythonDocString regions but the sageDoctest regions
-"syntax clear rstLiteralBlock
-"""""" END VERSION 7.3
-
-"""""" BEGIN VERSION 7.4
-" Load the ReST syntax file; this is just a copy of $VIMRUNTIME/syntax/rst.vim
-" with the test exists("b:current_syntax") disables.
-syntax include @ReST <sfile>:p:h/rst.vim
-" Clear the rstLiteralBlock so that our highlighting applies
-syntax clear rstLiteralBlock
-"""""" END VERSION 7.4
+hi SageDocStringKeywords cterm=bold,underline ctermfg=245 guifg=LightGray gui=underline,bold
 
 " By using the nextgroup argument below, we are giving priority to
 " pythonDocString over all other groups. This means that a pythonDocString
