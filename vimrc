@@ -155,30 +155,32 @@ command! Notes :tabnew ~/Dropbox/notes/
 " Scratchpad settings
 command! ScratchPad :tabnew ~/Dropbox/scratchpad.rst
 
-"""""""""""""""""""""""""""""""
-" latexbox configuration on mac
-"""""""""""""""""""""""""""""""
-let g:LatexBox_output_type = "pdf"
-" disable automatically openning the quickfix window post-compilation;
-" use :copen to open the window; or use <Leader>le (latexbox errors)
-let g:LatexBox_quickfix = 0
+""""""""""""""""""""""""
+" latexbox configuration
+""""""""""""""""""""""""
 if has("unix")
     let s:uname = system("uname")
     if s:uname == "Darwin\n"
         let g:LatexBox_viewer = "open -a /Applications/Skim.app"
-        let g:LatexBox_latexmk_async = 0
-    else
-        let g:LatexBox_latexmk_async = 1
+        " use SyncTeX with the Skim viewer
+        map <silent> <Leader>ls :silent
+                \ !/Applications/Skim.app/Contents/SharedSupport/displayline
+                \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
+                \ "%:p" <CR>
     endif
 endif
+
+let g:LatexBox_output_type = "pdf"
 "let g:LatexBox_latexmk_options = '-pdfdvi'
+"
 let g:LatexBox_Folding = 1
 
-" use SyncTeX with the Skim viewer
-map <silent> <Leader>ls :silent
-        \ !/Applications/Skim.app/Contents/SharedSupport/displayline
-        \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
-        \ "%:p" <CR>
+" disable async compile since it requires a vim server (complains in terminal)
+let g:LatexBox_latexmk_async = 0
+
+" disable automatic opening the quickfix window post-compilation;
+" use :copen to open the window; or use <Leader>le (latexbox errors)
+let g:LatexBox_quickfix = 0
 
 """""""""""""""""""
 " latexbox commands
