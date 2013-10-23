@@ -93,6 +93,7 @@ command! Notes :browse ~/Dropbox/notes/
 command! FullScreenEditing :vertical new | :vertical resize 120 | :wincmd w
 
 " show trailing spaces as dots, highlight tabs, etc.
+set list!
 set listchars=tab:>-,extends:»,precedes:«,trail:·
 match ErrorMsg /\t/
 
