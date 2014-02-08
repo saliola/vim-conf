@@ -13,6 +13,10 @@ cnoremap <C-l> <Right>
 cnoremap <C-j> <Down>
 cnoremap <C-k> <Up>
 
+" bind jk and kj to Esc
+inoremap jk <Esc>
+inoremap kj <Esc>
+
 " insert current date
 nnoremap <D-D> "=strftime("%F")<CR>P
 inoremap <D-D> <C-R>=strftime("%F")<CR>
