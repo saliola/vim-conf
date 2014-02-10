@@ -13,3 +13,6 @@
 [submodule "bundle/LaTeX-Box"]
 	path = bundle/LaTeX-Box
 	url = https://github.com/LaTeX-Box-Team/LaTeX-Box.git
+[submodule "bundle/vim-vinegar"]
+	path = bundle/vim-vinegar
+	url = git://github.com/tpope/vim-vinegar.git
