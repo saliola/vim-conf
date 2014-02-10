@@ -1,7 +1,8 @@
 """"""
 " Automatically set paste mode in Vim when pasting in insert mode
 "
-" Reference: https://coderwall.com/p/if9mda
+" author: Marcin Kulik
+" reference: https://coderwall.com/p/if9mda
 
 " inside of tmux, you need to double escape the codes in tSI/tEI.
 function! WrapForTmux(s)
