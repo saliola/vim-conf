@@ -172,6 +172,8 @@ if has("unix")
                 \ !/Applications/Skim.app/Contents/SharedSupport/displayline
                 \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
                 \ "%:p" <CR>
+    else
+        let g:LatexBox_viewer = "okular"
     endif
 endif
 
