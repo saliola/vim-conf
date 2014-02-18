@@ -287,27 +287,16 @@ map! ± ~
 "" binds SuperCleverTab to Tab
 "inoremap <Tab> <C-R>=SuperCleverTab()<CR>
 
-" OpenURL function
-" http://www.vim.org/scripts/script.php?script_id=3291
-function! OpenURL()
-python << EOM
-# coding=utf-8
-import vim
-import re
-import webbrowser
-re_obj = re.compile(r'https?://[a-zA-Z0-9-./"#$%&\':?=_+]+')
-line = vim.current.line
-match_obj = re_obj.search(line)
-try:
-    url = match_obj.group()
-    webbrowser.open(url)
-    print 'open URL : %s' % url
-except:
-    print 'failed! : open URL'
-EOM
-endfunction
-" set a command for OpenURL function
-map <Leader>gw :call OpenURL()<CR><CR>
+" Open the url under the cursor with gx
+if has("unix")
+    let s:uname = system("uname")
+    if s:uname == "Darwin\n"
+        " defaults to 'open' on Mac OSX
+        let g:netrw_browsex_viewer='-'
+    else
+        let g:netrw_browsex_viewer='gvfs-open'
+    endif
+endif
 
 " Show the highlight group syntax under the cursor
 " http://vim.wikia.com/wiki/Showing_syntax_highlight_group_in_statusline
