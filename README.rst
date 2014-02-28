@@ -44,6 +44,12 @@ Upgrading all plugins::
     cd ~/.vim
     git submodule foreach git pull origin master
 
+Pulling changes that include a new plugin::
+
+    git pull origin master
+    git submodule init
+    git submodule update
+
 ----------
 References
 ----------
