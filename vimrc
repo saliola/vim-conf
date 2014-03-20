@@ -303,3 +303,7 @@ endif
 function! ShowSyntaxHighlightGroup()
     echo synIDattr(synID(line("."),col("."),1),"name")
 endfunction
+
+" mapping to toggle (no)paste before pasting from the clipboard
+" Reference: http://tilvim.com/2014/03/18/a-better-paste.html
+map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
