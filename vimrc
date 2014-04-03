@@ -45,6 +45,23 @@ highlight Folded term=none cterm=none
 set cursorline
 set cursorcolumn
 set colorcolumn=80
+nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
+function! RedCursorLine()
+    let w:red_cursor = exists('w:red_cursor') ? !w:red_cursor : 0
+    if w:red_cursor
+        colorscheme solarized
+        set cursorline
+        set cursorcolumn
+        set colorcolumn=80
+    else
+        set cursorline
+        hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+        set nocursorcolumn
+        hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+        set colorcolumn=
+    endif
+endfunction
+command! RedCursorLine :call RedCursorLine()
 
 " hybrid line numbers (requires 7.4)
 set number " set number
