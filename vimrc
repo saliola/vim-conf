@@ -213,6 +213,9 @@ let g:LatexBox_latexmk_async = 0
 " use :copen to open the window; or use <Leader>le (latexbox errors)
 let g:LatexBox_quickfix = 0
 
+" Turn on/off folding of environments
+let g:LatexBox_fold_envs = 0
+
 """""""""""""""""""
 " latexbox commands
 """""""""""""""""""
