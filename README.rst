@@ -50,8 +50,9 @@ Pulling changes that include a new plugin::
     git submodule init
     git submodule update
 
-`Delete a plugin`__ (from git root directory; requires version > git1.8.3)::
+`Delete a plugin`__ (requires version > git1.8.3)::
 
+    cd ~/.vim
     git submodule deinit bundle/snipmate.vim
     git rm bundle/snipmate.vim # Note: no trailing slash
 
