@@ -135,8 +135,15 @@ let g:ctrlp_prompt_mappings = {
 nmap <C-p> :<C-U>CtrlPMRUFiles<CR>
 
 " Use ReStructuredText syntax highlighting for .notes and .txt files
-"autocmd BufRead,BufNewFile *.notes set filetype=rst
-"autocmd BufRead,BufNewFile *.txt set filetype=rst | set nowrap
+autocmd BufRead,BufNewFile *.notes set filetype=rst
+autocmd BufRead,BufNewFile *.txt set filetype=rst | set nowrap
+
+" UltiSnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+"let g:UltiSnipsEditSplit="vertical"
 
 " vim2sage
 if has("python")
