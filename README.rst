@@ -23,9 +23,9 @@ Switch to the `~/.vim` directory, and fetch submodules::
     git submodule init
     git submodule update
 
-----------------------------------
-Working with plugins as submodules
-----------------------------------
+------------------------------------------
+Working with plugins/bundles as submodules
+------------------------------------------
 
 Install a plugin as a submodule::
 
@@ -49,6 +49,13 @@ Pulling changes that include a new plugin::
     git pull origin master
     git submodule init
     git submodule update
+
+`Delete a plugin`__ (from git root directory; requires version > git1.8.3)::
+
+    git submodule deinit bundle/snipmate.vim
+    git rm bundle/snipmate.vim # Note: no trailing slash
+
+__ http://stackoverflow.com/questions/1260748/how-do-i-remove-a-git-submodule
 
 ----------
 References
