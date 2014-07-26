@@ -35,7 +35,7 @@ let g:LatexBox_latexmk_async = 0
 
 " disable automatic opening the quickfix window post-compilation;
 " use :copen to open the window; or use <Leader>le (latexbox errors)
-let g:LatexBox_quickfix = 0
+let g:LatexBox_quickfix = 2
 
 " Turn off folding of all environments, but insist that abstract, figure and
 " frame environments are folded.
@@ -45,6 +45,17 @@ let g:LatexBox_fold_envs_force = [
             \ "figure",
             \ "frame"
             \ ]
+
+let g:LatexBox_show_warnings = 1
+let g:LatexBox_ignore_warnings = [
+            \ 'Underfull',
+            \ 'Overfull',
+            \ 'specifier changed to',
+            \ 'LaTeX Font Warning: Font shape',
+            \ 'Package xcolor Warning: Incompatible color definition on input line',
+            \ ]
+
+
 
 """""""""""""""
 " Some mappings
