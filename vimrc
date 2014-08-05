@@ -172,7 +172,7 @@ def sage_doctest_tmux_writer(line1, line2, pane_id):
 
     # use %cpaste if there is more than one line
     if line1 != line2:
-        range = [r'%cpaste'] + range + [r'''''']
+        range = ['%cpaste'] + range + ['C-d']
 
     # compute the pane; if no pane is specified, use the 'last' used pane
     # this requires
@@ -181,12 +181,9 @@ def sage_doctest_tmux_writer(line1, line2, pane_id):
     pane_id = vim.eval("tbone#pane_id('%s')" % pane_id)
 
     # send the commands
-    args = ['/usr/local/bin/tmux', 'send-keys', '-t', pane_id]
+    args = ['tmux', 'send-keys', '-t', pane_id]
     for line in range:
-        sp = subprocess.call(args+[line])
-        sp = subprocess.call(args+["Enter"])
-        if sp != 0:
-           raise Exception("no appropriate tmux session found")
+        subprocess.call(args + [line, "Enter"])
 EOL
 command! -nargs=? -range -complete=custom,tbone#complete_panes SageDoctestTwrite
     \ execute ":python sage_doctest_tmux_writer(<line1>, <line2>, \"<args>\")"
