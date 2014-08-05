@@ -145,28 +145,52 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 "let g:UltiSnipsEditSplit="vertical"
 
-" vim2sage
+" SageDoctestTwrite: requires vim-tbone
 if has("python")
 python << EOL
 import vim
-def vim2sage(line1,line2):
+def sage_doctest_tmux_writer(line1, line2, pane_id):
+    r"""
+    Paste a sage doctest into a tmux pane.
+
+    Lines that don't start with "sage:" or "....:" are ignored (that is, the
+    lines corresponding to the expected output are ignored).
+    """
     import vim, subprocess
-    if line1 == line2:
-        range = list(vim.current.buffer.range(line1,line2))
-    else:
-        range = [r'%cpaste'] + list(vim.current.buffer.range(line1,line2)) + [r'''''']
-    args = ['/usr/local/bin/tmux', 'send-keys', '-t', '0']
+
+    range = list(vim.current.buffer.range(line1,line2))
+
+    # remove whitespace and docstring indicators, ignoring non-docstring lines
+    new_range = []
+    for (i, line) in enumerate(range):
+        for indicator in ('sage: ', '....: '):
+            if line.lstrip(' ').startswith(indicator):
+                indent_level = line.index(indicator)
+                line = line[indent_level + len(indicator):]
+                new_range.append(line)
+    range = new_range
+
+    # use %cpaste if there is more than one line
+    if line1 != line2:
+        range = [r'%cpaste'] + range + [r'''''']
+
+    # compute the pane; if no pane is specified, use the 'last' used pane
+    # this requires
+    if pane_id == '':
+        pane_id = 'last'
+    pane_id = vim.eval("tbone#pane_id('%s')" % pane_id)
+
+    # send the commands
+    args = ['/usr/local/bin/tmux', 'send-keys', '-t', pane_id]
     for line in range:
         sp = subprocess.call(args+[line])
         sp = subprocess.call(args+["Enter"])
         if sp != 0:
            raise Exception("no appropriate tmux session found")
 EOL
-command! -range SageVisualMode :call SageVisualModeFunction(<line1>,<line2>)
-function! SageVisualModeFunction(line1,line2)
-    execute ":python vim2sage(" . a:line1 . "," . a:line2 . ")"
-endfunction
-map <S-CR> :SageVisualMode<CR><CR>
+command! -nargs=? -range -complete=custom,tbone#complete_panes SageDoctestTwrite
+    \ execute ":python sage_doctest_tmux_writer(<line1>, <line2>, \"<args>\")"
+map <S-CR> :SageDoctestTwrite<CR><CR>
 imap <S-CR> <C-o><S-CR>
 endif
 
