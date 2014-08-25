@@ -1,9 +1,45 @@
-" let pathogen do its thing
+" let pathogen do its thing {{{
+
 execute pathogen#infect()
 
-" Edit vimrc
-map ,rc :tabnew $MYVIMRC<CR>
-map ,src :source $MYVIMRC<CR>
+" }}}
+" Leaders {{{
+
+let mapleader = ","
+let maplocalleader = "\\"
+
+" }}}
+" vimrc {{{
+
+map <leader>ev :tabnew $MYVIMRC<CR>
+
+" Source the vimrc file after saving it
+augroup vimrc
+    au!
+    au bufwritepost .vimrc source $MYVIMRC
+augroup END
+
+augroup ft_vim
+    au!
+    au FileType vim setlocal foldmethod=marker
+    au FileType help setlocal textwidth=78
+    au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+augroup END
+
+" }}}
+" Line Return {{{
+
+" Make sure Vim returns to the same line when you reopen a file.
+" Thanks, Steve Losh https://bitbucket.org/sjl/dotfiles/src/tip/vim/vimrc
+augroup line_return
+    au!
+    au BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \     execute 'normal! g`"zvzz' |
+        \ endif
+augroup END
+
+" }}}
 
 " cursor movement in command line mode
 cnoremap <C-a> <Home>
