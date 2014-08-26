@@ -2,6 +2,15 @@
 " Author: Franco Saliola <saliola@gmail.com>
 " credit: various sources, including steve losh's vimrc http://bitbucket.org/sjl/dotfiles/src/tip/vim/
 
+" Things to look up ------------------------------------------------------- {{{
+"
+" <C-x><C-f>
+" <C-x><C-l>
+" <C-x><C-]>
+" g;
+" g,
+" ------------------------------------------------------------------------- }}}
+
 " Pathogen ---------------------------------------------------------------- {{{
 
 execute pathogen#infect()
@@ -135,10 +144,10 @@ cmap %% <C-R>=escape(expand("%"),' ')<CR>
 
 " Opens a tab edit command with the path of the currently edited file filled in
 " Normal mode: <Leader>t
-map <LocalLeader>t :tabnew
-map <LocalLeader>tp :tabnew <C-p>
-map <LocalLeader>tn :tabnew 
-map <LocalLeader>tN :tabnew ~/Dropbox/notes/
+map <Leader>t :tabnew
+map <Leader>tp :tabnew <C-p>
+map <Leader>tn :tabnew 
+map <Leader>tN :tabnew ~/Dropbox/notes/
 command! Notes :tabnew ~/Dropbox/notes/
 
 " Scratchpad settings
@@ -147,6 +156,43 @@ command! ScratchPad :tabnew ~/Dropbox/scratchpad.rst
 " Fullscreen with 
 " command! FullScreenEditing :vertical new readonly | :vertical resize 120 | :wincmd w
 command! FullScreenEditing :vertical new | :vertical resize 120 | :wincmd w
+
+" Make the help key do something useful.
+noremap  <F1> :checktime<cr>
+inoremap <F1> <esc>:checktime<cr>
+
+" Make the Q key to something useful.
+nnoremap Q gqip
+vnoremap Q gq
+
+" Join an entire paragraph. -- Steve Losh
+nnoremap <Leader>J mzvipJ`z
+
+" Don't move on * -- Steve Losh
+nnoremap <silent> * :let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
+
+" Keep search matches in the middle of the window. -- Steve Losh
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+
+" ------------------------------------------------------------------------- }}}
+" Folding ----------------------------------------------------------------- {{{
+
+" TODO: pick a different key instead of C-z
+
+" From Steve Losh:
+" "Focus" the current line.  Basically:
+"
+" 1. Close all folds.
+" 2. Open just the folds containing the current line.
+" 3. Move the line to a little bit (15 lines) above the center of the screen.
+" 4. Pulse the cursor line.  My eyes are bad.
+"
+" This mapping wipes out the z mark, which I never use.
+"
+" I use :sus for the rare times I want to actually background Vim.
+nnoremap <c-z> mzzMzvzz15<c-e>`z:Pulse<cr>
 
 " ------------------------------------------------------------------------- }}}
 " Appearance -------------------------------------------------------------- {{{
@@ -224,10 +270,15 @@ source ~/.vim/bundle/my-vim-latex-config/latexbox-conf.vim
 " ------------------------------------------------------------------------- }}}
 " Filetype-specific ------------------------------------------------------- {{{
 
+" txt / notes {{{
+
 " TODO: move to appropriate ft_* augroup
 " Use ReStructuredText syntax highlighting for .notes and .txt files
 autocmd BufRead,BufNewFile *.notes set filetype=rst
 autocmd BufRead,BufNewFile *.txt set filetype=rst | set nowrap
+
+" }}}
+" Hg {{{
 
 " TODO: this was useful for working with hg ... move to a plugin ?
 function! OpenRejectFile()
@@ -238,6 +289,17 @@ function! OpenRejectFile()
     exec 'edit '.rejectsfile
 endfunction
 command! Rejects :call OpenRejectFile()
+
+" }}}
+" Python {{{
+
+augroup ft_python
+    au!
+
+    au FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+augroup END
+
+" }}}
 
 " ------------------------------------------------------------------------- }}}
 " Sage -------------------------------------------------------------------- {{{
@@ -373,6 +435,115 @@ endif
 function! ShowSyntaxHighlightGroup()
     echo synIDattr(synID(line("."),col("."),1),"name")
 endfunction
+
+" Show the stack of syntax hilighting classes affecting whatever is under the
+" cursor. -- Steve Losh
+function! SynStack()
+  echo join(map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")'), " > ")
+endfunc
+
+" ------------------------------------------------------------------------- }}}
+" Pulse Line -------------------------------------------------------------- {{{
+" Source: Steve Losh
+
+function! s:Pulse() " {{{
+    redir => old_hi
+        silent execute 'hi CursorLine'
+    redir END
+    let old_hi = split(old_hi, '\n')[0]
+    let old_hi = substitute(old_hi, 'xxx', '', '')
+
+    let steps = 2
+    let width = 1
+    let start = width
+    let end = steps * width
+    let color = 160
+
+    for i in range(start, end, width)
+        execute "hi CursorLine ctermbg=" . (color + i)
+        redraw
+        sleep 6m
+    endfor
+    for i in range(end, start, -1 * width)
+        execute "hi CursorLine ctermbg=" . (color + i)
+        redraw
+        sleep 6m
+    endfor
+
+    execute 'hi ' . old_hi
+endfunction " }}}
+command! -nargs=0 Pulse call s:Pulse()
+
+" ------------------------------------------------------------------------- }}}
+" Indent Guides ----------------------------------------------------------- {{{
+
+let g:indentguides_state = 0
+function! IndentGuides() " {{{
+    if g:indentguides_state
+        let g:indentguides_state = 0
+        2match None
+    else
+        let g:indentguides_state = 1
+        execute '2match IndentGuides /\%(\_^\s*\)\@<=\%(\%'.(0*&sw+1).'v\|\%'.(1*&sw+1).'v\|\%'.(2*&sw+1).'v\|\%'.(3*&sw+1).'v\|\%'.(4*&sw+1).'v\|\%'.(5*&sw+1).'v\|\%'.(6*&sw+1).'v\|\%'.(7*&sw+1).'v\)\s/'
+    endif
+endfunction " }}}
+hi def IndentGuides guibg=#303030 ctermbg=234
+nnoremap <leader>I :call IndentGuides()<cr>
+
+" ------------------------------------------------------------------------- }}}
+" Highlight Word ---------------------------------------------------------- {{{
+"
+" Source: Steve Losh
+" This mini-plugin provides a few mappings for highlighting words temporarily.
+"
+" Sometimes you're looking at a hairy piece of code and would like a certain
+" word or two to stand out temporarily.  You can search for it, but that only
+" gives you one color of highlighting.  Now you can use <leader>N where N is
+" a number from 1-6 to highlight the current word in a specific color.
+
+function! HiInterestingWord(n) " {{{
+    " Save our location.
+    normal! mz
+
+    " Yank the current word into the z register.
+    normal! "zyiw
+
+    " Calculate an arbitrary match ID.  Hopefully nothing else is using it.
+    let mid = 86750 + a:n
+
+    " Clear existing matches, but don't worry if they don't exist.
+    silent! call matchdelete(mid)
+
+    " Construct a literal pattern that has to match at boundaries.
+    let pat = '\V\<' . escape(@z, '\') . '\>'
+
+    " Actually match the words.
+    call matchadd("InterestingWord" . a:n, pat, 1, mid)
+
+    " Move back to our original location.
+    normal! `z
+endfunction " }}}
+
+" Mappings {{{
+
+nnoremap <silent> <leader>1 :call HiInterestingWord(1)<cr>
+nnoremap <silent> <leader>2 :call HiInterestingWord(2)<cr>
+nnoremap <silent> <leader>3 :call HiInterestingWord(3)<cr>
+nnoremap <silent> <leader>4 :call HiInterestingWord(4)<cr>
+nnoremap <silent> <leader>5 :call HiInterestingWord(5)<cr>
+nnoremap <silent> <leader>6 :call HiInterestingWord(6)<cr>
+
+" }}}
+" Default Highlights {{{
+
+hi def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
+hi def InterestingWord2 guifg=#000000 ctermfg=16 guibg=#aeee00 ctermbg=154
+hi def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#8cffba ctermbg=121
+hi def InterestingWord4 guifg=#000000 ctermfg=16 guibg=#b88853 ctermbg=137
+hi def InterestingWord5 guifg=#000000 ctermfg=16 guibg=#ff9eb8 ctermbg=211
+hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
+
+" }}}
 
 " ------------------------------------------------------------------------- }}}
 " ------------------------------------------------------------------------- }}}
