@@ -1,4 +1,8 @@
-" let pathogen do its thing {{{
+" .vimrc
+" Author: Franco Saliola <saliola@gmail.com>
+" credit: various sources, including steve losh's vimrc http://bitbucket.org/sjl/dotfiles/src/tip/vim/
+
+" Pathogen {{{
 
 execute pathogen#infect()
 
@@ -27,6 +31,79 @@ augroup ft_vim
 augroup END
 
 " }}}
+" Basic options {{{
+
+set encoding=utf-8
+set showmode
+set showcmd
+set visualbell
+set nowrap " don't wrap text ; I have a wide monitor
+set textwidth=0 " set textwidth to 75 to cause wrapping
+set hlsearch " hightlight search
+set history=50 " 50 lines of command lines history
+set viminfo='20,\"50 " read/write a .viminfo file with at most 50 lines
+set ruler " show the cursor position all the time
+set nojoinspaces " only put one space after periods
+set incsearch " incremental search
+set scrolloff=1 " always show n screen lines to above and below the cursor
+set tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab " tab settings for all files
+set undofile
+set undoreload=10000
+
+set laststatus=2
+set statusline=%F%m%r%h%w\ [Type=%Y]\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L]
+
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
+
+set iskeyword=@,48-57,_,192-255
+set formatoptions+=1n
+
+" hybrid line numbers (requires 7.4)
+set number " set number
+set relativenumber " set relative line numbers
+
+" spell-checking
+set nospell
+set spellsuggest=5
+
+" no swap files or backups
+set nobackup         " no backup files
+set nowritebackup    " only in case you don't want a backup file while editing
+set noswapfile       " no swap files
+
+" show trailing spaces as dots, highlight tabs, etc.
+set list
+set listchars=tab:▸-,extends:❯,precedes:❮,trail:· ",eol:¬
+"set listchars+=eol:¬
+set showbreak=↪
+match ErrorMsg /\t/
+
+set splitbelow
+set splitright
+set linebreak
+
+" wild card settings
+set wildmenu
+set wildmode=list:full
+
+" Resize splits when the window is resized
+au VimResized * :wincmd =
+
+" enable copy/paste on Mac OSX and tmux (see also notes/macosx.notes)
+set clipboard=unnamed
+
+" }}}
+" Command line mode {{{
+
+" cursor movement in command line mode
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-h> <Left>
+cnoremap <C-l> <Right>
+cnoremap <C-j> <Down>
+cnoremap <C-k> <Up>
+
+" }}}
 " Line Return {{{
 
 " Make sure Vim returns to the same line when you reopen a file.
@@ -40,25 +117,36 @@ augroup line_return
 augroup END
 
 " }}}
-
-" cursor movement in command line mode
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
-cnoremap <C-h> <Left>
-cnoremap <C-l> <Right>
-cnoremap <C-j> <Down>
-cnoremap <C-k> <Up>
-
-" bind jk and kj to Esc
-inoremap jk <Esc>
-inoremap kj <Esc>
+" Mappings {{{
 
 " insert current date
 nnoremap <D-D> "=strftime("%F")<CR>P
 inoremap <D-D> <C-R>=strftime("%F")<CR>
 
-" enable copy/paste on Mac OSX and tmux (see also notes/macosx.notes)
-set clipboard=unnamed
+" Insert the current directory into a command-line path
+" Notes:
+" - if path contains whitespace, then ``escape`` will escape them
+cmap <C-P> <C-R>=escape(expand("%:p:h"),' ') . "/"<CR>
+" Insert the current filename into a command-line path
+cmap %% <C-R>=escape(expand("%"),' ')<CR>
+
+" Opens a tab edit command with the path of the currently edited file filled in
+" Normal mode: <Leader>t
+map <Leader>t :tabnew
+map <Leader>tp :tabnew <C-p>
+map <Leader>tn :tabnew 
+map <Leader>tN :tabnew ~/Dropbox/notes/
+command! Notes :tabnew ~/Dropbox/notes/
+
+" Scratchpad settings
+command! ScratchPad :tabnew ~/Dropbox/scratchpad.rst
+
+" Fullscreen with 
+" command! FullScreenEditing :vertical new readonly | :vertical resize 120 | :wincmd w
+command! FullScreenEditing :vertical new | :vertical resize 120 | :wincmd w
+
+" }}}
+" Appearance {{{
 
 " Pretty Colours
 syntax enable " enable syntax highlighting
@@ -99,66 +187,10 @@ function! RedCursorLine()
 endfunction
 command! RedCursorLine :call RedCursorLine()
 
-" hybrid line numbers (requires 7.4)
-set number " set number
-set relativenumber " set relative line numbers
+" }}}
+" Plugin settings {{{
 
-" General settings
-set encoding=utf-8
-set nowrap " don't wrap text ; I have a wide monitor
-set textwidth=0 " set textwidth to 75 to cause wrapping
-set hlsearch " hightlight search
-set history=50 " 50 lines of command lines history
-set viminfo='20,\"50 " read/write a .viminfo file with at most 50 lines
-set ruler " show the cursor position all the time
-set nojoinspaces " only put one space after periods
-set incsearch " incremental search
-set scrolloff=1 " always show n screen lines to above and below the cursor
-set tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab " tab settings for all files
-set laststatus=2
-set statusline=%F%m%r%h%w\ [Type=%Y]\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L]
-set backspace=indent,eol,start " allow backspacing over everything in insert mode
-set iskeyword=@,48-57,_,192-255
-set formatoptions+=1n
-
-" spell-checking
-set nospell
-set spellsuggest=5
-
-" no swap files or backups
-set nobackup         " no backup files
-set nowritebackup    " only in case you don't want a backup file while editing
-set noswapfile       " no swap files
-
-" Insert the current directory into a command-line path
-" Notes:
-" - if path contains whitespace, then ``escape`` will escape them
-cmap <C-P> <C-R>=escape(expand("%:p:h"),' ') . "/"<CR>
-" Insert the current filename into a command-line path
-cmap %% <C-R>=escape(expand("%"),' ')<CR>
-
-" Opens a tab edit command with the path of the currently edited file filled in
-" Normal mode: <Leader>t
-map <Leader>t :tabnew
-map <Leader>tp :tabnew <C-p>
-map <Leader>tn :tabnew 
-map <Leader>tN :tabnew ~/Dropbox/notes/
-command! Notes :browse ~/Dropbox/notes/
-
-" Fullscreen with 
-" command! FullScreenEditing :vertical new readonly | :vertical resize 120 | :wincmd w
-command! FullScreenEditing :vertical new | :vertical resize 120 | :wincmd w
-
-" show trailing spaces as dots, highlight tabs, etc.
-set list!
-set listchars=tab:>-,extends:»,precedes:«,trail:·
-match ErrorMsg /\t/
-
-" wild card settings
-set wildmenu
-set wildmode=list:full
-" ignore these filenames during tab completion
-set wildignore+=*.out,*.synctex.gz,*.aux,*.ilg,*.log,*.nls,*.idx,*.ind,*.blg,*.nlo,*.pdf,*.toc
+" CtrlP {{{
 
 " List of recent files, using CtrlP <https://github.com/kien/ctrlp.vim>
 let g:ctrlp_cmd = 'CtrlPMRUFiles'
@@ -170,17 +202,44 @@ let g:ctrlp_prompt_mappings = {
     \ }
 nmap <C-p> :<C-U>CtrlPMRUFiles<CR>
 
-" Use ReStructuredText syntax highlighting for .notes and .txt files
-autocmd BufRead,BufNewFile *.notes set filetype=rst
-autocmd BufRead,BufNewFile *.txt set filetype=rst | set nowrap
+" }}}
+" UltiSnips {{{
 
-" UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 "let g:UltiSnipsEditSplit="vertical"
 
+" }}}
+" LaTeXBox {{{
+
+" TODO: switch to augroup
+source ~/.vim/bundle/my-vim-latex-config/latexbox-conf.vim
+
+" }}}
+" }}}
+" Filetype-specific {{{
+
+" TODO: move to appropriate ft_* augroup
+" Use ReStructuredText syntax highlighting for .notes and .txt files
+autocmd BufRead,BufNewFile *.notes set filetype=rst
+autocmd BufRead,BufNewFile *.txt set filetype=rst | set nowrap
+
+" TODO: this was useful for working with hg ... move to a plugin ?
+function! OpenRejectFile()
+    " splits window and opens the %.rej
+    let filename=expand('%')
+    let rejectsfile = filename.'.rej'
+    split
+    exec 'edit '.rejectsfile
+endfunction
+command! Rejects :call OpenRejectFile()
+
+" }}}
+" Sage {{{
+
+" TODO: move to vim-sage
 " SageDoctestTwrite: requires vim-tbone
 if has("python")
 python << EOL
@@ -227,24 +286,12 @@ map <S-CR> :SageDoctestTwrite<CR><CR>
 imap <S-CR> <C-o><S-CR>
 endif
 
-function! OpenRejectFile()
-    " splits window and opens the %.rej
-    let filename=expand('%')
-    let rejectsfile = filename.'.rej'
-    split
-    exec 'edit '.rejectsfile
-endfunction
-command! Rejects :call OpenRejectFile()
+" }}}
+" Latex {{{
 
-command! Notes :tabnew ~/Dropbox/notes/
-
-" Scratchpad settings
-command! ScratchPad :tabnew ~/Dropbox/scratchpad.rst
-
-""""""""""""""""""""""""
-" latexbox configuration
-""""""""""""""""""""""""
-source ~/.vim/bundle/my-vim-latex-config/latexbox-conf.vim
+" TODO: move to latex-conf augroup
+" ignore these filenames during tab completion
+set wildignore+=*.out,*.synctex.gz,*.aux,*.ilg,*.log,*.nls,*.idx,*.ind,*.blg,*.nlo,*.pdf,*.toc
 
 " open a .tex file in TeXShop
 function! TeXShop()
@@ -282,7 +329,15 @@ endfunction
 
 noremap  <D-t> :call RunTeXShop()<CR>
 
-" Diff current file with the version on disk
+" }}}
+" Useful functions {{{
+
+" mapping to toggle (no)paste before pasting from the clipboard {{{
+" Reference: http://tilvim.com/2014/03/18/a-better-paste.html
+map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
+"}}}
+" Diff current file with the version on disk {{{
+
 " [From Hacking Vim, Chapter 4, by Kim Schulz]
 function! DiffWithFileFromDisk()
     let filename=expand('%')
@@ -293,45 +348,10 @@ function! DiffWithFileFromDisk()
     exec 'edit '.filename
     diffthis
 endfunction
-" To execute this function:
-":call DiffWithFileFromDisk()
 
-""""" Mac OSX Specific
-" For the French keyboard on the MacBook: map the key §/± key to `/~
-map! § `
-map! ± ~
+" }}}
+" Open the url under the cursor with gx {{{
 
-""""""
-"" From Hacking Vim, Chapter 4, by Kim Schulz
-""
-"" Try, in order:
-""    - omni-completion
-""    - dictionary-completion
-""    - buffer-completion
-"function! SuperCleverTab()
-"    "check if at beginning of line or after a space
-"    if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-"        return "\<Tab>"
-"    else
-"        " use known-word completion
-"        return "\<C-N>"
-"        "" do we have omni completion available
-"        "if &omnifunc != ''
-"        "    " try omni-completion
-"        "    return "\<C-X>\<C-O>"
-"        "elseif &dictionary != ''
-"        "    " try dictionary completion
-"        "    return "\<C-K>"
-"        "else
-"        "    " use known-word completion
-"        "    return "\<C-N>"
-"        "endif
-"    endif
-"endfunction
-"" binds SuperCleverTab to Tab
-"inoremap <Tab> <C-R>=SuperCleverTab()<CR>
-
-" Open the url under the cursor with gx
 if has("unix")
     let s:uname = system("uname")
     if s:uname == "Darwin\n"
@@ -342,12 +362,19 @@ if has("unix")
     endif
 endif
 
-" Show the highlight group syntax under the cursor
+" }}}
+" Show the highlight group syntax under the cursor {{{
 " http://vim.wikia.com/wiki/Showing_syntax_highlight_group_in_statusline
 function! ShowSyntaxHighlightGroup()
     echo synIDattr(synID(line("."),col("."),1),"name")
 endfunction
 
-" mapping to toggle (no)paste before pasting from the clipboard
-" Reference: http://tilvim.com/2014/03/18/a-better-paste.html
-map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
+" }}}
+" }}}
+" Mac OSX Specific {{{
+
+" For the French keyboard on the MacBook: map the key §/± key to `/~
+map! § `
+map! ± ~
+
+" }}}
