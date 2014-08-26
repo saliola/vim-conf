@@ -2,18 +2,18 @@
 " Author: Franco Saliola <saliola@gmail.com>
 " credit: various sources, including steve losh's vimrc http://bitbucket.org/sjl/dotfiles/src/tip/vim/
 
-" Pathogen {{{
+" Pathogen ---------------------------------------------------------------- {{{
 
 execute pathogen#infect()
 
-" }}}
-" Leaders {{{
+" ------------------------------------------------------------------------- }}}
+" Leaders ----------------------------------------------------------------- {{{
 
 let mapleader = ","
 let maplocalleader = "\\"
 
-" }}}
-" vimrc {{{
+" ------------------------------------------------------------------------- }}}
+" vimrc ------------------------------------------------------------------- {{{
 
 map <leader>ev :tabnew $MYVIMRC<CR>
 
@@ -30,8 +30,8 @@ augroup ft_vim
     au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
 augroup END
 
-" }}}
-" Basic options {{{
+" ------------------------------------------------------------------------- }}}
+" Basic options ----------------------------------------------------------- {{{
 
 set encoding=utf-8
 set showmode
@@ -95,8 +95,8 @@ set directory=~/.vim/tmp/swap//   " swap files
 
 set noswapfile       " no swap files
 
-" }}}
-" Command line mode {{{
+" ------------------------------------------------------------------------- }}}
+" Command line mode ------------------------------------------------------- {{{
 
 " cursor movement in command line mode
 cnoremap <C-a> <Home>
@@ -106,8 +106,8 @@ cnoremap <C-l> <Right>
 cnoremap <C-j> <Down>
 cnoremap <C-k> <Up>
 
-" }}}
-" Line Return {{{
+" ------------------------------------------------------------------------- }}}
+" Line Return ------------------------------------------------------------- {{{
 
 " Make sure Vim returns to the same line when you reopen a file.
 " Thanks, Steve Losh https://bitbucket.org/sjl/dotfiles/src/tip/vim/vimrc
@@ -119,8 +119,8 @@ augroup line_return
         \ endif
 augroup END
 
-" }}}
-" Mappings {{{
+" ------------------------------------------------------------------------- }}}
+" Mappings ---------------------------------------------------------------- {{{
 
 " insert current date
 nnoremap <D-D> "=strftime("%F")<CR>P
@@ -135,10 +135,10 @@ cmap %% <C-R>=escape(expand("%"),' ')<CR>
 
 " Opens a tab edit command with the path of the currently edited file filled in
 " Normal mode: <Leader>t
-map <Leader>t :tabnew
-map <Leader>tp :tabnew <C-p>
-map <Leader>tn :tabnew 
-map <Leader>tN :tabnew ~/Dropbox/notes/
+map <LocalLeader>t :tabnew
+map <LocalLeader>tp :tabnew <C-p>
+map <LocalLeader>tn :tabnew 
+map <LocalLeader>tN :tabnew ~/Dropbox/notes/
 command! Notes :tabnew ~/Dropbox/notes/
 
 " Scratchpad settings
@@ -148,8 +148,8 @@ command! ScratchPad :tabnew ~/Dropbox/scratchpad.rst
 " command! FullScreenEditing :vertical new readonly | :vertical resize 120 | :wincmd w
 command! FullScreenEditing :vertical new | :vertical resize 120 | :wincmd w
 
-" }}}
-" Appearance {{{
+" ------------------------------------------------------------------------- }}}
+" Appearance -------------------------------------------------------------- {{{
 
 " Pretty Colours
 syntax enable " enable syntax highlighting
@@ -190,10 +190,10 @@ function! RedCursorLine()
 endfunction
 command! RedCursorLine :call RedCursorLine()
 
-" }}}
-" Plugin settings {{{
+" ------------------------------------------------------------------------- }}}
+" Plugin settings --------------------------------------------------------- {{{
 
-" CtrlP {{{
+" CtrlP ------------------------------------------------------------------- {{{
 
 " List of recent files, using CtrlP <https://github.com/kien/ctrlp.vim>
 let g:ctrlp_cmd = 'CtrlPMRUFiles'
@@ -205,8 +205,8 @@ let g:ctrlp_prompt_mappings = {
     \ }
 nmap <C-p> :<C-U>CtrlPMRUFiles<CR>
 
-" }}}
-" UltiSnips {{{
+" ------------------------------------------------------------------------- }}}
+" UltiSnips --------------------------------------------------------------- {{{
 
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -214,15 +214,15 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 "let g:UltiSnipsEditSplit="vertical"
 
-" }}}
-" LaTeXBox {{{
+" ------------------------------------------------------------------------- }}}
+" LaTeXBox ---------------------------------------------------------------- {{{
 
 " TODO: switch to augroup
 source ~/.vim/bundle/my-vim-latex-config/latexbox-conf.vim
 
-" }}}
-" }}}
-" Filetype-specific {{{
+" ------------------------------------------------------------------------- }}}
+" ------------------------------------------------------------------------- }}}
+" Filetype-specific ------------------------------------------------------- {{{
 
 " TODO: move to appropriate ft_* augroup
 " Use ReStructuredText syntax highlighting for .notes and .txt files
@@ -239,8 +239,8 @@ function! OpenRejectFile()
 endfunction
 command! Rejects :call OpenRejectFile()
 
-" }}}
-" Sage {{{
+" ------------------------------------------------------------------------- }}}
+" Sage -------------------------------------------------------------------- {{{
 
 " TODO: move to vim-sage
 " SageDoctestTwrite: requires vim-tbone
@@ -289,8 +289,8 @@ map <S-CR> :SageDoctestTwrite<CR><CR>
 imap <S-CR> <C-o><S-CR>
 endif
 
-" }}}
-" Latex {{{
+" ------------------------------------------------------------------------- }}}
+" Latex ------------------------------------------------------------------- {{{
 
 " TODO: move to latex-conf augroup
 " ignore these filenames during tab completion
@@ -332,14 +332,16 @@ endfunction
 
 noremap  <D-t> :call RunTeXShop()<CR>
 
-" }}}
-" Useful functions {{{
+" ------------------------------------------------------------------------- }}}
+" Useful functions -------------------------------------------------------- {{{
 
-" mapping to toggle (no)paste before pasting from the clipboard {{{
+" mapping to toggle (no)paste before pasting from the clipboard ----------- {{{
+
 " Reference: http://tilvim.com/2014/03/18/a-better-paste.html
 map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
-"}}}
-" Diff current file with the version on disk {{{
+
+" ------------------------------------------------------------------------- }}}
+" Diff current file with the version on disk ------------------------------ {{{
 
 " [From Hacking Vim, Chapter 4, by Kim Schulz]
 function! DiffWithFileFromDisk()
@@ -352,8 +354,8 @@ function! DiffWithFileFromDisk()
     diffthis
 endfunction
 
-" }}}
-" Open the url under the cursor with gx {{{
+" ------------------------------------------------------------------------- }}}
+" Open the url under the cursor with gx ----------------------------------- {{{
 
 if has("unix")
     let s:uname = system("uname")
@@ -365,19 +367,19 @@ if has("unix")
     endif
 endif
 
-" }}}
-" Show the highlight group syntax under the cursor {{{
+" ------------------------------------------------------------------------- }}}
+" Show the highlight group syntax under the cursor ------------------------ {{{
 " http://vim.wikia.com/wiki/Showing_syntax_highlight_group_in_statusline
 function! ShowSyntaxHighlightGroup()
     echo synIDattr(synID(line("."),col("."),1),"name")
 endfunction
 
-" }}}
-" }}}
-" Mac OSX Specific {{{
+" ------------------------------------------------------------------------- }}}
+" ------------------------------------------------------------------------- }}}
+" Mac OSX Specific -------------------------------------------------------- {{{
 
 " For the French keyboard on the MacBook: map the key §/± key to `/~
 map! § `
 map! ± ~
 
-" }}}
+" ------------------------------------------------------------------------- }}}
