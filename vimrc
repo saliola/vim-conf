@@ -47,8 +47,6 @@ set nojoinspaces " only put one space after periods
 set incsearch " incremental search
 set scrolloff=1 " always show n screen lines to above and below the cursor
 set tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab " tab settings for all files
-set undofile
-set undoreload=10000
 
 set laststatus=2
 set statusline=%F%m%r%h%w\ [Type=%Y]\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L]
@@ -65,11 +63,6 @@ set relativenumber " set relative line numbers
 " spell-checking
 set nospell
 set spellsuggest=5
-
-" no swap files or backups
-set nobackup         " no backup files
-set nowritebackup    " only in case you don't want a backup file while editing
-set noswapfile       " no swap files
 
 " show trailing spaces as dots, highlight tabs, etc.
 set list
@@ -91,6 +84,16 @@ au VimResized * :wincmd =
 
 " enable copy/paste on Mac OSX and tmux (see also notes/macosx.notes)
 set clipboard=unnamed
+
+set undofile
+set undoreload=10000
+set undodir=~/.vim/tmp/undo//     " undo files
+
+set backup
+set backupdir=~/.vim/tmp/backup// " backups
+set directory=~/.vim/tmp/swap//   " swap files
+
+set noswapfile       " no swap files
 
 " }}}
 " Command line mode {{{
