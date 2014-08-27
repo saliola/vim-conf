@@ -254,11 +254,13 @@ nmap <C-p> :<C-U>CtrlPMRUFiles<CR>
 " ------------------------------------------------------------------------- }}}
 " UltiSnips --------------------------------------------------------------- {{{
 
+let g:snips_author="Franco Saliola"
+let g:snips_author_email="saliola@gmail.com"
+
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-" If you want :UltiSnipsEdit to split your window.
-"let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsEditSplit="vertical"
 
 " ------------------------------------------------------------------------- }}}
 " ------------------------------------------------------------------------- }}}
