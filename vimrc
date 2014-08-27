@@ -185,20 +185,16 @@ nnoremap N Nzzzv
 " ------------------------------------------------------------------------- }}}
 " Folding ----------------------------------------------------------------- {{{
 
-" TODO: pick a different key instead of C-z
-
 " From Steve Losh:
 " "Focus" the current line.  Basically:
 "
 " 1. Close all folds.
 " 2. Open just the folds containing the current line.
-" 3. Move the line to a little bit (15 lines) above the center of the screen.
-" 4. Pulse the cursor line.  My eyes are bad.
+" 3. Move the line a few lines above the center of the screen.
+" 4. Pulse the cursor line.
 "
-" This mapping wipes out the z mark, which I never use.
-"
-" I use :sus for the rare times I want to actually background Vim.
-nnoremap <c-z> mzzMzvzz15<c-e>`z:Pulse<cr>
+" Warning: This mapping wipes out the z mark.
+nnoremap <Leader>f mzzMzvzz10<c-e>`z:Pulse<cr>
 
 " ------------------------------------------------------------------------- }}}
 " Appearance -------------------------------------------------------------- {{{
@@ -396,7 +392,7 @@ function! s:Pulse() " {{{
     let old_hi = split(old_hi, '\n')[0]
     let old_hi = substitute(old_hi, 'xxx', '', '')
 
-    let steps = 2
+    let steps = 4
     let width = 1
     let start = width
     let end = steps * width
