@@ -14,6 +14,7 @@
 " `` (jump to position before last jump)
 " Explore
 " Texplore
+" tip: s//bar/g will replace the current search pattern with bar
 " ------------------------------------------------------------------------- }}}
 
 " Pathogen ---------------------------------------------------------------- {{{
@@ -258,8 +259,9 @@ let g:snips_author="Franco Saliola"
 let g:snips_author_email="saliola@gmail.com"
 
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
 let g:UltiSnipsEditSplit="vertical"
 
 " ------------------------------------------------------------------------- }}}
