@@ -270,12 +270,24 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " ------------------------------------------------------------------------- }}}
 " Filetype-specific ------------------------------------------------------- {{{
 
-" txt / notes {{{
+" txt {{{
 
-" TODO: move to appropriate ft_* augroup
-" Use ReStructuredText syntax highlighting for .notes and .txt files
-autocmd BufRead,BufNewFile *.notes set filetype=rst
-autocmd BufRead,BufNewFile *.txt set filetype=rst | set nowrap
+augroup ft_txt
+    au!
+
+    " Use ReStructuredText syntax highlighting for .txt files
+    autocmd BufRead,BufNewFile *.txt set filetype=rst
+augroup END
+
+" }}}
+" notes {{{
+
+augroup ft_notes
+    au!
+
+    " Use ReStructuredText syntax highlighting for .notes and .txt files
+    autocmd BufRead,BufNewFile *.notes set filetype=rst
+augroup END
 
 " }}}
 " Hg {{{
