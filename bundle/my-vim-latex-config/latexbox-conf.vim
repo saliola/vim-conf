@@ -10,6 +10,12 @@
 " \lg Show the running status of latexmk for the current buffer.
 " \lG Show the running status of latexmk for all buffers with process group ID's.
 " \le Load the log file for the current document and jump to the first error.
+"
+" Custom commands
+" \lce Change the Environment
+" \lts Toggle Star environment
+" \lwc Wrap selection in a Command
+" \lwe Wrap selection in an Environment
 
 if has("unix")
     let s:uname = system("uname")
@@ -54,11 +60,4 @@ let g:LatexBox_ignore_warnings = [
             \ 'LaTeX Font Warning: Font shape',
             \ 'Package xcolor Warning: Incompatible color definition on input line',
             \ ]
-
-
-
-"""""""""""""""
-" Some mappings
-"""""""""""""""
-
 

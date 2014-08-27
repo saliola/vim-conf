@@ -9,6 +9,9 @@
 " <C-x><C-]>
 " g;
 " g,
+" gv (reselect last visual selection)
+" =ip (format inner paragraph)
+" `` (jump to position before last jump)
 " ------------------------------------------------------------------------- }}}
 
 " Pathogen ---------------------------------------------------------------- {{{
@@ -165,13 +168,16 @@ inoremap <F1> <esc>:checktime<cr>
 nnoremap Q gqip
 vnoremap Q gq
 
-" Join an entire paragraph. -- Steve Losh
+" Join an entire paragraph.
+" Source: Steve Losh
 nnoremap <Leader>J mzvipJ`z
 
-" Don't move on * -- Steve Losh
+" Don't move on *
+" Source: Steve Losh
 nnoremap <silent> * :let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
 
-" Keep search matches in the middle of the window. -- Steve Losh
+" Keep search matches in the middle of the window.
+" Source: Steve Losh
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
@@ -261,12 +267,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 "let g:UltiSnipsEditSplit="vertical"
 
 " ------------------------------------------------------------------------- }}}
-" LaTeXBox ---------------------------------------------------------------- {{{
-
-" TODO: switch to augroup
-source ~/.vim/bundle/my-vim-latex-config/latexbox-conf.vim
-
-" ------------------------------------------------------------------------- }}}
 " ------------------------------------------------------------------------- }}}
 " Filetype-specific ------------------------------------------------------- {{{
 
@@ -297,6 +297,17 @@ augroup ft_python
     au!
 
     au FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+augroup END
+
+" }}}
+" bash vi-input mode {{{
+" Syntax highlighting in Bash vi-input mode
+" Source: http://stackoverflow.com/questions/7115324/syntax-highlighting-in-bash-vi-input-mode/7115478#7115478
+
+augroup bash_vi_input_mode
+    au!
+
+    au BufRead,BufNewFile bash-fc-* set filetype=sh
 augroup END
 
 " }}}
@@ -354,45 +365,15 @@ endif
 " ------------------------------------------------------------------------- }}}
 " Latex ------------------------------------------------------------------- {{{
 
-" TODO: move to latex-conf augroup
-" ignore these filenames during tab completion
-set wildignore+=*.out,*.synctex.gz,*.aux,*.ilg,*.log,*.nls,*.idx,*.ind,*.blg,*.nlo,*.pdf,*.toc
+augroup ft_tex
+    au!
 
-" open a .tex file in TeXShop
-function! TeXShop()
-    let filename=expand('%')
-    execute '!open -a /Applications/TeX/TeXShop.app '.filename
-endfunction
+    " ignore these filenames during tab completion
+    au FileType tex setlocal wildignore+=*.out,*.synctex.gz,*.aux,*.ilg,*.log,*.nls,*.idx,*.ind,*.blg,*.nlo,*.pdf,*.toc
 
-" Run LaTeX through TexShop
-function! RunTeXShop()
-   if &ft != 'tex'
-      echo "calling RunTeXShop from a non-tex file"
-      return ''
-   end
-
-   "write the file
-   :w
-
-   "New Script:
-   " tell app \"TeXShop\"
-   "    set theDoc to open ((POSIX file \"'.thePath.'\") as alias)
-   "    try
-   "        tell theDoc to latexinteractive
-   "    on error
-   "        set theDoc to front document
-   "        tell theDoc to latexinteractive
-   "    end try
-   "    end tell
-   let thePath = getcwd() . '/'. expand("%")
-   let execString = 'osascript -e "tell app \"TeXShop\"" -e "set theDoc to open ((POSIX file \"'.thePath.'\") as alias)" -e "try" -e "tell theDoc to latexinteractive" -e "on error" -e "set theDoc to front document" -e "tell theDoc to latexinteractive" -e "end try" -e "end tell"'
-   
-   exec 'silent! !' execString
-   exec '!' execString
-   return ''
-endfunction
-
-noremap  <D-t> :call RunTeXShop()<CR>
+    " load configuration
+    au FileType tex source ~/.vim/bundle/my-vim-latex-config/latexbox-conf.vim
+augroup END
 
 " ------------------------------------------------------------------------- }}}
 " Useful functions -------------------------------------------------------- {{{
@@ -437,7 +418,8 @@ function! ShowSyntaxHighlightGroup()
 endfunction
 
 " Show the stack of syntax hilighting classes affecting whatever is under the
-" cursor. -- Steve Losh
+" cursor.
+" Source: Steve Losh
 function! SynStack()
   echo join(map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")'), " > ")
 endfunc

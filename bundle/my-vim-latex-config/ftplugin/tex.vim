@@ -1,10 +1,10 @@
 " LaTeX-box configurations
-"inoremap <buffer> [[ 		\begin{
-imap <buffer> ]]		    <Plug>LatexCloseCurEnv
-inoremap <buffer> <F6>	    begin<C-R>=snipMate#TriggerSnippet()<CR>
-nmap <buffer> <S-F6>	    <Plug>LatexChangeEnv
-vmap <buffer> <F7>		    <Plug>LatexWrapSelection
-vmap <buffer> <S-F7>	    <Plug>LatexEnvWrapSelection
+imap <buffer> ]]                <Plug>LatexCloseCurEnv
+nmap <buffer> <LocalLeader>lce  <Plug>LatexChangeEnv
+nmap <buffer> <LocalLeader>lts  <Plug>LatexToggleStarEnv
+nmap <buffer> <LocalLeader>lwc  viw<Plug>LatexWrapSelection
+vmap <buffer> <LocalLeader>lwc  <Plug>LatexWrapSelection
+vmap <buffer> <LocalLeader>lwe  <Plug>LatexEnvWrapSelection
 
 " open a \left parenthesis
 inoremap <buffer> [[ \left[
