@@ -292,15 +292,14 @@ augroup END
 " }}}
 " Hg {{{
 
-" TODO: this was useful for working with hg ... move to a plugin ?
-function! OpenRejectFile()
+function! OpenHGRejectFile()
     " splits window and opens the %.rej
     let filename=expand('%')
     let rejectsfile = filename.'.rej'
     split
     exec 'edit '.rejectsfile
 endfunction
-command! Rejects :call OpenRejectFile()
+command! HGRejects :call OpenHGRejectFile()
 
 " }}}
 " Python {{{
