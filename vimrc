@@ -12,6 +12,8 @@
 " gv (reselect last visual selection)
 " =ip (format inner paragraph)
 " `` (jump to position before last jump)
+" Explore
+" Texplore
 " ------------------------------------------------------------------------- }}}
 
 " Pathogen ---------------------------------------------------------------- {{{
@@ -133,10 +135,6 @@ augroup END
 
 " ------------------------------------------------------------------------- }}}
 " Mappings ---------------------------------------------------------------- {{{
-
-" insert current date
-nnoremap <D-D> "=strftime("%F")<CR>P
-inoremap <D-D> <C-R>=strftime("%F")<CR>
 
 " Insert the current directory into a command-line path
 " Notes:
