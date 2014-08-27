@@ -1,2 +1,9 @@
 extends python
 
+snippet sage:
+`!p
+snip.rv = '\n'.join(("sage: " + line if i == 0 else "....: " + line)
+			           for (i, line) in enumerate(snip.v.text.splitlines()))
+`
+$0
+endsnippet
