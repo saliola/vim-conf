@@ -265,6 +265,18 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 
 " ------------------------------------------------------------------------- }}}
+" Commentary -------------------------------------------------------------- {{{
+
+nmap <leader>c <Plug>CommentaryLine
+xmap <leader>c <Plug>Commentary
+
+augroup plugin_commentary
+    au!
+
+    au FileType python,sage setlocal commentstring=#%s
+augroup END
+
+" ------------------------------------------------------------------------- }}}
 " ------------------------------------------------------------------------- }}}
 " Filetype-specific ------------------------------------------------------- {{{
 
