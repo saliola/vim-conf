@@ -1,0 +1,40 @@
+global !p
+import datetime
+def next_weekday(weekday, d=None):
+    r"""
+    adapted from: http://stackoverflow.com/questions/6558535/python-find-the-date-for-the-first-monday-after-a-given-a-date
+    """
+    weekdays = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+    if weekday in weekdays:
+        weekday = weekdays.index(weekday)
+    if d is None:
+        d = datetime.date.today()
+    days_ahead = weekday - d.weekday()
+    if days_ahead <= 0: # Target day already happened this week
+        days_ahead += 7
+    return (d + datetime.timedelta(days_ahead)).strftime("%d %B %Y")
+
+endglobal
+
+snippet ann "announcement" b
+.. announcement:: ${1:title}
+    :date: ${2:`!v strftime("%d %b %Y")`}
+    :time: ${3:`!v strftime("%H:%M")`}
+
+    ${0:announcement}
+endsnippet
+
+snippet dev "devoir" b
+* \`Devoir ${1:} <devoirs/devoir$1.pdf>\`_ : à remettre en version papier le ${2:`!v strftime("%d %B %Y")`}.
+$0
+endsnippet
+
+snippet feu "feulle d'exercices" b
+* \`Feuille d'exercices ${1:} <exercices/exercices$1.pdf>\`_
+  (pour la démonstration de *${2:`!p snip.rv = next_weekday("Tuesday")`}*)
+$0
+endsnippet
+
+snippet doc "document"
+\`${1:document name} <documents/${2:filename}>\`_
+endsnippet
