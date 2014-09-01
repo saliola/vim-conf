@@ -24,7 +24,7 @@
 	url = git://github.com/tpope/vim-tbone.git
 [submodule "bundle/vim-tmux-navigator"]
 	path = bundle/vim-tmux-navigator
-	url = git://github.com/christoomey/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator.git
 [submodule "bundle/ultisnips"]
 	path = bundle/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
