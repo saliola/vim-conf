@@ -15,6 +15,7 @@
 " Explore
 " Texplore
 " tip: s//bar/g will replace the current search pattern with bar
+" vim-unimpaired mappings
 " ------------------------------------------------------------------------- }}}
 
 " Pathogen ---------------------------------------------------------------- {{{
