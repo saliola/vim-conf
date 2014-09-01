@@ -116,6 +116,17 @@ set nospell
 set spellsuggest=5
 "set dictionary+=~/.vim/spell/fr.utf-8.spl
 
+" Look up word under cursor in a dictionary:
+" - Dictionary.app in Mac OSX
+" - not currently defined under Linux
+if has("unix")
+    let s:uname = system("uname")
+    if s:uname == "Darwin\n"
+        " Source: http://tammersaleh.com/posts/using-dictionary-app-with-vim/
+        nnoremap <silent> <Leader>d :!open dict://<cword><CR><CR>
+    endif
+endif
+
 " }}} Spelling "
 " Thesaurus {{{ "
 
