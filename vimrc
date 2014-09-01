@@ -7,6 +7,8 @@
 " <C-x><C-f>
 " <C-x><C-l>
 " <C-x><C-]>
+" g*
+" g#
 " g;
 " g,
 " gv (reselect last visual selection)
@@ -16,6 +18,7 @@
 " Texplore
 " tip: s//bar/g will replace the current search pattern with bar
 " vim-unimpaired mappings
+" :set spell spelllang=fr
 " ------------------------------------------------------------------------- }}}
 
 " Pathogen ---------------------------------------------------------------- {{{
