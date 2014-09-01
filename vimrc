@@ -117,15 +117,22 @@ set spellsuggest=5
 "set dictionary+=~/.vim/spell/fr.utf-8.spl
 
 " Look up word under cursor in a dictionary:
-" - Dictionary.app in Mac OSX
-" - not currently defined under Linux
+" - <Leader>d : Dictionary.app in Mac OSX
+" - <Leader>gd : google dictionary (launch browser)
+" - <Leader>wd : wordnet (launch browser)
+" - <Leader>mw : merriam-webster thesaurus (launch browser)
 if has("unix")
     let s:uname = system("uname")
     if s:uname == "Darwin\n"
         " Source: http://tammersaleh.com/posts/using-dictionary-app-with-vim/
         nnoremap <silent> <Leader>d :!open dict://<cword><CR><CR>
+    else
+        nnoremap <silent> <Leader>d :!open "https://www.google.ca/webhp?\#q=define:"<cword><CR><CR>
     endif
 endif
+nnoremap <silent> <Leader>gd :!open "https://www.google.ca/webhp?\#q=define:"<cword><CR><CR>
+nnoremap <silent> <Leader>wn :!open "http://wordnetweb.princeton.edu/perl/webwn?s="<cword><CR><CR>
+nnoremap <silent> <Leader>mw :!open "http://www.merriam-webster.com/thesaurus/"<cword><CR><CR>
 
 " }}} Spelling "
 " Thesaurus {{{ "
