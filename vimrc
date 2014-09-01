@@ -79,10 +79,6 @@ set formatoptions+=1n
 set number " set number
 set relativenumber " set relative line numbers
 
-" spell-checking
-set nospell
-set spellsuggest=5
-
 " show trailing spaces as dots, highlight tabs, etc.
 set list
 set listchars=tab:▸-,extends:❯,precedes:❮,trail:· ",eol:¬
@@ -114,6 +110,18 @@ set directory=~/.vim/tmp/swap//   " swap files
 
 set noswapfile       " no swap files
 
+" Spelling {{{ "
+
+set nospell
+set spellsuggest=5
+"set dictionary+=~/.vim/spell/fr.utf-8.spl
+
+" }}} Spelling "
+" Thesaurus {{{ "
+
+set thesaurus+=~/.vim/thesaurus/mthesaur.txt
+
+" }}} Thesaurus "
 " ------------------------------------------------------------------------- }}}
 " Command line mode ------------------------------------------------------- {{{
 
