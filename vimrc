@@ -19,6 +19,7 @@
 " tip: s//bar/g will replace the current search pattern with bar
 " vim-unimpaired mappings
 " :set spell spelllang=fr
+" cox from vim-unimpaired to toggle cursorline and cursorcolumn (x)
 " ------------------------------------------------------------------------- }}}
 
 " Pathogen ---------------------------------------------------------------- {{{
@@ -249,7 +250,7 @@ highlight Folded term=none cterm=none
 set cursorline
 set cursorcolumn
 set colorcolumn=80
-nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
+
 function! RedCursorLine()
     let w:red_cursor = exists('w:red_cursor') ? !w:red_cursor : 0
     if w:red_cursor
