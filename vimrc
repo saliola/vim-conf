@@ -95,9 +95,6 @@ set linebreak
 set wildmenu
 set wildmode=list:full
 
-" Resize splits when the window is resized
-au VimResized * :wincmd =
-
 " enable copy/paste on Mac OSX and tmux (see also notes/macosx.notes)
 set clipboard=unnamed
 
@@ -111,6 +108,16 @@ set directory=~/.vim/tmp/swap//   " swap files
 
 set noswapfile       " no swap files
 
+" Windows {{{ "
+
+" Resize splits when the window is resized
+au VimResized * :wincmd =
+
+" use | and - to split windows, which mimics tmux behaviour
+nnoremap <silent> <C-W>\| <C-W>v
+nnoremap <silent> <C-W>- <C-W>s
+
+" }}} Windows "
 " Spelling {{{ "
 
 set nospell
