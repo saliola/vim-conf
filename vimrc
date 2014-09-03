@@ -545,3 +545,19 @@ map! § `
 map! ± ~
 
 " ------------------------------------------------------------------------- }}}
+" Experimental {{{ "
+
+function! EditNewDatestampedFile(filename, extension)
+    exec 'tabnew '.a:filename.'.'.strftime("%Y-%m-%d").'.'.a:extension
+endfunction
+
+function! EditNewSageComputationsFile()
+    if isdirectory("computations")
+        :call EditNewDatestampedFile('computations/computations', 'sage')
+    else
+        :call EditNewDatestampedFile('computations', 'sage')
+    endif
+endfunction
+command! NewSageComputationsFile :call EditNewSageComputationsFile()
+
+" }}} Experimental "
