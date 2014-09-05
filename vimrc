@@ -319,7 +319,6 @@ augroup END
 " vim-tmux-navigator {{{ "
 
 " vim-tmux-navigator overwrites <C-l>, so I need another way to use nohlsearch.
-nnoremap <CR> :nohlsearch<CR><CR>
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 
 " }}} vim-tmux-navigator "
