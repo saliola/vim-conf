@@ -41,6 +41,7 @@ map <leader>ev :tabnew $MYVIMRC<CR>
 augroup vimrc
     au!
     au bufwritepost .vimrc source $MYVIMRC
+    au bufwritepost ~/.vim/vimrc source $MYVIMRC
 augroup END
 
 augroup ft_vim
@@ -554,9 +555,12 @@ map! ± ~
 " ------------------------------------------------------------------------- }}}
 " Experimental {{{ "
 
+" Date-stamped file {{{ "
 function! EditNewDatestampedFile(filename, extension)
     exec 'tabnew '.a:filename.'.'.strftime("%Y-%m-%d").'.'.a:extension
 endfunction
+" }}} Date-stamped file "
+" Sage compuation fie {{{ "
 
 function! EditNewSageComputationsFile()
     if isdirectory("computations")
@@ -586,5 +590,50 @@ function! EditMRUSageComputationsFile()
     exec 'tabnew '.file
 endfunction
 command! MRUSageComputationsFile :call EditMRUSageComputationsFile()
+
+" }}} Sage compuation fie "
+" Quick-fix grep {{{ "
+
+function! GrepResultsInQuickFixWindow(searchpattern)
+
+    " save the current view
+    let b:currentview = winsaveview()
+
+    " set last search pattern to a:searchpattern
+    if a:searchpattern =~ "/.\\+/"
+        let @/=a:searchpattern[1:-2]
+    else
+        let @/=a:searchpattern
+    endif
+
+    " cd to directory of current file; this way, we only see the filename and
+    " not the complete path in the quickfix window.
+    lcd %:p:h
+
+    " vimgrep (populates the quickfix window)
+    exec "vimgrep ".a:searchpattern.' '.escape(expand("%"),' ')
+
+    " open the quickfix window
+    copen
+
+    " change to the previous current directory
+    cd -
+
+    " move to previous window
+    wincmd w
+
+    " restore the view
+    call winrestview(b:currentview)
+endfunction
+
+" You cannot set the last used search pattern and highlighting from within
+" a function, see :help function-search-undo.
+
+command! -nargs=1 QuickFixGrep call GrepResultsInQuickFixWindow(<f-args>)
+nnoremap <Leader>g  :QuickFixGrep //<Left>
+nnoremap <Leader>*  "zyiw:exec "QuickFixGrep /\\<".@z."\\>/"<CR>
+nnoremap <Leader>g* "zyiw:exec "QuickFixGrep /".@z."/"<CR>
+
+" }}} Quick-fix grep "
 
 " }}} Experimental "
