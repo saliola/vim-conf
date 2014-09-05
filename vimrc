@@ -567,4 +567,24 @@ function! EditNewSageComputationsFile()
 endfunction
 command! NewSageComputationsFile :call EditNewSageComputationsFile()
 
+function! EditNewestSageComputationsFile()
+    if isdirectory("computations")
+        let file = system("ls -1 computations/computations.* | tail -1")
+    else
+        let file = system("ls -1 computations.* | tail -1")
+    endif
+    exec 'tabnew '.file
+endfunction
+command! NewestSageComputationsFile :call EditNewestSageComputationsFile()
+
+function! EditMRUSageComputationsFile()
+    if isdirectory("computations")
+        let file = system("ls -tr1 computations/computations.* | tail -1")
+    else
+        let file = system("ls -tr1 computations.* | tail -1")
+    endif
+    exec 'tabnew '.file
+endfunction
+command! MRUSageComputationsFile :call EditMRUSageComputationsFile()
+
 " }}} Experimental "
