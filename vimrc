@@ -83,7 +83,7 @@ set relativenumber " set relative line numbers
 set list
 set listchars=tab:▸-,extends:❯,precedes:❮,trail:· ",eol:¬
 "set listchars+=eol:¬
-set showbreak=↪
+set showbreak=…
 match ErrorMsg /\t/
 
 set splitbelow
