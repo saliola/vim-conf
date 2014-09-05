@@ -19,6 +19,7 @@
 " tip: s//bar/g will replace the current search pattern with bar
 " vim-unimpaired mappings
 " :set spell spelllang=fr
+" cox from vim-unimpaired to toggle cursorline and cursorcolumn (x)
 " ------------------------------------------------------------------------- }}}
 
 " Pathogen ---------------------------------------------------------------- {{{
@@ -94,9 +95,6 @@ set linebreak
 set wildmenu
 set wildmode=list:full
 
-" Resize splits when the window is resized
-au VimResized * :wincmd =
-
 " enable copy/paste on Mac OSX and tmux (see also notes/macosx.notes)
 set clipboard=unnamed
 
@@ -110,6 +108,16 @@ set directory=~/.vim/tmp/swap//   " swap files
 
 set noswapfile       " no swap files
 
+" Windows {{{ "
+
+" Resize splits when the window is resized
+au VimResized * :wincmd =
+
+" use | and - to split windows, which mimics tmux behaviour
+nnoremap <silent> <C-W>\| <C-W>v
+nnoremap <silent> <C-W>- <C-W>s
+
+" }}} Windows "
 " Spelling {{{ "
 
 set nospell
@@ -249,7 +257,7 @@ highlight Folded term=none cterm=none
 set cursorline
 set cursorcolumn
 set colorcolumn=80
-nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
+
 function! RedCursorLine()
     let w:red_cursor = exists('w:red_cursor') ? !w:red_cursor : 0
     if w:red_cursor
@@ -307,6 +315,13 @@ augroup plugin_commentary
 augroup END
 
 " ------------------------------------------------------------------------- }}}
+" vim-tmux-navigator {{{ "
+
+" vim-tmux-navigator overwrites <C-l>, so I need another way to use nohlsearch.
+nnoremap <CR> :nohlsearch<CR><CR>
+nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
+
+" }}} vim-tmux-navigator "
 " ------------------------------------------------------------------------- }}}
 " Filetype-specific ------------------------------------------------------- {{{
 
@@ -537,3 +552,39 @@ map! § `
 map! ± ~
 
 " ------------------------------------------------------------------------- }}}
+" Experimental {{{ "
+
+function! EditNewDatestampedFile(filename, extension)
+    exec 'tabnew '.a:filename.'.'.strftime("%Y-%m-%d").'.'.a:extension
+endfunction
+
+function! EditNewSageComputationsFile()
+    if isdirectory("computations")
+        :call EditNewDatestampedFile('computations/computations', 'sage')
+    else
+        :call EditNewDatestampedFile('computations', 'sage')
+    endif
+endfunction
+command! NewSageComputationsFile :call EditNewSageComputationsFile()
+
+function! EditNewestSageComputationsFile()
+    if isdirectory("computations")
+        let file = system("ls -1 computations/computations.* | tail -1")
+    else
+        let file = system("ls -1 computations.* | tail -1")
+    endif
+    exec 'tabnew '.file
+endfunction
+command! NewestSageComputationsFile :call EditNewestSageComputationsFile()
+
+function! EditMRUSageComputationsFile()
+    if isdirectory("computations")
+        let file = system("ls -tr1 computations/computations.* | tail -1")
+    else
+        let file = system("ls -tr1 computations.* | tail -1")
+    endif
+    exec 'tabnew '.file
+endfunction
+command! MRUSageComputationsFile :call EditMRUSageComputationsFile()
+
+" }}} Experimental "
