@@ -598,25 +598,15 @@ function! GrepResultsInQuickFixWindow(searchpattern)
     " save the current view
     let b:currentview = winsaveview()
 
-    " set last search pattern to a:searchpattern
-    if a:searchpattern =~ "/.\\+/"
-        let @/=a:searchpattern[1:-2]
-    else
-        let @/=a:searchpattern
-    endif
-
-    " cd to directory of current file; this way, we only see the filename and
-    " not the complete path in the quickfix window.
-    lcd %:p:h
-
     " vimgrep (populates the quickfix window)
-    exec "vimgrep ".a:searchpattern.' '.escape(expand("%"),' ')
+    exec "lvimgrep ".a:searchpattern.' '.escape(expand("%"),' ')
 
     " open the quickfix window
-    copen
+    lopen
 
-    " change to the previous current directory
-    cd -
+    " match the current search pattern
+    execute '2match GrepQuickfixTerm ' . a:searchpattern
+    echo a:searchpattern
 
     " move to previous window
     wincmd w
@@ -624,6 +614,9 @@ function! GrepResultsInQuickFixWindow(searchpattern)
     " restore the view
     call winrestview(b:currentview)
 endfunction
+
+hi def GrepQuickfixTerm guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
+
 
 " You cannot set the last used search pattern and highlighting from within
 " a function, see :help function-search-undo.
@@ -634,5 +627,7 @@ nnoremap <Leader>*  "zyiw:exec "QuickFixGrep /\\<".@z."\\>/"<CR>
 nnoremap <Leader>g* "zyiw:exec "QuickFixGrep /".@z."/"<CR>
 
 " }}} Quick-fix grep "
+
+source ~/.vim/grep-operator.vim
 
 " }}} Experimental "
