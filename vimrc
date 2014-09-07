@@ -352,7 +352,7 @@ function! OpenHGRejectFile()
     let filename=expand('%')
     let rejectsfile = filename.'.rej'
     split
-    exec 'edit '.rejectsfile
+    execute 'edit '.rejectsfile
 endfunction
 command! HGRejects :call OpenHGRejectFile()
 
@@ -406,10 +406,10 @@ map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
 function! DiffWithFileFromDisk()
     let filename=expand('%')
     let diffname = filename.'.fileFromBuffer'
-    exec 'saveas! '.diffname
+    execute 'saveas! '.diffname
     diffthis
     vsplit
-    exec 'edit '.filename
+    execute 'edit '.filename
     diffthis
 endfunction
 
@@ -556,7 +556,7 @@ map! ± ~
 
 " Date-stamped file {{{ "
 function! EditNewDatestampedFile(filename, extension)
-    exec 'tabnew '.a:filename.'.'.strftime("%Y-%m-%d").'.'.a:extension
+    execute 'tabnew '.a:filename.'.'.strftime("%Y-%m-%d").'.'.a:extension
 endfunction
 " }}} Date-stamped file "
 " Sage compuation fie {{{ "
@@ -576,7 +576,7 @@ function! EditNewestSageComputationsFile()
     else
         let file = system("ls -1 computations.* | tail -1")
     endif
-    exec 'tabnew '.file
+    execute 'tabnew '.file
 endfunction
 command! NewestSageComputationsFile :call EditNewestSageComputationsFile()
 
@@ -586,7 +586,7 @@ function! EditMRUSageComputationsFile()
     else
         let file = system("ls -tr1 computations.* | tail -1")
     endif
-    exec 'tabnew '.file
+    execute 'tabnew '.file
 endfunction
 command! MRUSageComputationsFile :call EditMRUSageComputationsFile()
 
@@ -598,8 +598,8 @@ function! GrepResultsInQuickFixWindow(searchpattern)
     " save the current view
     let b:currentview = winsaveview()
 
-    " vimgrep (populates the quickfix window)
-    exec "lvimgrep ".a:searchpattern.' '.escape(expand("%"),' ')
+    " call vimgrep (populates the quickfix window)
+    execute "lvimgrep ".a:searchpattern.' '.escape(expand("%"),' ')
 
     " open the quickfix window
     lopen
@@ -623,11 +623,9 @@ hi def GrepQuickfixTerm guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
 
 command! -nargs=1 QuickFixGrep call GrepResultsInQuickFixWindow(<f-args>)
 nnoremap <Leader>g  :QuickFixGrep //<Left>
-nnoremap <Leader>*  "zyiw:exec "QuickFixGrep /\\<".@z."\\>/"<CR>
-nnoremap <Leader>g* "zyiw:exec "QuickFixGrep /".@z."/"<CR>
+nnoremap <Leader>*  "zyiw:execute "QuickFixGrep /\\<".@z."\\>/"<CR>
+nnoremap <Leader>g* "zyiw:execute "QuickFixGrep /".@z."/"<CR>
 
 " }}} Quick-fix grep "
-
-source ~/.vim/grep-operator.vim
 
 " }}} Experimental "
