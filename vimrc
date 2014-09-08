@@ -49,7 +49,7 @@ augroup ft_vim
     au FileType vim setlocal foldmethod=marker
     au FileType help setlocal textwidth=78
     au FileType vim setlocal keywordprg=:help
-    "au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+    au BufWinEnter *.txt if &ft == 'help' | setlocal keywordprg=:help | endif
 augroup END
 
 " ------------------------------------------------------------------------- }}}
@@ -77,7 +77,6 @@ match ErrorMsg /\t/
 
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 
-set iskeyword=@,48-57,_,192-255
 set formatoptions+=1n
 
 set linebreak
@@ -615,34 +614,46 @@ command! MRUSageComputationsFile :call EditMRUSageComputationsFile()
 
 function! GrepResultsInQuickFixWindow(searchpattern)
 
-    " save the current view
+    " Save the current view
     let b:currentview = winsaveview()
 
-    " set last search pattern to a:searchpattern
+    " Save the current iskeyword setting.
+    let save_iskeyword = &iskeyword
+
+    " Set last search pattern to a:searchpattern
     if a:searchpattern =~ "/.\\+/"
         let @/=a:searchpattern[1:-2]
     else
         let @/=a:searchpattern
     endif
 
-    " call vimgrep (populates the quickfix window)
+    " Call vimgrep (populates the quickfix window)
     execute "lvimgrep ".a:searchpattern.' '.escape(expand("%"),' ')
 
     " open the quickfix window
     lopen
 
-    " set conceallevel=2 concealcursor=nc
-    " syntax match qfFileName /^[^|]*/ transparent conceal
-    " syntax match qfLineNr /|[^|]*|/ transparent conceal
+    " Use the same iskeyword setting as the original window so that search
+    " matches agree. For instance, if the original window's iskeyword does not
+    " contain _ (.tex files), then \<alpha\> will not match the alpha in
+    " alpha_n if _ is in iskeyword. (iskeyword contains _, by default.)
+    execute 'setlocal iskeyword=' . save_iskeyword
 
-    " match the current search pattern
+    " Use conceal to hide the filename from the location list.
+    set conceallevel=2 concealcursor=nc
+    syntax match qfFileName /^[^|]*/ transparent conceal
+    " For some reason, conceal disables the syntax highlighting of the line
+    " number, so let's re-establish it.
+    syntax match myqfLineNr /[0-9]\+ col [0-9]\+/
+    highlight link myqfLineNr qfLineNr
+
+    " Match the current search pattern
     execute '2match GrepQuickfixTerm ' . a:searchpattern
-    echo a:searchpattern
 
-    " move to previous window
+    " Move to previous window
     wincmd w
 
-    " restore the view
+    " Restore the view
     call winrestview(b:currentview)
 endfunction
 
