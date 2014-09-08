@@ -25,16 +25,16 @@ snippet ann "announcement" b
 endsnippet
 
 snippet dev "devoir" b
-* \`Devoir ${1:} <devoirs/devoir$1.pdf>\`_ : à remettre en version papier le ${2:`!v strftime("%d %B %Y")`}.
+* \`Devoir ${1:} <devoirs/devoir$1.pdf>\`__ : à remettre en version papier le ${2:`!v strftime("%d %B %Y")`}.
 $0
 endsnippet
 
 snippet feu "feulle d'exercices" b
-* \`Feuille d'exercices ${1:} <exercices/exercices$1.pdf>\`_
+* \`Feuille d'exercices ${1:} <exercices/exercices$1.pdf>\`__
   (pour la démonstration de *${2:`!p snip.rv = next_weekday("Tuesday")`}*)
 $0
 endsnippet
 
 snippet doc "document"
-\`${1:document name} <documents/${2:filename}>\`_
+\`${1:document name} <documents/${2:filename}>\`__
 endsnippet
