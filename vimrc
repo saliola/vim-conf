@@ -618,11 +618,22 @@ function! GrepResultsInQuickFixWindow(searchpattern)
     " save the current view
     let b:currentview = winsaveview()
 
+    " set last search pattern to a:searchpattern
+    if a:searchpattern =~ "/.\\+/"
+        let @/=a:searchpattern[1:-2]
+    else
+        let @/=a:searchpattern
+    endif
+
     " call vimgrep (populates the quickfix window)
     execute "lvimgrep ".a:searchpattern.' '.escape(expand("%"),' ')
 
     " open the quickfix window
     lopen
+
+    " set conceallevel=2 concealcursor=nc
+    " syntax match qfFileName /^[^|]*/ transparent conceal
+    " syntax match qfLineNr /|[^|]*|/ transparent conceal
 
     " match the current search pattern
     execute '2match GrepQuickfixTerm ' . a:searchpattern
