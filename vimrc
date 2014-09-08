@@ -48,38 +48,25 @@ augroup ft_vim
     au!
     au FileType vim setlocal foldmethod=marker
     au FileType help setlocal textwidth=78
+    au FileType vim setlocal keywordprg=:help
     "au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
 augroup END
 
 " ------------------------------------------------------------------------- }}}
 " Basic options ----------------------------------------------------------- {{{
 
-set encoding=utf-8
-set showmode
-set showcmd
 set visualbell
-set nowrap " don't wrap text ; I have a wide monitor
-set textwidth=0 " set textwidth to 75 to cause wrapping
-set hlsearch " hightlight search
-set history=50 " 50 lines of command lines history
+
 set viminfo='20,\"50 " read/write a .viminfo file with at most 50 lines
-set ruler " show the cursor position all the time
+
+" General Editing {{{ "
+
+set encoding=utf-8
 set nojoinspaces " only put one space after periods
-set incsearch " incremental search
+set textwidth=0 " set textwidth to 75 to cause wrapping
 set scrolloff=1 " always show n screen lines to above and below the cursor
 set tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab " tab settings for all files
-
-set laststatus=2
-set statusline=%F%m%r%h%w\ [Type=%Y]\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L]
-
-set backspace=indent,eol,start " allow backspacing over everything in insert mode
-
-set iskeyword=@,48-57,_,192-255
-set formatoptions+=1n
-
-" hybrid line numbers (requires 7.4)
-set number " set number
-set relativenumber " set relative line numbers
+set nowrap " don't wrap text ; I have a wide monitor
 
 " show trailing spaces as dots, highlight tabs, etc.
 set list
@@ -88,16 +75,36 @@ set listchars=tab:▸-,extends:❯,precedes:❮,trail:· ",eol:¬
 set showbreak=…
 match ErrorMsg /\t/
 
-set splitbelow
-set splitright
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
+
+set iskeyword=@,48-57,_,192-255
+set formatoptions+=1n
+
 set linebreak
 
-" wild card settings
-set wildmenu
-set wildmode=list:full
+" }}} General Editing "
+" Searching {{{ "
 
-" enable copy/paste on Mac OSX and tmux (see also notes/macosx.notes)
-set clipboard=unnamed
+set hlsearch " hightlight search
+set incsearch " incremental search
+
+" }}} Searching "
+" Status line {{{ "
+
+set laststatus=2
+set statusline=%F%m%r%h%w\ [Type=%Y]\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L]
+set showmode
+set showcmd
+set ruler " show the cursor position all the time
+
+" }}} Status line "
+" Line numbers {{{ "
+
+set number
+set relativenumber
+
+" }}} Line numbers "
+" Undo / Backup / Swap {{{ "
 
 set undofile
 set undoreload=10000
@@ -109,7 +116,11 @@ set directory=~/.vim/tmp/swap//   " swap files
 
 set noswapfile       " no swap files
 
+" }}} Undo / Backup / Swap "
 " Windows {{{ "
+
+set splitbelow
+set splitright
 
 " Resize splits when the window is resized
 au VimResized * :wincmd =
@@ -149,8 +160,13 @@ nnoremap <silent> <Leader>mw :!open "http://www.merriam-webster.com/thesaurus/"<
 set thesaurus+=~/.vim/thesaurus/mthesaur.txt
 
 " }}} Thesaurus "
-" ------------------------------------------------------------------------- }}}
 " Command line mode ------------------------------------------------------- {{{
+
+" wild card settings
+set wildmenu
+set wildmode=list:full
+
+set history=50 " 50 lines of command lines history
 
 " cursor movement in command line mode
 cnoremap <C-a> <Home>
@@ -160,6 +176,7 @@ cnoremap <C-l> <Right>
 cnoremap <C-j> <Down>
 cnoremap <C-k> <Up>
 
+" ------------------------------------------------------------------------- }}}
 " ------------------------------------------------------------------------- }}}
 " Line Return ------------------------------------------------------------- {{{
 
@@ -550,6 +567,9 @@ hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
 " For the French keyboard on the MacBook: map the key §/± key to `/~
 map! § `
 map! ± ~
+
+" enable copy/paste on Mac OSX and tmux (see also notes/macosx.notes)
+set clipboard=unnamed
 
 " ------------------------------------------------------------------------- }}}
 " Experimental {{{ "
