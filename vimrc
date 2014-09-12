@@ -669,5 +669,9 @@ nnoremap <Leader>*  "zyiw:execute "QuickFixGrep /\\<".@z."\\>/"<CR>
 nnoremap <Leader>g* "zyiw:execute "QuickFixGrep /".@z."/"<CR>
 
 " }}} Quick-fix grep "
+" Sage attach current file {{{ "
 
+nnoremap <LocalLeader>sa :Tmux send-keys -t top %attach <C-R>=escape(expand("%:p"),' ')<CR> Enter<CR>
+
+" }}} Sage attach current file "
 " }}} Experimental "
