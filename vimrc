@@ -20,6 +20,9 @@
 " vim-unimpaired mappings
 " :set spell spelllang=fr
 " cox from vim-unimpaired to toggle cursorline and cursorcolumn (x)
+" @: -- repeat last command-line (then use @@ to repeat)
+" @@ -- repeat last @{0-9a-z":*} command
+" :w !cmd -- execute cmd with give lines as std input, but do not replace (:write_c)
 " ------------------------------------------------------------------------- }}}
 
 " Pathogen ---------------------------------------------------------------- {{{
