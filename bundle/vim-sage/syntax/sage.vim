@@ -45,6 +45,7 @@ syntax region pythonDocString
     \ end=+"""+
     \ contains=sageDoctest,pythonEscape,@Spell,@ReST,SageDocStringKeywords,sageTodo
     \ contained
+    \ containedin=pythonRawString
     \ skipempty
     \ skipwhite
     \ keepend
@@ -55,6 +56,29 @@ syntax region pythonDocString
     \ end=+'''+
     \ contains=sageDoctest,pythonEscape,@Spell,@ReST,SageDocStringKeywords,sageTodo
     \ contained
+    \ containedin=pythonRawString
+    \ skipempty
+    \ skipwhite
+    \ keepend
+    \ fold
+syntax region pythonDocString
+    \ matchgroup=PyDocString
+    \ start=+^[uUr]\="""+
+    \ end=+"""+
+    \ contains=sageDoctest,pythonEscape,@Spell,@ReST,SageDocStringKeywords,sageTodo
+    \ contained
+    \ containedin=pythonString
+    \ skipempty
+    \ skipwhite
+    \ keepend
+    \ fold
+syntax region pythonDocString
+    \ matchgroup=PyDocString
+    \ start=+^[uUr]\='''+
+    \ end=+'''+
+    \ contains=sageDoctest,pythonEscape,@Spell,@ReST,SageDocStringKeywords,sageTodo
+    \ contained
+    \ containedin=pythonString
     \ skipempty
     \ skipwhite
     \ keepend
