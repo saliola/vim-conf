@@ -71,15 +71,17 @@ syntax region sageDoctest
     \ start=+^\s*sage:\s+
     \ end=+\%(^\s*$\|^\s*"""$\)+
     \ contains=ALLBUT,sageDoctest,@ReST,@Spell
-    \ contained 
+    \ contained
+    \ containedin=rstLiteralBlock
     \ nextgroup=sageDoctestValue
-"hi link sageDoctest Statement
+" hi link sageDoctest Statement
 
 syntax region sageDoctestValue
     \ start=+^\s*\%(sage:\s\|>>>\s\|\.\.\.\)\@!\S\++
     \ end="$"
     \ contains=NONE
-    \ contained 
+    \ contained
+    \ containedin=rstLiteralBlock
 hi link sageDoctestValue Underlined
 
 syntax match sagePrompt "sage:" containedin=sageDoctest contained
