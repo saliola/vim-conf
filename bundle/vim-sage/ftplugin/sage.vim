@@ -11,6 +11,8 @@
 " - docstrings should be folded:
 "   - docstrings at the beginning of a file are folded
 "   - a triple quote following a class/def starts a fold
+"   - a raw triple quote that begins a line starts a fold
+"   - a single triple quote that begins a line ends a fold
 "   - a single triple quote ends a fold
 "   unless it follows an import statement.
 " - comments preceeding a class/def (with the same indentation) 
@@ -29,7 +31,7 @@
 let s:defpat = '^\s*\(@\|\(class\|cdef\|cpdef\)\s.*:\|def\s\)'
 
 " Pattern for matching docstrings
-let s:docstringbegin = "^\\s*r*[\"']\\{3}"
+let s:docstringbegin = "^\\s*[uUr]*[\"']\\{3}"
 let s:docstringend = "^\\s*[\"']\\{3}\\s*$"
 
 " Pattern for matching imports/includes
@@ -114,12 +116,16 @@ function! GetPythonFold(lnum)
         " - a triple quote following a class/def starts a fold
         elseif getline(prevnonblank(a:lnum-1)) =~ s:defpat
             let foldlevel = "a1"
+        " - a raw triple quote that begins a line starts a fold
+        elseif line =~ "^[uUr][\"']\\{3}"
+            let foldlevel = ">1"
         " - a single triple quote ends a fold
         elseif line =~ s:docstringend
             let foldlevel = "s1"
         endif
 
-    " - comments preceeding a class/def (with the same indentation) 
+
+    " - comments preceeding a class/def (with the same indentation)
     "   (check to see if the next non-empty, non-comment line is a
     "   class/def/decorator)
     elseif line =~ '^\s*#'
