@@ -581,38 +581,6 @@ function! EditNewDatestampedFile(filename, extension)
     execute 'tabnew '.a:filename.'.'.strftime("%Y-%m-%d").'.'.a:extension
 endfunction
 " }}} Date-stamped file "
-" Sage compuation fie {{{ "
-
-function! EditNewSageComputationsFile()
-    if isdirectory("computations")
-        :call EditNewDatestampedFile('computations/computations', 'sage')
-    else
-        :call EditNewDatestampedFile('computations', 'sage')
-    endif
-endfunction
-command! NewSageComputationsFile :call EditNewSageComputationsFile()
-
-function! EditNewestSageComputationsFile()
-    if isdirectory("computations")
-        let file = system("ls -1 computations/computations.* | tail -1")
-    else
-        let file = system("ls -1 computations.* | tail -1")
-    endif
-    execute 'tabnew '.file
-endfunction
-command! NewestSageComputationsFile :call EditNewestSageComputationsFile()
-
-function! EditMRUSageComputationsFile()
-    if isdirectory("computations")
-        let file = system("ls -tr1 computations/computations.* | tail -1")
-    else
-        let file = system("ls -tr1 computations.* | tail -1")
-    endif
-    execute 'tabnew '.file
-endfunction
-command! MRUSageComputationsFile :call EditMRUSageComputationsFile()
-
-" }}} Sage compuation fie "
 " Quick-fix grep {{{ "
 
 function! GrepResultsInQuickFixWindow(searchpattern)
@@ -672,11 +640,6 @@ nnoremap <Leader>*  "zyiw:execute "QuickFixGrep /\\<".@z."\\>/"<CR>
 nnoremap <Leader>g* "zyiw:execute "QuickFixGrep /".@z."/"<CR>
 
 " }}} Quick-fix grep "
-" Sage attach current file {{{ "
-
-nnoremap <LocalLeader>sa :Tmux send-keys -t top %attach <C-R>=escape(expand("%:p"),' ')<CR> Enter<CR>
-
-" }}} Sage attach current file "
 " fix iskeyword {{{ "
 
 " iskeyword is set in the lisp.vim syntax file, which is loaded by the rst

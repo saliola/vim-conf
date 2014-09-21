@@ -47,7 +47,49 @@ EOL
 command! -nargs=? -range -complete=custom,tbone#complete_panes SageDoctestTwrite
     \ execute ":python sage_doctest_tmux_writer(<line1>, <line2>, \"<args>\")"
 
+nnoremap <LocalLeader>st :SageDoctestTwrite<CR>
 vnoremap <LocalLeader>st :SageDoctestTwrite<CR>
 
 endif
 " }}}
+" Sage compuation fie {{{ "
+
+function! EditNewSageComputationsFile()
+    if isdirectory("computations")
+        :call EditNewDatestampedFile('computations/computations', 'sage')
+    else
+        :call EditNewDatestampedFile('computations', 'sage')
+    endif
+endfunction
+command! SageNewComputationsFile :call EditNewSageComputationsFile()
+
+function! EditNewestSageComputationsFile()
+    if isdirectory("computations")
+        let file = system("ls -1 computations/computations.* | tail -1")
+    else
+        let file = system("ls -1 computations.* | tail -1")
+    endif
+    execute 'tabnew '.file
+endfunction
+command! SageNewestComputationsFile :call EditNewestSageComputationsFile()
+
+function! EditMRUSageComputationsFile()
+    if isdirectory("computations")
+        let file = system("ls -tr1 computations/computations.* | tail -1")
+    else
+        let file = system("ls -tr1 computations.* | tail -1")
+    endif
+    execute 'tabnew '.file
+endfunction
+command! SageMRUComputationsFile :call EditMRUSageComputationsFile()
+
+" }}} Sage compuation fie "
+" Sage attach current file {{{ "
+" Requires: Tim Popoe's vim-tbone plugin
+
+function! SageAttachCommand(target)
+    execute ":Tmux send-keys -t " . tbone#pane_id(a:target) . " " . shellescape("%attach " . expand("%:p")) . " Enter"
+endfunction
+command! -nargs=1 -complete=custom,tbone#complete_panes SageAttach :call SageAttachCommand("<args>")
+
+" }}} Sage attach current file "
