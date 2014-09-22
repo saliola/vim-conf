@@ -513,28 +513,38 @@ nnoremap <leader>I :call IndentGuides()<cr>
 " word or two to stand out temporarily.  You can search for it, but that only
 " gives you one color of highlighting.  Now you can use <leader>N where N is
 " a number from 1-6 to highlight the current word in a specific color.
+"
+" <leader>0 will clear the highlighting.
 
 function! HiInterestingWord(n) " {{{
-    " Save our location.
-    normal! mz
+    if a:n == 0
+        for m in range(1, 6)
+            let mid = 86750 + m
+            silent! call matchdelete(mid)
+        endfor
 
-    " Yank the current word into the z register.
-    normal! "zyiw
+    else
+        " Save our location.
+        normal! mz
 
-    " Calculate an arbitrary match ID.  Hopefully nothing else is using it.
-    let mid = 86750 + a:n
+        " Yank the current word into the z register.
+        normal! "zyiw
 
-    " Clear existing matches, but don't worry if they don't exist.
-    silent! call matchdelete(mid)
+        " Calculate an arbitrary match ID.  Hopefully nothing else is using it.
+        let mid = 86750 + a:n
 
-    " Construct a literal pattern that has to match at boundaries.
-    let pat = '\V\<' . escape(@z, '\') . '\>'
+        " Clear existing matches, but don't worry if they don't exist.
+        silent! call matchdelete(mid)
 
-    " Actually match the words.
-    call matchadd("InterestingWord" . a:n, pat, 1, mid)
+        " Construct a literal pattern that has to match at boundaries.
+        let pat = '\V\<' . escape(@z, '\') . '\>'
 
-    " Move back to our original location.
-    normal! `z
+        " Actually match the words.
+        call matchadd("InterestingWord" . a:n, pat, 1, mid)
+
+        " Move back to our original location.
+        normal! `z
+    endif
 endfunction " }}}
 
 " Mappings {{{
@@ -545,8 +555,13 @@ nnoremap <silent> <leader>3 :call HiInterestingWord(3)<cr>
 nnoremap <silent> <leader>4 :call HiInterestingWord(4)<cr>
 nnoremap <silent> <leader>5 :call HiInterestingWord(5)<cr>
 nnoremap <silent> <leader>6 :call HiInterestingWord(6)<cr>
+nnoremap <silent> <leader>7 :call HiInterestingWord(7)<cr>
+nnoremap <silent> <leader>8 :call HiInterestingWord(8)<cr>
+nnoremap <silent> <leader>9 :call HiInterestingWord(9)<cr>
+nnoremap <silent> <leader>0 :call HiInterestingWord(0)<cr>
 
 " }}}
+
 " Default Highlights {{{
 
 hi def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
@@ -555,6 +570,9 @@ hi def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#8cffba ctermbg=121
 hi def InterestingWord4 guifg=#000000 ctermfg=16 guibg=#b88853 ctermbg=137
 hi def InterestingWord5 guifg=#000000 ctermfg=16 guibg=#ff9eb8 ctermbg=211
 hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
+hi def InterestingWord7 guifg=#000000 ctermfg=16 guibg=#d75faf ctermbg=169
+hi def InterestingWord8 guifg=#000000 ctermfg=16 guibg=#ff005f ctermbg=197
+hi def InterestingWord9 guifg=#000000 ctermfg=16 guibg=#ffd7ff ctermbg=225
 
 " }}}
 
