@@ -95,7 +95,6 @@ set incsearch " incremental search
 " Status line {{{ "
 
 set laststatus=2
-set statusline=%F%m%r%h%w\ [Type=%Y]\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L]
 set showmode
 set showcmd
 set ruler " show the cursor position all the time
@@ -448,10 +447,6 @@ endif
 
 " ------------------------------------------------------------------------- }}}
 " Show the highlight group syntax under the cursor ------------------------ {{{
-" http://vim.wikia.com/wiki/Showing_syntax_highlight_group_in_statusline
-function! ShowSyntaxHighlightGroup()
-    echo synIDattr(synID(line("."),col("."),1),"name")
-endfunction
 
 " Show the stack of syntax hilighting classes affecting whatever is under the
 " cursor.
