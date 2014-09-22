@@ -641,15 +641,5 @@ nnoremap <Leader>*  "zyiw:execute "QuickFixGrep /\\<".@z."\\>/"<CR>
 nnoremap <Leader>g* "zyiw:execute "QuickFixGrep /".@z."/"<CR>
 
 " }}} Quick-fix grep "
-" fix iskeyword {{{ "
-
-" iskeyword is set in the lisp.vim syntax file, which is loaded by the rst
-" syntax file. The rst.vim syntax file uses lisp.vim to appropriately color
-" lisp code blocks. The following global variable in rst.vim decides which
-" syntax files to include to color code blocks, so we'll just remove lisp, for
-" now.
-let g:rst_syntax_code_list = ['vim', 'java', 'cpp', 'php', 'python', 'perl']
-
-" }}} fix iskeyword "
 
 " }}} Experimental "

@@ -11,7 +11,14 @@ if version < 600
 else
     runtime! syntax/python.vim
     unlet b:current_syntax " (otherwise rst.vim does nothing)
+    " By default, rst.vim sources various other syntax files in order to color
+    " code blocks. This causes a problem because the lisp.vim syntax file
+    " overrides iskeyword. rst.vim uses the following global variable to
+    " decide which syntax files to source. Since we are only dealing with
+    " python code blocks in our context, we set this to python.
+    let g:rst_syntax_code_list = ['python']
     syntax include @ReST syntax/rst.vim
+    unlet g:rst_syntax_code_list
 endif
 
 let b:current_syntax = "sage"
