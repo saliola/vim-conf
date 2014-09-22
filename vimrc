@@ -38,7 +38,8 @@ let maplocalleader = "\\"
 " ------------------------------------------------------------------------- }}}
 " vimrc ------------------------------------------------------------------- {{{
 
-map <leader>ev :tabnew $MYVIMRC<CR>
+map <leader>vr :tabnew $MYVIMRC<CR>
+map <leader>vb :Texplore $HOME/.vim/bundle/<CR>
 
 " Source the vimrc file after saving it
 augroup vimrc
