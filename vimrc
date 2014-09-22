@@ -518,7 +518,7 @@ nnoremap <leader>I :call IndentGuides()<cr>
 
 function! HiInterestingWord(n) " {{{
     if a:n == 0
-        for m in range(1, 6)
+        for m in range(1, 9)
             let mid = 86750 + m
             silent! call matchdelete(mid)
         endfor
