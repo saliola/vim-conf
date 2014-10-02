@@ -344,13 +344,22 @@ nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 " ------------------------------------------------------------------------- }}}
 " Filetype-specific ------------------------------------------------------- {{{
 
-" txt {{{
+" txt / rst {{{
 
 augroup ft_txt
     au!
 
     " Use ReStructuredText syntax highlighting for .txt files
     autocmd BufRead,BufNewFile *.txt set filetype=rst
+augroup END
+
+augroup ft_rst
+    au!
+
+    " set iskeyword (rst syntax file loads the lisp syntax file for code
+    " blocks, which overwrites iskeyword)
+    " au FileType rst setlocal iskeyword=@,48-57,a-z,A-Z,192-255
+    au FileType rst setlocal iskeyword=@,48-57,_,192-255
 augroup END
 
 " }}}
@@ -408,6 +417,9 @@ augroup ft_tex
 
     " load configuration
     au FileType tex source ~/.vim/bundle/my-vim-latex-config/latexbox-conf.vim
+
+    " set iskeyword (tex syntax file overides this....)
+    au FileType tex setlocal iskeyword=@,48-57,_,192-255
 augroup END
 
 " ------------------------------------------------------------------------- }}}
