@@ -276,7 +276,10 @@ highlight Folded term=none cterm=none
 " Crosshair
 set cursorline
 set cursorcolumn
-set colorcolumn=80
+
+" Cursor column : highlight the 81st column of wide lines - Damien Conway
+highlight ColorColumn ctermfg=16 ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
 
 function! RedCursorLine()
     let w:red_cursor = exists('w:red_cursor') ? !w:red_cursor : 0
@@ -284,7 +287,7 @@ function! RedCursorLine()
         colorscheme solarized
         set cursorline
         set cursorcolumn
-        set colorcolumn=80
+        call matchadd('ColorColumn', '\%81v', 100)
     else
         set cursorline
         hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
