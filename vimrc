@@ -354,7 +354,7 @@ augroup ft_txt
     au!
 
     " Use ReStructuredText syntax highlighting for .txt files
-    autocmd BufRead,BufNewFile *.txt set filetype=rst
+    autocmd BufWinEnter *.txt if &ft != 'help' | set filetype=rst | endif
 augroup END
 
 augroup ft_rst
