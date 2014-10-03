@@ -173,10 +173,6 @@ set history=50 " 50 lines of command lines history
 " cursor movement in command line mode
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-cnoremap <C-h> <Left>
-cnoremap <C-l> <Right>
-cnoremap <C-j> <Down>
-cnoremap <C-k> <Up>
 
 " ------------------------------------------------------------------------- }}}
 " ------------------------------------------------------------------------- }}}
@@ -618,6 +614,25 @@ hi def InterestingWord9 guifg=#000000 ctermfg=16 guibg=#ffd7ff ctermbg=225
 " }}}
 
 " ------------------------------------------------------------------------- }}}
+" GetDigraphWrapper {{{ "
+
+" Wrap C-k to allow backspace to interrupt digraph insertion;
+" currently, it spits out <BS>, which is completely useless
+" Source: loosely inspired by Damien Conway's HUDigraphs
+function! GetDigraphWrapper ()
+    let char1 = getchar()
+    if (char1 == "\<BS>") | return "" | endif
+
+    let char2 = getchar()
+    if (char2 == "\<BS>") | return "" | endif
+
+    return "\<C-K>" . nr2char(char1) . nr2char(char2)
+endfunction
+
+inoremap <expr> <C-K> GetDigraphWrapper()
+cnoremap <expr> <C-K> GetDigraphWrapper()
+
+" }}} GetDigraphWrapper "
 " ------------------------------------------------------------------------- }}}
 " Mac OSX Specific -------------------------------------------------------- {{{
 
