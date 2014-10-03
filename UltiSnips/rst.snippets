@@ -1,10 +1,14 @@
 global !p
 import datetime
+
+month_translation_dict_en_fr = {"January": "janvier", "February": "février", "March": "mars", "April": "avril", "May": "mai", "June": "juin", "July": "juillet", "August": "août", "September": "septembre", "October": "octobre", "November": "novembre", "December": "décembre"}
+weekdays = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+
 def next_weekday(weekday, d=None):
     r"""
     adapted from: http://stackoverflow.com/questions/6558535/python-find-the-date-for-the-first-monday-after-a-given-a-date
     """
-    weekdays = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+    global weekdays
     if weekday in weekdays:
         weekday = weekdays.index(weekday)
     if d is None:
@@ -13,6 +17,14 @@ def next_weekday(weekday, d=None):
     if days_ahead <= 0: # Target day already happened this week
         days_ahead += 7
     return (d + datetime.timedelta(days_ahead)).strftime("%d %B %Y")
+
+def frenchify_date(date):
+    r"""
+    INPUT: date - strftime("%d %B %Y") formatted date
+    """
+    global month_translation_dict_en_fr
+    d, B, Y = date.split(" ")
+    return "%s %s %s" % (d, month_translation_dict_en_fr[B], Y)
 
 endglobal
 
@@ -25,13 +37,13 @@ snippet ann "announcement" b
 endsnippet
 
 snippet dev "devoir" b
-* \`Devoir ${1:} <devoirs/devoir$1.pdf>\`__ : à remettre en version papier le ${2:`!v strftime("%d %B %Y")`}.
+* \`Devoir ${1:} <devoirs/devoir$1.pdf>\`__ : à remettre en version papier le *${2:`!v strftime("%d %B %Y")`}*.
 $0
 endsnippet
 
 snippet feu "feulle d'exercices" b
 * \`Feuille d'exercices ${1:} <exercices/exercices$1.pdf>\`__
-  (pour la démonstration de *${2:`!p snip.rv = next_weekday("Tuesday")`}*)
+  (pour la démonstration de *${2:`!p snip.rv = frenchify_date(next_weekday("Tuesday"))`}*)
 $0
 endsnippet
 
