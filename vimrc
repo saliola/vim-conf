@@ -234,9 +234,9 @@ nnoremap <Leader>J mzvipJ`z
 nnoremap <silent> * :let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
 
 " Highlight next search by pulsing the CursorLine and CursorColumn
-" Source: mashup of Damien Conway's idea and Steve Losh's PulseLine
-nnoremap <silent> n   n:call PulseX(3)<cr>
-nnoremap <silent> N   N:call PulseX(3)<cr>
+" Source: mashup of Damien Conway's idea and Steve Losh's Pulse
+nnoremap <silent> n   n:PulseX<cr>
+nnoremap <silent> N   N:PulseX<cr>
 
 " ------------------------------------------------------------------------- }}}
 " Folding ----------------------------------------------------------------- {{{
@@ -474,68 +474,59 @@ endfunc
 " Pulse Line -------------------------------------------------------------- {{{
 " Source: Steve Losh
 
-function! PulseLine(steps) " {{{
-    redir => old_hi
-        silent execute 'hi CursorLine'
-    redir END
-    let old_hi = split(old_hi, '\n')[0]
-    let old_hi = substitute(old_hi, 'xxx', '', '')
+function! s:PulseX(pulsesteps, pulseline, pulsecolumn, color) " {{{
+    if a:pulseline == 1
+        redir => old_hi_cursorline
+            silent execute 'hi CursorLine'
+        redir END
+        let old_hi_cursorline = split(old_hi_cursorline, '\n')[0]
+        let old_hi_cursorline = substitute(old_hi_cursorline, 'xxx', '', '')
+    endif
 
-    let steps = a:steps
+    if a:pulsecolumn == 1
+        redir => old_hi_cursorcolumn
+            silent execute 'hi CursorColumn'
+        redir END
+        let old_hi_cursorcolumn = split(old_hi_cursorcolumn, '\n')[0]
+        let old_hi_cursorcolumn = substitute(old_hi_cursorcolumn, 'xxx', '', '')
+    endif
+
+    let steps = a:pulsesteps
     let width = 1
     let start = width
     let end = steps * width
-    let color = 240
+    let color = a:color
 
     for i in range(start, end, width)
-        execute "hi CursorLine ctermbg=" . (color + i)
+        if a:pulseline
+            execute "hi CursorLine ctermbg=" . (color + i)
+        endif
+        if a:pulsecolumn
+            execute "hi CursorColumn ctermbg=" . (color + i)
+        endif
         redraw
         sleep 6m
     endfor
     for i in range(end, start, -1 * width)
-        execute "hi CursorLine ctermbg=" . (color + i)
+        if a:pulseline
+            execute "hi CursorLine ctermbg=" . (color + i)
+        endif
+        if a:pulsecolumn
+            execute "hi CursorColumn ctermbg=" . (color + i)
+        endif
         redraw
         sleep 6m
     endfor
 
-    execute 'hi ' . old_hi
+    if a:pulseline
+        execute 'hi ' . old_hi_cursorline
+    endif
+    if a:pulsecolumn
+        execute 'hi ' . old_hi_cursorcolumn
+    endif
 endfunction " }}}
-command! -nargs=0 Pulse call PulseLine(4)
-
-function! PulseX(steps) " {{{
-    redir => old_hi_cursorline
-        silent execute 'hi CursorLine'
-    redir END
-    let old_hi_cursorline = split(old_hi_cursorline, '\n')[0]
-    let old_hi_cursorline = substitute(old_hi_cursorline, 'xxx', '', '')
-
-    redir => old_hi_cursorcolumn
-        silent execute 'hi CursorColumn'
-    redir END
-    let old_hi_cursorcolumn = split(old_hi_cursorcolumn, '\n')[0]
-    let old_hi_cursorcolumn = substitute(old_hi_cursorcolumn, 'xxx', '', '')
-
-    let steps = a:steps
-    let width = 1
-    let start = width
-    let end = steps * width
-    let color = 240
-
-    for i in range(start, end, width)
-        execute "hi CursorLine ctermbg=" . (color + i)
-        execute "hi CursorColumn ctermbg=" . (color + i)
-        redraw
-        sleep 6m
-    endfor
-    for i in range(end, start, -1 * width)
-        execute "hi CursorColumn ctermbg=" . (color + i)
-        redraw
-        sleep 6m
-    endfor
-
-    execute 'hi ' . old_hi_cursorline
-    execute 'hi ' . old_hi_cursorcolumn
-endfunction " }}}
+command! -nargs=0 Pulse call s:PulseX(4, 1, 0, 160)
+command! -nargs=0 PulseX call s:PulseX(2, 1, 1, 240)
 
 " ------------------------------------------------------------------------- }}}
 " Indent Guides ----------------------------------------------------------- {{{
