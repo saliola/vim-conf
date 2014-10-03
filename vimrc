@@ -234,10 +234,10 @@ nnoremap <Leader>J mzvipJ`z
 nnoremap <silent> * :let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
 
 " Keep search matches in the middle of the window.
-" Source: Steve Losh
-nnoremap n nzzzv
-nnoremap N Nzzzv
-
+" Source: Damien Conway (idea)
+" Source: Steve Losh (PulseLine)
+nnoremap <silent> n   n:call PulseLine(2)<cr>
+nnoremap <silent> N   N:call PulseLine(2)<cr>
 
 " ------------------------------------------------------------------------- }}}
 " Folding ----------------------------------------------------------------- {{{
@@ -277,7 +277,8 @@ highlight Folded term=none cterm=none
 set cursorline
 set cursorcolumn
 
-" Cursor column : highlight the 81st column of wide lines - Damien Conway
+" Cursor column : highlight the 81st column of wide lines
+" Source: Damien Conway
 highlight ColorColumn ctermfg=16 ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
 
@@ -474,18 +475,18 @@ endfunc
 " Pulse Line -------------------------------------------------------------- {{{
 " Source: Steve Losh
 
-function! s:Pulse() " {{{
+function! PulseLine(steps) " {{{
     redir => old_hi
         silent execute 'hi CursorLine'
     redir END
     let old_hi = split(old_hi, '\n')[0]
     let old_hi = substitute(old_hi, 'xxx', '', '')
 
-    let steps = 4
+    let steps = a:steps
     let width = 1
     let start = width
     let end = steps * width
-    let color = 160
+    let color = 240
 
     for i in range(start, end, width)
         execute "hi CursorLine ctermbg=" . (color + i)
@@ -500,7 +501,7 @@ function! s:Pulse() " {{{
 
     execute 'hi ' . old_hi
 endfunction " }}}
-command! -nargs=0 Pulse call s:Pulse()
+command! -nargs=0 Pulse call PulseLine(4)
 
 " ------------------------------------------------------------------------- }}}
 " Indent Guides ----------------------------------------------------------- {{{
