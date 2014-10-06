@@ -47,3 +47,6 @@
 	path = bundle/hgrev
 	url = https://github.com/vim-scripts/hgrev.git
 	ignore = dirty
+[submodule "bundle/vim-airline"]
+	path = bundle/vim-airline
+	url = https://github.com/bling/vim-airline
