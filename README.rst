@@ -8,16 +8,25 @@ Installation in three easy steps
 
 The included script ``install.sh`` automates the steps below.
 
-Clone repo::
+Clone repo
+~~~~~~~~~~
+
+::
 
     git clone https://github.com/saliola/dotvim.git ~/.vim
 
-Create symlinks (for vim version < 7.4)::
+Create symlinks (for vim version < 7.4)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
 
     ln -s ~/.vim/vimrc ~/.vimrc
     ln -s ~/.vim/gvimrc ~/.gvimrc
 
-Switch to the `~/.vim` directory, and fetch submodules::
+Switch to the `~/.vim` directory, and fetch submodules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
 
     cd ~/.vim
     git submodule init
@@ -27,30 +36,45 @@ Switch to the `~/.vim` directory, and fetch submodules::
 Working with plugins/bundles as submodules
 ------------------------------------------
 
-Install a plugin as a submodule::
+Install a plugin as a submodule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
 
     cd ~/.vim/
     git submodule add git://github.com/tpope/vim-sensible.git bundle/vim-sensible
     git add .
     git commit -m "Install vim-sensible bundle as a git submodule."
 
-Upgrading a plugin::
+Upgrading a plugin
+~~~~~~~~~~~~~~~~~~
+
+::
 
     cd ~/.vim/bundle/vim-sensible
     git pull origin master
 
-Upgrading all plugins::
+Upgrading all plugins
+~~~~~~~~~~~~~~~~~~~~~
+
+::
 
     cd ~/.vim
     git submodule foreach git pull origin master
 
-Pulling changes that include a new plugin::
+Pulling changes that include a new plugin
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
 
     git pull origin master
     git submodule init
     git submodule update
 
-`Delete a plugin`__ (requires version > git1.8.3)::
+Delete a plugin
+~~~~~~~~~~~~~~~
+
+`Delete a plugin`__ requires version > ``git1.8.3``::
 
     cd ~/.vim
     git submodule deinit bundle/snipmate.vim
@@ -58,11 +82,14 @@ Pulling changes that include a new plugin::
 
 __ http://stackoverflow.com/questions/1260748/how-do-i-remove-a-git-submodule
 
-Generate helptags::
+Generate helptags
+~~~~~~~~~~~~~~~~~
+
+::
 
     :Helptags
 
- From the VimCast for `Synchronizing plugins with git submodules and pathogen`__:
+From the VimCast for `Synchronizing plugins with git submodules and pathogen`__:
 
     ... generating helptags dirties the submodule’s git repository tree.
     Several other people chimed in with suggestions on how to fix this. Nils
