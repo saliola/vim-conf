@@ -58,6 +58,22 @@ Pulling changes that include a new plugin::
 
 __ http://stackoverflow.com/questions/1260748/how-do-i-remove-a-git-submodule
 
+Generate helptags::
+
+    :Helptags
+
+ From the VimCast for `Synchronizing plugins with git submodules and pathogen`__:
+
+    ... generating helptags dirties the submodule’s git repository tree.
+    Several other people chimed in with suggestions on how to fix this. Nils
+    Haldenwang has written a `blog post`__ describing a simple fix, which just
+    involves adding the line ``ignore = dirty`` to the ``.gitmodules`` file for
+    each submodule that reports a dirty tree when you run git status.
+
+__ http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen/
+__ http://www.nils-haldenwang.de/frameworks-and-tools/git/how-to-ignore-changes-in-git-submodules
+
+
 ----------
 References
 ----------
