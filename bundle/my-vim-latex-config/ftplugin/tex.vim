@@ -74,4 +74,22 @@ inoremap <buffer> `, \nonumber
 inoremap <buffer> `\| \Big|
 inoremap <buffer> `~ \widetilde
 inoremap <buffer> `^ \widehat
-inoremap <buffer> `_ \overline
+inoremap <buffer> `_ \textunderscore
+
+
+function! ToggleDisplaySolutions()
+    " supposes that there is a line in the latex file of the following form:
+    "
+    "   \def\showsolutions{True}
+    "   \def\showsolutions{False}
+
+    let b:currentview = winsaveview()
+    let l:searchpattern = '^\\def\\showsolutions{\(True\|False\)}$'
+    let l:toggledict = '{"True":"False", "False":"True"}'
+    execute 'g/' . l:searchpattern . '/'. 's/True\|False/\='.l:toggledict.'[submatch(0)]/g'
+    write
+    Latexmk
+    call winrestview(b:currentview)
+endfunction
+
+command! -nargs=0 ShowSolutions call ToggleDisplaySolutions()
