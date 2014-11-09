@@ -340,6 +340,16 @@ augroup END
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 
 " }}} vim-tmux-navigator "
+" GitGutter {{{ "
+
+highlight clear SignColumn
+
+let g:gitgutter_enabled = 0
+let g:gitgutter_highlight_lines = 1
+let g:gitgutter_sign_column_always = 1
+let g:gitgutter_map_keys = 1
+
+" }}} GitGutter "
 " ------------------------------------------------------------------------- }}}
 " Filetype-specific ------------------------------------------------------- {{{
 
