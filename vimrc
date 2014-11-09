@@ -340,6 +340,28 @@ augroup END
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 
 " }}} vim-tmux-navigator "
+" vim-signify {{{ "
+
+" Some Notes:
+" :SignifyRefresh
+" :SignifyToggle
+" :SignifyToggleHighlight
+" mappings: ]c / [c to move between changes / hunks
+" text object: ic / ac
+
+let g:signify_vcs_list = [ 'git', 'hg', 'svn' ]
+
+omap ic <plug>(signify-motion-inner-pending)
+xmap ic <plug>(signify-motion-inner-visual)
+omap ac <plug>(signify-motion-outer-pending)
+xmap ac <plug>(signify-motion-outer-visual)
+
+highlight SignColumn ctermfg=239 ctermbg=235 guifg=Yellow
+highlight SignifySignAdd    cterm=bold ctermbg=235  ctermfg=119
+highlight SignifySignDelete cterm=bold ctermbg=235  ctermfg=167
+highlight SignifySignChange cterm=bold ctermbg=235  ctermfg=227
+
+" }}} vim-signify "
 " ------------------------------------------------------------------------- }}}
 " Filetype-specific ------------------------------------------------------- {{{
 
