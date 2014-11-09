@@ -1,3 +1,27 @@
+" LatexBox commands
+"
+" <LocalLeader>lt Table of Contents
+" <LocalLeader>ll Compile with latexmk.
+" <LocalLeader>lL Force compilation with latexmk.
+" <LocalLeader>lc Clean temporary output from LaTeX.
+" <LocalLeader>lC Clean all output from LaTeX.
+" <LocalLeader>lk Kill latexmk if it is running.
+" <LocalLeader>lg Show the running status of latexmk for the current buffer.
+" <LocalLeader>lG Show the running status of latexmk for all buffers with process group ID's.
+" <LocalLeader>le Load the log file for the current document and jump to the first error.
+" <LocalLeader>lf Recalculate the folds.
+"
+" Custom commands
+"
+" <LocalLeader>lh  Load this (help) file
+" <LocalLeader>lce Change the Environment
+" <LocalLeader>lts Toggle Star environment
+" <LocalLeader>lwc Wrap selection in a Command
+" <LocalLeader>lwe Wrap selection in an Environment
+
+" load this file
+nmap <buffer> <LocalLeader>lh   :split $HOME/.vim/bundle/my-vim-latex-config/tex.vim<CR>
+
 " LaTeX-box configurations
 imap <buffer> ]]                <Plug>LatexCloseCurEnv
 nmap <buffer> <LocalLeader>lce  <Plug>LatexChangeEnv
@@ -93,3 +117,5 @@ function! ToggleDisplaySolutions()
 endfunction
 
 command! -nargs=0 ShowSolutions call ToggleDisplaySolutions()
+
+

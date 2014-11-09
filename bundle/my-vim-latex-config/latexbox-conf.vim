@@ -1,22 +1,14 @@
-"""""""""""""""""""
-" latexbox commands
-"""""""""""""""""""
-" \lt Table of Contents
-" \ll Compile with latexmk.
-" \lL Force compilation with latexmk.
-" \lc Clean temporary output from LaTeX.
-" \lC Clean all output from LaTeX.
-" \lk Kill latexmk if it is running.
-" \lg Show the running status of latexmk for the current buffer.
-" \lG Show the running status of latexmk for all buffers with process group ID's.
-" \le Load the log file for the current document and jump to the first error.
-"
-" Custom commands
-" \lce Change the Environment
-" \lts Toggle Star environment
-" \lwc Wrap selection in a Command
-" \lwe Wrap selection in an Environment
+augroup ft_tex
+    autocmd!
 
+    " ignore these filenames during tab completion
+    autocmd FileType tex setlocal wildignore+=*.out,*.synctex.gz,*.aux,*.ilg,*.log,*.nls,*.idx,*.ind,*.blg,*.nlo,*.pdf,*.toc
+
+    " set iskeyword (tex syntax file overides this....)
+    autocmd FileType tex setlocal iskeyword=@,48-57,_,192-255
+augroup END
+
+" set default viewer
 if has("unix")
     let s:uname = system("uname")
     if s:uname == "Darwin\n"
@@ -33,8 +25,6 @@ endif
 
 let g:LatexBox_output_type = "pdf"
 "let g:LatexBox_latexmk_options = '-pdfdvi'
-"
-let g:LatexBox_Folding = 1
 
 " disable async compile since it requires a vim server (complains in terminal)
 let g:LatexBox_latexmk_async = 0
@@ -42,15 +32,6 @@ let g:LatexBox_latexmk_async = 0
 " disable automatic opening the quickfix window post-compilation;
 " use :copen to open the window; or use <Leader>le (latexbox errors)
 let g:LatexBox_quickfix = 2
-
-" Turn off folding of all environments, but insist that abstract, figure and
-" frame environments are folded.
-let g:LatexBox_fold_envs = 0
-let g:LatexBox_fold_envs_force = [
-            \ "abstract",
-            \ "figure",
-            \ "frame"
-            \ ]
 
 let g:LatexBox_show_warnings = 1
 let g:LatexBox_ignore_warnings = [
@@ -61,3 +42,23 @@ let g:LatexBox_ignore_warnings = [
             \ 'Package xcolor Warning: Incompatible color definition on input line',
             \ ]
 
+
+" Turn off folding of all environments, except for those explicitly specified.
+let g:LatexBox_fold_envs = 0
+let g:LatexBox_fold_envs_force = [
+            \ "abstract",
+            \ "figure",
+            \ "frame",
+            \ "exercice",
+            \ "solution"
+            \ ]
+
+" activate folding, but turn off auto calculation of folds (*really slow*)
+let g:LatexBox_Folding = 1
+let g:LatexBox_fold_automatic = 0
+
+" calculate folds when a file is loaded
+augroup latex_folding
+    autocmd!
+    autocmd BufRead *.tex LatexFold
+augroup END

@@ -408,18 +408,7 @@ augroup END
 " ------------------------------------------------------------------------- }}}
 " Latex ------------------------------------------------------------------- {{{
 
-augroup ft_tex
-    au!
-
-    " ignore these filenames during tab completion
-    au FileType tex setlocal wildignore+=*.out,*.synctex.gz,*.aux,*.ilg,*.log,*.nls,*.idx,*.ind,*.blg,*.nlo,*.pdf,*.toc
-
-    " load configuration
-    au FileType tex source ~/.vim/bundle/my-vim-latex-config/latexbox-conf.vim
-
-    " set iskeyword (tex syntax file overides this....)
-    au FileType tex setlocal iskeyword=@,48-57,_,192-255
-augroup END
+source ~/.vim/bundle/my-vim-latex-config/latexbox-conf.vim
 
 " ------------------------------------------------------------------------- }}}
 " Useful functions -------------------------------------------------------- {{{
