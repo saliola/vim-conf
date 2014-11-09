@@ -38,7 +38,7 @@ let maplocalleader = "_"
 " ------------------------------------------------------------------------- }}}
 " vimrc ------------------------------------------------------------------- {{{
 
-map <leader>vr :tabnew $MYVIMRC<CR>
+map <leader>vrc :tabnew $MYVIMRC<CR>
 map <leader>vb :Texplore $HOME/.vim/bundle/<CR>
 
 " Source the vimrc file after saving it
