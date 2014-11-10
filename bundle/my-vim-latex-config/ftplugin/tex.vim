@@ -119,3 +119,19 @@ endfunction
 command! -nargs=0 ShowSolutions call ToggleDisplaySolutions()
 
 
+function! LatexAddItem()
+    " add \item within a list-like environment (itemize/enumerate/etc) after
+    " a carriage return provided that the previous and current lines are blank
+    "
+    " adapted from: http://stackoverflow.com/questions/2547739/auto-insert-text-at-a-newline-in-vim
+    if getline(line('.')) =~ '^ *$' && getline(line('.') - 1) =~ '^$'
+        if searchpair('\\begin{enumerate}', '', '\\end{enumerate}', '') ||
+                    \ searchpair('\\begin{itemize}', '', '\\end{itemize}', '') ||
+                    \ searchpair('\\begin{description}', '', '\\end{description}', '')
+            return "\\item\r"
+        endif
+    endif
+    return "\r"
+endfunction
+
+inoremap <expr><buffer> <CR> LatexAddItem()
