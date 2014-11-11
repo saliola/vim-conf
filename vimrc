@@ -299,15 +299,28 @@ command! RedCursorLine :call RedCursorLine()
 
 " CtrlP ------------------------------------------------------------------- {{{
 
-" List of recent files, using CtrlP <https://github.com/kien/ctrlp.vim>
-let g:ctrlp_cmd = 'CtrlPMRUFiles'
-let g:ctrlp_by_filename = 1 " toggle with <c-d>
-let g:ctrlp_regexp = 0 " toggle with <c-r>
+" Default behaviour : Most Recently Used files
+let g:ctrlp_cmd = 'CtrlPMRU'
+
+" Set this to 1 to set searching by filename (as opposed to full path);
+" toggle with <c-d>
+let g:ctrlp_by_filename = 1
+
+" Set this to 1 to set regexp search as the default;
+" toggle with <c-r>
+let g:ctrlp_regexp = 0
+
+" prompt mappings:
+" - <cr> opens file in new tab;
+" - <c-t> opens file in same window
 let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-t>'],
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
-nmap <C-p> :<C-U>CtrlPMRUFiles<CR>
+
+" mappings
+nmap <C-p> :<C-U>CtrlPMRU<CR>
+nmap <C-n> :<C-U>CtrlP ~/Dropbox/notes<CR>
 
 " ------------------------------------------------------------------------- }}}
 " UltiSnips --------------------------------------------------------------- {{{
