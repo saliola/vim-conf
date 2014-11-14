@@ -375,6 +375,25 @@ highlight SignifySignDelete cterm=bold ctermbg=235  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=235  ctermfg=227
 
 " }}} vim-signify "
+" rainbow parantheses {{{ "
+
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+let g:rainbow#colors = {
+\   'dark': [
+\     ['darkyellow',  'orangered3'    ],
+\     ['darkgreen',   'orange2'       ],
+\     ['blue',        'yellow3'       ],
+\     ['darkmagenta', 'olivedrab4'    ],
+\     ['red',         'green4'        ],
+\     ['darkyellow',  'paleturquoise3'],
+\     ['darkgreen',   'deepskyblue4'  ],
+\     ['blue',        'darkslateblue' ],
+\     ['darkmagenta', 'darkviolet'    ]
+\   ]
+\ }
+
+" }}} rainbow parantheses "
 " ------------------------------------------------------------------------- }}}
 " Filetype-specific ------------------------------------------------------- {{{
 
