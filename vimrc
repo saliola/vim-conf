@@ -229,10 +229,12 @@ nnoremap <Leader>J mzvipJ`z
 " Source: Steve Losh
 nnoremap <silent> * :let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
 
-" Highlight next search by pulsing the CursorLine and CursorColumn
-" Source: mashup of Damien Conway's idea and Steve Losh's Pulse
-nnoremap <silent> n   n:PulseX<cr>
-nnoremap <silent> N   N:PulseX<cr>
+" Highlight next search by pulsing the CursorLine and CursorColumn; also, open
+" just enough folds to make the line in which the cursor is located not folded.
+"
+" Source: mashup of Damien Conway's idea and Steve Losh's Pulse and zv
+nnoremap <silent> n   nzv:PulseX<cr>
+nnoremap <silent> N   Nzv:PulseX<cr>
 
 " ------------------------------------------------------------------------- }}}
 " Folding ----------------------------------------------------------------- {{{
