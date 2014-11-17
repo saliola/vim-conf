@@ -460,6 +460,15 @@ augroup bash_vi_input_mode
 augroup END
 
 " }}}
+" xmonad.hs {{{ "
+
+" recompile and restart xmonad on save
+augroup xmonad
+    au!
+    au bufwritepost xmonad.hs :!xmonad --recompile && xmonad --restart
+augroup END
+
+" }}} xmonad.hs "
 
 " ------------------------------------------------------------------------- }}}
 " Latex ------------------------------------------------------------------- {{{
