@@ -43,10 +43,6 @@
 [submodule "bundle/vim-repeat"]
 	path = bundle/vim-repeat
 	url = https://github.com/tpope/vim-repeat.git
-[submodule "bundle/hgrev"]
-	path = bundle/hgrev
-	url = https://github.com/vim-scripts/hgrev.git
-	ignore = dirty
 [submodule "bundle/vim-airline"]
 	path = bundle/vim-airline
 	url = https://github.com/bling/vim-airline
@@ -64,3 +60,9 @@
 [submodule "bundle/vim-signify"]
 	path = bundle/vim-signify
 	url = https://github.com/mhinz/vim-signify.git
+[submodule "bundle/vim-eunuch"]
+	path = bundle/vim-eunuch
+	url = https://github.com/tpope/vim-eunuch.git
+[submodule "bundle/rainbow_parantheses.vim"]
+	path = bundle/rainbow_parantheses.vim
+	url = https://github.com/junegunn/rainbow_parentheses.vim.git

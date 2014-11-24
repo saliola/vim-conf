@@ -232,10 +232,12 @@ nnoremap <Leader>J mzvipJ`z
 " Source: Steve Losh
 nnoremap <silent> * :let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
 
-" Highlight next search by pulsing the CursorLine and CursorColumn
-" Source: mashup of Damien Conway's idea and Steve Losh's Pulse
-nnoremap <silent> n   n:PulseX<cr>
-nnoremap <silent> N   N:PulseX<cr>
+" Highlight next search by pulsing the CursorLine and CursorColumn; also, open
+" just enough folds to make the line in which the cursor is located not folded.
+"
+" Source: mashup of Damien Conway's idea and Steve Losh's Pulse and zv
+nnoremap <silent> n   nzv:PulseX<cr>
+nnoremap <silent> N   Nzv:PulseX<cr>
 
 " ------------------------------------------------------------------------- }}}
 " Folding ----------------------------------------------------------------- {{{
@@ -382,6 +384,25 @@ highlight SignifySignDelete cterm=bold ctermbg=235  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=235  ctermfg=227
 
 " }}} vim-signify "
+" rainbow parantheses {{{ "
+
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+let g:rainbow#colors = {
+\   'dark': [
+\     ['darkyellow',  'orangered3'    ],
+\     ['darkgreen',   'orange2'       ],
+\     ['blue',        'yellow3'       ],
+\     ['darkmagenta', 'olivedrab4'    ],
+\     ['red',         'green4'        ],
+\     ['darkyellow',  'paleturquoise3'],
+\     ['darkgreen',   'deepskyblue4'  ],
+\     ['blue',        'darkslateblue' ],
+\     ['darkmagenta', 'darkviolet'    ]
+\   ]
+\ }
+
+" }}} rainbow parantheses "
 " ------------------------------------------------------------------------- }}}
 " Filetype-specific ------------------------------------------------------- {{{
 
@@ -446,6 +467,15 @@ augroup bash_vi_input_mode
 augroup END
 
 " }}}
+" xmonad.hs {{{ "
+
+" recompile and restart xmonad on save
+augroup xmonad
+    au!
+    au bufwritepost xmonad.hs :!xmonad --recompile && xmonad --restart
+augroup END
+
+" }}} xmonad.hs "
 
 " ------------------------------------------------------------------------- }}}
 " Latex ------------------------------------------------------------------- {{{
