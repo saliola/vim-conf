@@ -32,7 +32,10 @@ execute pathogen#infect()
 " ------------------------------------------------------------------------- }}}
 " Leaders ----------------------------------------------------------------- {{{
 
-let mapleader = " "
+" map Space to leader, so that leader commands appear in showcmd area
+let mapleader = "_"
+map <Space> <Leader>
+
 let maplocalleader = "_"
 
 " ------------------------------------------------------------------------- }}}
@@ -247,6 +250,10 @@ nnoremap <silent> N   N:PulseX<cr>
 "
 " Warning: This mapping wipes out the z mark.
 nnoremap <Leader>f mzzMzvzz10<c-e>`z:Pulse<cr>
+
+" toggle fold with za
+nnoremap <Leader><Space> za
+
 
 " ------------------------------------------------------------------------- }}}
 " Appearance -------------------------------------------------------------- {{{
