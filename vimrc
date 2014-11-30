@@ -91,8 +91,16 @@ set linebreak
 " }}} General Editing "
 " Searching {{{ "
 
-set hlsearch " hightlight search
-set incsearch " incremental search
+" Settings:
+" - hightlight search results (hlsearch)
+" - enable incremental search (incsearch)
+" - ignore case in search patterns (ignorecase)
+" - case-sensitive if the pattern contains uppercase characters (smartcase)
+
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
 
 " }}} Searching "
 " Status line {{{ "
