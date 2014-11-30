@@ -493,10 +493,15 @@ source ~/.vim/bundle/my-vim-latex-config/latexbox-conf.vim
 " ------------------------------------------------------------------------- }}}
 " Useful functions -------------------------------------------------------- {{{
 
-" mapping to toggle (no)paste before pasting from the clipboard ----------- {{{
+" yank / paste from the clipboard ------------------------------------------ {{{
 
+" toggle (no)paste before pasting from the clipboard
 " Reference: http://tilvim.com/2014/03/18/a-better-paste.html
-map <Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>
+nnoremap <Leader>p :set paste<CR>"*]p:set nopaste<cr>
+
+" yank to system clipboard
+vmap <Leader>y "+y
+nmap <Leader>yy "+yy
 
 " ------------------------------------------------------------------------- }}}
 " Diff current file with the version on disk ------------------------------ {{{
