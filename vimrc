@@ -33,7 +33,7 @@ execute pathogen#infect()
 " Leaders ----------------------------------------------------------------- {{{
 
 " map Space to leader, so that leader commands appear in showcmd area
-let mapleader = "_"
+let mapleader = " "
 map <Space> <Leader>
 
 let maplocalleader = "_"
