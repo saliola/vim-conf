@@ -495,6 +495,9 @@ source ~/.vim/bundle/my-vim-latex-config/latexbox-conf.vim
 
 " yank / paste from the clipboard ------------------------------------------ {{{
 
+" enable copy/paste on Mac OSX and tmux (see also notes/macosx.notes)
+set clipboard=unnamed
+
 " toggle (no)paste before pasting from the clipboard
 " Reference: http://tilvim.com/2014/03/18/a-better-paste.html
 nnoremap <Leader>p :set paste<CR>"*]p:set nopaste<cr>
@@ -713,9 +716,6 @@ cnoremap <expr> <C-K> GetDigraphWrapper()
 " For the French keyboard on the MacBook: map the key §/± key to `/~
 map! § `
 map! ± ~
-
-" enable copy/paste on Mac OSX and tmux (see also notes/macosx.notes)
-set clipboard=unnamed
 
 " ------------------------------------------------------------------------- }}}
 " Experimental {{{ "
