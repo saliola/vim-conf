@@ -686,9 +686,17 @@ cnoremap <expr> <C-K> GetDigraphWrapper()
 " }}} GetDigraphWrapper "
 " Cursorline {{{ "
 
+highlight CursorLine   ctermbg=52
+highlight CursorColumn ctermbg=52
+
+set cursorline
+set cursorcolumn
+
 augroup cursorline
     autocmd WinEnter * setlocal cursorline | setlocal cursorcolumn
     autocmd WinLeave * setlocal nocursorline | setlocal nocursorcolumn
+    autocmd InsertEnter * highlight CursorLine ctermbg=234 | highlight CursorColumn ctermbg=234
+    autocmd InsertLeave * highlight CursorLine ctermbg=52 | highlight CursorColumn ctermbg=52
 augroup END
 
 " Cursor column : highlight the 81st column of wide lines
