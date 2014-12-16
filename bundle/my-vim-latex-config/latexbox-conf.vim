@@ -29,6 +29,9 @@ let g:LatexBox_output_type = "pdf"
 " disable async compile since it requires a vim server (complains in terminal)
 let g:LatexBox_latexmk_async = 0
 
+" run latexmk in continuous mode
+let g:LatexBox_latexmk_preview_continuously = 1
+
 " disable automatic opening the quickfix window post-compilation;
 " use :copen to open the window; or use <Leader>le (latexbox errors)
 let g:LatexBox_quickfix = 2
