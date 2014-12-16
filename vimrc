@@ -285,32 +285,6 @@ endif
 " syntax colouring for folded blocks: turn off underlining in the terminal
 highlight Folded term=none cterm=none
 
-" Crosshair
-set cursorline
-set cursorcolumn
-
-" Cursor column : highlight the 81st column of wide lines
-" Source: Damien Conway
-highlight ColorColumn ctermfg=16 ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
-
-function! RedCursorLine()
-    let w:red_cursor = exists('w:red_cursor') ? !w:red_cursor : 0
-    if w:red_cursor
-        colorscheme solarized
-        set cursorline
-        set cursorcolumn
-        call matchadd('ColorColumn', '\%81v', 100)
-    else
-        set cursorline
-        hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-        set nocursorcolumn
-        hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-        set colorcolumn=
-    endif
-endfunction
-command! RedCursorLine :call RedCursorLine()
-
 " ------------------------------------------------------------------------- }}}
 " Plugin settings --------------------------------------------------------- {{{
 
@@ -710,6 +684,44 @@ inoremap <expr> <C-K> GetDigraphWrapper()
 cnoremap <expr> <C-K> GetDigraphWrapper()
 
 " }}} GetDigraphWrapper "
+" Cursorline {{{ "
+
+highlight CursorLine   ctermbg=52
+highlight CursorColumn ctermbg=52
+
+set cursorline
+set cursorcolumn
+
+augroup cursorline
+    autocmd WinEnter * setlocal cursorline | setlocal cursorcolumn
+    autocmd WinLeave * setlocal nocursorline | setlocal nocursorcolumn
+    autocmd InsertEnter * highlight CursorLine ctermbg=234 | highlight CursorColumn ctermbg=234
+    autocmd InsertLeave * highlight CursorLine ctermbg=52 | highlight CursorColumn ctermbg=52
+augroup END
+
+" Cursor column : highlight the 81st column of wide lines
+" Source: Damien Conway
+highlight ColorColumn ctermfg=16 ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
+
+function! RedCursorLine()
+    let w:red_cursor = exists('w:red_cursor') ? !w:red_cursor : 0
+    if w:red_cursor
+        colorscheme solarized
+        set cursorline
+        set cursorcolumn
+        call matchadd('ColorColumn', '\%81v', 100)
+    else
+        set cursorline
+        hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+        set nocursorcolumn
+        hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+        set colorcolumn=
+    endif
+endfunction
+command! RedCursorLine :call RedCursorLine()
+
+" }}} Cursorline "
 " ------------------------------------------------------------------------- }}}
 " Mac OSX Specific -------------------------------------------------------- {{{
 
