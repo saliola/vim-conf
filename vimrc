@@ -75,9 +75,9 @@ set scrolloff=1 " always show n screen lines to above and below the cursor
 set tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab " tab settings for all files
 set nowrap " don't wrap text ; I have a wide monitor
 
-" show trailing spaces as dots, highlight tabs, etc.
+" show tabs, etc.
 set list
-set listchars=tab:▸-,extends:❯,precedes:❮,trail:· ",eol:¬
+set listchars=tab:▸-,extends:❯,precedes:❮
 "set listchars+=eol:¬
 set showbreak=…
 match ErrorMsg /\t/
@@ -209,18 +209,16 @@ cmap <C-P> <C-R>=escape(expand("%:p:h"),' ') . "/"<CR>
 " Insert the current filename into a command-line path
 cmap %% <C-R>=escape(expand("%"),' ')<CR>
 
-" Opens a tab edit command with the path of the currently edited file filled in
-" Normal mode: <Leader>t
-map <Leader>t :tabnew
+" Start a tabnew command with the directory of the currently edited file
 map <Leader>tp :tabnew <C-p>
-map <Leader>tn :tabnew 
+map <Leader>tn :tabnew<Space>
 map <Leader>tN :tabnew ~/Dropbox/notes/
 command! Notes :tabnew ~/Dropbox/notes/
 
 " Scratchpad settings
 command! ScratchPad :tabnew ~/Dropbox/scratchpad.rst
 
-" Fullscreen with 
+" Fullscreen with
 " command! FullScreenEditing :vertical new readonly | :vertical resize 120 | :wincmd w
 command! FullScreenEditing :vertical new | :vertical resize 120 | :wincmd w
 
@@ -722,6 +720,20 @@ endfunction
 command! RedCursorLine :call RedCursorLine()
 
 " }}} Cursorline "
+" FixTrailingWhitespace {{{ "
+
+" Reference: https://github.com/bronson/vim-trailing-whitespace
+set listchars+=trail:·
+
+function! s:FixTrailingWhitespace(line1,line2)
+    let l:save_cursor = getpos(".")
+    silent! execute ':' . a:line1 . ',' . a:line2 . 's/\s\+$//'
+    call setpos('.', l:save_cursor)
+endfunction
+
+command! -range=% FixTrailingWhitespace call <SID>FixTrailingWhitespace(<line1>,<line2>)
+
+" }}} FixTrailingWhitespace "
 " ------------------------------------------------------------------------- }}}
 " Mac OSX Specific -------------------------------------------------------- {{{
 
