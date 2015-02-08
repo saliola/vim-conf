@@ -88,6 +88,8 @@ set formatoptions+=1n
 
 set linebreak
 
+set hidden
+
 " }}} General Editing "
 " Searching {{{ "
 
