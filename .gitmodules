@@ -72,3 +72,6 @@
 [submodule "bundle/vim-peekaboo"]
 	path = bundle/vim-peekaboo
 	url = https://github.com/junegunn/vim-peekaboo.git
+[submodule "bundle/VimCompletesMe"]
+	path = bundle/VimCompletesMe
+	url = https://github.com/ajh17/VimCompletesMe.git
