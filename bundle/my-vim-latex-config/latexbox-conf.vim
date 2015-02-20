@@ -1,13 +1,3 @@
-augroup ft_tex
-    autocmd!
-
-    " ignore these filenames during tab completion
-    autocmd FileType tex setlocal wildignore+=*.out,*.synctex.gz,*.aux,*.ilg,*.log,*.nls,*.idx,*.ind,*.blg,*.nlo,*.pdf,*.toc
-
-    " set iskeyword (tex syntax file overides this....)
-    autocmd FileType tex setlocal iskeyword=@,48-57,_,192-255
-augroup END
-
 " set default viewer
 if has("unix")
     let s:uname = system("uname")
@@ -60,8 +50,22 @@ let g:LatexBox_fold_envs_force = [
 let g:LatexBox_Folding = 1
 let g:LatexBox_fold_automatic = 0
 
-" calculate folds when a file is loaded
-augroup latex_folding
+augroup ft_tex
     autocmd!
+
+    " ignore these filenames during tab completion
+    autocmd FileType tex setlocal wildignore+=*.out,*.synctex.gz,*.aux,*.ilg,*.log,*.nls,*.idx,*.ind,*.blg,*.nlo,*.pdf,*.toc
+
+    " set iskeyword (tex syntax file overides this....)
+    autocmd FileType tex setlocal iskeyword=@,48-57,_,192-255
+
+    " calculate folds when a file is loaded
     autocmd BufRead *.tex LatexFold
+
+    " If a key has not been pressed for some time, stop all latexmk processes.
+    " If latexmk is running continuously in two different instances of vim, both
+    " editing the same file that happens to be synced via Dropbox, then there is
+    " a compilation loop and each loop creates "conflicted" versions of the file.
+    set updatetime=300000
+    autocmd CursorHold,CursorHoldI *.tex if !empty(g:latexmk_running_pids) | call LatexBox_LatexmkStop(0) | endif
 augroup END
