@@ -732,7 +732,7 @@ set cursorcolumn
 augroup cursorline
     autocmd WinEnter * setlocal cursorline | setlocal cursorcolumn
     autocmd WinLeave * setlocal nocursorline | setlocal nocursorcolumn
-    autocmd InsertEnter * highlight CursorLine ctermbg=234 | highlight CursorColumn ctermbg=234
+    autocmd InsertEnter * highlight CursorLine ctermbg=0 | highlight CursorColumn ctermbg=0
     autocmd InsertLeave * highlight CursorLine ctermbg=52 | highlight CursorColumn ctermbg=52
 augroup END
 
