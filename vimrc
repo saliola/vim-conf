@@ -273,15 +273,15 @@ nnoremap <Leader><Space> za
 syntax enable " enable syntax highlighting
 if has('gui_running')
     set background=light
-    colorscheme solarized
 else
-    set background=dark
+    set background=light
     set t_Co=256
     let g:solarized_termtrans = 1
     let g:solarized_termcolors=256
+    let g:solarized_underline=0
     let g:solarized_italic=0 " disable display of italics (bgcolor is too dark)
-    colorscheme solarized
 endif
+colorscheme my-solarized
 
 " syntax colouring for folded blocks: turn off underlining in the terminal
 highlight Folded term=none cterm=none
@@ -360,11 +360,6 @@ omap ic <plug>(signify-motion-inner-pending)
 xmap ic <plug>(signify-motion-inner-visual)
 omap ac <plug>(signify-motion-outer-pending)
 xmap ac <plug>(signify-motion-outer-visual)
-
-highlight SignColumn ctermfg=239 ctermbg=235 guifg=Yellow
-highlight SignifySignAdd    cterm=bold ctermbg=235  ctermfg=119
-highlight SignifySignDelete cterm=bold ctermbg=235  ctermfg=167
-highlight SignifySignChange cterm=bold ctermbg=235  ctermfg=227
 
 " }}} vim-signify "
 " rainbow parantheses {{{ "
@@ -723,19 +718,6 @@ cnoremap <expr> <C-K> GetDigraphWrapper()
 " }}} GetDigraphWrapper "
 " Cursorline {{{ "
 
-highlight CursorLine   ctermbg=52
-highlight CursorColumn ctermbg=52
-
-set cursorline
-set cursorcolumn
-
-augroup cursorline
-    autocmd WinEnter * setlocal cursorline | setlocal cursorcolumn
-    autocmd WinLeave * setlocal nocursorline | setlocal nocursorcolumn
-    autocmd InsertEnter * highlight CursorLine ctermbg=0 | highlight CursorColumn ctermbg=0
-    autocmd InsertLeave * highlight CursorLine ctermbg=52 | highlight CursorColumn ctermbg=52
-augroup END
-
 " Cursor column : highlight the 81st column of wide lines
 " Source: Damien Conway
 highlight ColorColumn ctermfg=16 ctermbg=magenta
@@ -744,7 +726,7 @@ call matchadd('ColorColumn', '\%81v', 100)
 function! RedCursorLine()
     let w:red_cursor = exists('w:red_cursor') ? !w:red_cursor : 0
     if w:red_cursor
-        colorscheme solarized
+        colorscheme my-solarized
         set cursorline
         set cursorcolumn
         call matchadd('ColorColumn', '\%81v', 100)
