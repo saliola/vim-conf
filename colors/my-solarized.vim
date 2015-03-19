@@ -13,7 +13,10 @@ let g:solarized_termcolors=256
 let g:solarized_underline=0
 let g:solarized_bold=0
 let g:solarized_italic=0
+
 runtime colors/solarized.vim
+
+let g:colors_name = "my-solarized"
 
 " }}} Load Solarized "
 
@@ -23,10 +26,10 @@ set cursorline
 set cursorcolumn
 
 if &background == "dark"
-    highlight SignColumn        cterm=None ctermbg=235 ctermfg=239 guifg=Yellow
-    highlight SignifySignAdd    cterm=bold ctermbg=235 ctermfg=119
-    highlight SignifySignDelete cterm=bold ctermbg=235 ctermfg=167
-    highlight SignifySignChange cterm=bold ctermbg=235 ctermfg=227
+    highlight SignColumn        cterm=None ctermfg=239 ctermbg=235 guifg=Yellow
+    highlight SignifySignAdd    cterm=bold ctermfg=119 ctermbg=235
+    highlight SignifySignDelete cterm=bold ctermfg=167 ctermbg=235
+    highlight SignifySignChange cterm=bold ctermfg=227 ctermbg=235
 
     highlight CursorLine    ctermbg=52
     highlight CursorColumn  ctermbg=52
@@ -38,13 +41,15 @@ if &background == "dark"
         autocmd InsertEnter * highlight CursorLine ctermbg=0 | highlight CursorColumn ctermbg=0
         autocmd InsertLeave * highlight CursorLine ctermbg=52 | highlight CursorColumn ctermbg=52
     augroup END
-else
-    highlight SignColumn        cterm=None ctermbg=236 ctermfg=239 guifg=Yellow
-    highlight SignifySignAdd    cterm=bold ctermbg=235 ctermfg=119
-    highlight SignifySignDelete cterm=bold ctermbg=235 ctermfg=167
-    highlight SignifySignChange cterm=bold ctermbg=235 ctermfg=227
 
-    highlight CursorLine   ctermbg=186
+else
+
+    highlight SignColumn        cterm=None ctermfg=245 ctermbg=187 guifg=Brown
+    highlight SignifySignAdd    cterm=bold ctermfg=34  ctermbg=187
+    highlight SignifySignDelete cterm=bold ctermfg=160 ctermbg=187
+    highlight SignifySignChange cterm=bold ctermfg=22  ctermbg=187
+
+    highlight CursorLine ctermbg=186
     highlight CursorColumn ctermbg=186
 
     augroup cursorline
@@ -57,3 +62,9 @@ else
 endif
 
 " }}} Cursorline / CursorColumn "
+
+" Enable ToggleBG to toggle between dark/light background {{{ "
+
+call togglebg#map("")
+
+" }}} Fold description "
