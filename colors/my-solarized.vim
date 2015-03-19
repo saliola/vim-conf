@@ -3,8 +3,21 @@ if exists("syntax_on")
     syntax reset
 endif
 
-" Load solarized
+syntax enable
+
+" Load Solarized {{{ "
+
+set t_Co=256
+let g:solarized_termtrans = 1
+let g:solarized_termcolors=256
+let g:solarized_underline=0
+let g:solarized_bold=0
+let g:solarized_italic=0
 runtime colors/solarized.vim
+
+" }}} Load Solarized "
+
+" Cursorline / CursorColumn {{{ "
 
 set cursorline
 set cursorcolumn
@@ -42,3 +55,5 @@ else
         autocmd InsertLeave * highlight CursorLine ctermbg=186 | highlight CursorColumn ctermbg=186
     augroup END
 endif
+
+" }}} Cursorline / CursorColumn "

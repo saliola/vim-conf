@@ -269,23 +269,8 @@ nnoremap <Leader><Space> za
 " ------------------------------------------------------------------------- }}}
 " Appearance -------------------------------------------------------------- {{{
 
-" Pretty Colours
-syntax enable " enable syntax highlighting
-if has('gui_running')
-    set background=light
-else
-    set background=dark
-    set t_Co=256
-    let g:solarized_termtrans = 1
-    let g:solarized_termcolors=256
-    let g:solarized_underline=0
-    let g:solarized_bold=0
-    let g:solarized_italic=0 " disable display of italics (bgcolor is too dark)
-endif
+set background=dark
 colorscheme my-solarized
-
-" syntax colouring for folded blocks: turn off underlining in the terminal
-highlight Folded term=none cterm=none
 
 " ------------------------------------------------------------------------- }}}
 " Plugin settings --------------------------------------------------------- {{{
