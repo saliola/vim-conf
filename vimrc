@@ -248,6 +248,10 @@ nnoremap <silent> * :let stay_star_view = winsaveview()<cr>*:call winrestview(st
 nnoremap <silent> n   nzv:PulseX<cr>
 nnoremap <silent> N   Nzv:PulseX<cr>
 
+" Skip over closed folds with { and }
+nnoremap <expr> } foldclosed(search('^$', 'Wn')) == -1 ? "}" : "}j}"
+nnoremap <expr> { foldclosed(search('^$', 'Wnb')) == -1 ? "{" : "{k{"
+
 " ------------------------------------------------------------------------- }}}
 " Folding ----------------------------------------------------------------- {{{
 
