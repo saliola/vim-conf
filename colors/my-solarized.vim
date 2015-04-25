@@ -56,7 +56,7 @@ else
         autocmd!
         autocmd WinEnter * setlocal cursorline | setlocal cursorcolumn
         autocmd WinLeave * setlocal nocursorline | setlocal nocursorcolumn
-        autocmd InsertEnter * highlight CursorLine ctermbg=0 | highlight CursorColumn ctermbg=0
+        autocmd InsertEnter * highlight CursorLine ctermbg=230 | highlight CursorColumn ctermbg=230
         autocmd InsertLeave * highlight CursorLine ctermbg=186 | highlight CursorColumn ctermbg=186
     augroup END
 endif
