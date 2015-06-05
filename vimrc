@@ -286,7 +286,7 @@ let g:ctrlp_cmd = 'CtrlPMRU'
 
 " Set this to 1 to set searching by filename (as opposed to full path);
 " toggle with <c-d>
-let g:ctrlp_by_filename = 1
+let g:ctrlp_by_filename = 0
 
 " Set this to 1 to set regexp search as the default;
 " toggle with <c-r>
@@ -301,8 +301,11 @@ let g:ctrlp_prompt_mappings = {
     \ }
 
 " mappings
-nmap <C-p> :<C-U>CtrlPMRU<CR>
-nmap <C-n> :<C-U>CtrlP ~/Dropbox/notes<CR>
+nmap <C-p> :<C-U>CtrlP<CR>
+nmap <C-p><C-f> :<C-U>CtrlP<CR>
+nmap <C-p><C-r> :<C-U>CtrlPMRU<CR>
+nmap <C-p><C-l> :<C-U>CtrlPLine<CR>
+nmap <C-p><C-n> :<C-U>CtrlP ~/Dropbox/notes<CR>
 
 " ------------------------------------------------------------------------- }}}
 " UltiSnips --------------------------------------------------------------- {{{
