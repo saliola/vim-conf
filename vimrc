@@ -23,6 +23,10 @@
 " @: -- repeat last command-line (then use @@ to repeat)
 " @@ -- repeat last @{0-9a-z":*} command
 " :w !cmd -- execute cmd with give lines as std input, but do not replace (:write_c)
+" :[range]m[move] {address} -- Move the lines given by [range] to below the line given by {address}.
+" :[range]co[py] {address} -- Copy the lines given by [range] to below the line given by {address}.
+" :t -- Synonym for copy.
+"
 " ------------------------------------------------------------------------- }}}
 
 " Pathogen ---------------------------------------------------------------- {{{
