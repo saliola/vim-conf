@@ -24,11 +24,11 @@ nmap <buffer> <LocalLeader>lh   :split $HOME/.vim/bundle/my-vim-latex-config/tex
 
 " LaTeX-box configurations
 imap <buffer> ]]                <Plug>LatexCloseCurEnv
-nmap <buffer> <LocalLeader>lce  <Plug>LatexChangeEnv
-nmap <buffer> <LocalLeader>lts  <Plug>LatexToggleStarEnv
-nmap <buffer> <LocalLeader>lwc  viw<Plug>LatexWrapSelection
-vmap <buffer> <LocalLeader>lwc  <Plug>LatexWrapSelection
-vmap <buffer> <LocalLeader>lwe  <Plug>LatexEnvWrapSelection
+nmap <buffer> <LocalLeader>ce   <Plug>LatexChangeEnv
+nmap <buffer> <LocalLeader>*    <Plug>LatexToggleStarEnv
+nmap <buffer> <LocalLeader>wc   viw<Plug>LatexWrapSelection
+vmap <buffer> <LocalLeader>wc   <Plug>LatexWrapSelection
+vmap <buffer> <LocalLeader>we   <Plug>LatexEnvWrapSelection
 
 " open a \left parenthesis
 inoremap <buffer> [[ \left[
@@ -43,6 +43,7 @@ inoremap <buffer> ^-1 ^{-1}
 
 " Greek Letters
 " reference: http://www.giss.nasa.gov/latex/ltx-405.html
+inoremap <buffer> `` ``
 inoremap <buffer> `a \alpha
 inoremap <buffer> `b \beta
 inoremap <buffer> `c \chi
