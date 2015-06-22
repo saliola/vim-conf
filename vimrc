@@ -414,6 +414,20 @@ omap <leader>s <Plug>Sneak_s
 omap <leader>S <Plug>Sneak_S
 
 " }}} vim-sneak "
+" vim-startify {{{ "
+
+autocmd User Startified setlocal cursorline
+
+let g:startify_bookmarks = [ '~/.vimrc' ]
+let g:startify_files_number = 20
+let g:startify_change_to_dir = 1
+
+hi StartifyFooter  ctermfg=240
+hi StartifyHeader  ctermfg=114
+hi StartifyPath    ctermfg=245
+hi StartifySpecial ctermfg=240
+
+" }}} vim-startify "
 " ------------------------------------------------------------------------- }}}
 " Filetype-specific ------------------------------------------------------- {{{
 
