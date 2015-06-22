@@ -44,7 +44,7 @@ Install a plugin as a submodule
     cd ~/.vim/
     git submodule add git://github.com/tpope/vim-sensible.git bundle/vim-sensible
     git add .
-    git commit -m "Install vim-sensible bundle as a git submodule."
+    git commit -m "Install vim-sensible plugin as a git submodule."
 
 Upgrading a plugin
 ~~~~~~~~~~~~~~~~~~
