@@ -381,7 +381,9 @@ let g:rainbow#colors = {
 " vim-dispatch {{{ "
 
 nnoremap <Leader>d :Dispatch<CR>
+nnoremap <Leader>D :Dispatch!<CR>
 nnoremap <Leader>m :Make<CR>
+nnoremap <Leader>M :Make!<CR>
 
 " }}} vim-dispatch "
 " vim-sneak {{{ "
