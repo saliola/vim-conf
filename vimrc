@@ -40,7 +40,10 @@ execute pathogen#infect()
 let mapleader = " "
 map <Space> <Leader>
 
-let maplocalleader = "_"
+" set localleader to q (first disable q for recording macros)
+nnoremap q <Nop>
+let maplocalleader = "q"
+nnoremap <leader>q q
 
 " ------------------------------------------------------------------------- }}}
 " vimrc ------------------------------------------------------------------- {{{
@@ -216,11 +219,8 @@ cmap <C-P> <C-R>=escape(expand("%:p:h"),' ') . "/"<CR>
 " Insert the current filename into a command-line path
 cmap %% <C-R>=escape(expand("%"),' ')<CR>
 
-" Start a tabnew command with the directory of the currently edited file
-map <Leader>tp :tabnew <C-p>
 map <Leader>tn :tabnew<Space>
-map <Leader>tN :tabnew ~/Dropbox/notes/
-command! Notes :tabnew ~/Dropbox/notes/
+map <Leader>tt :tabnew %<CR>
 
 " Scratchpad settings
 command! ScratchPad :tabnew ~/Dropbox/scratchpad.rst
