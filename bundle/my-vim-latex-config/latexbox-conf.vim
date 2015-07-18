@@ -40,9 +40,10 @@ let g:LatexBox_ignore_warnings = [
 let g:LatexBox_fold_envs = 0
 let g:LatexBox_fold_envs_force = [
             \ "abstract",
+            \ "exercice",
             \ "figure",
             \ "frame",
-            \ "exercice",
+            \ "proof",
             \ "solution"
             \ ]
 
