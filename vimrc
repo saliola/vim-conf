@@ -48,7 +48,7 @@ nnoremap <leader>q q
 " ------------------------------------------------------------------------- }}}
 " vimrc ------------------------------------------------------------------- {{{
 
-map <leader>vrc :tabnew $MYVIMRC<CR>
+map <leader>vrc :tabnew $HOME/.vim/vimrc<CR>
 map <leader>vb :Texplore $HOME/.vim/bundle/<CR>
 
 " Source the vimrc file after saving it
@@ -649,7 +649,7 @@ nnoremap <leader>I :call IndentGuides()<cr>
 "
 " <leader>0 will clear the highlighting.
 
-function! HiInterestingWord(n) " {{{
+function! HighlightInterestingWord(n) " {{{
     if a:n == 0
         for m in range(1, 9)
             let mid = 86750 + m
@@ -682,16 +682,16 @@ endfunction " }}}
 
 " Mappings {{{
 
-nnoremap <silent> <leader>1 :call HiInterestingWord(1)<cr>
-nnoremap <silent> <leader>2 :call HiInterestingWord(2)<cr>
-nnoremap <silent> <leader>3 :call HiInterestingWord(3)<cr>
-nnoremap <silent> <leader>4 :call HiInterestingWord(4)<cr>
-nnoremap <silent> <leader>5 :call HiInterestingWord(5)<cr>
-nnoremap <silent> <leader>6 :call HiInterestingWord(6)<cr>
-nnoremap <silent> <leader>7 :call HiInterestingWord(7)<cr>
-nnoremap <silent> <leader>8 :call HiInterestingWord(8)<cr>
-nnoremap <silent> <leader>9 :call HiInterestingWord(9)<cr>
-nnoremap <silent> <leader>0 :call HiInterestingWord(0)<cr>
+nnoremap <silent> <leader>1 :call HighlightInterestingWord(1)<cr>
+nnoremap <silent> <leader>2 :call HighlightInterestingWord(2)<cr>
+nnoremap <silent> <leader>3 :call HighlightInterestingWord(3)<cr>
+nnoremap <silent> <leader>4 :call HighlightInterestingWord(4)<cr>
+nnoremap <silent> <leader>5 :call HighlightInterestingWord(5)<cr>
+nnoremap <silent> <leader>6 :call HighlightInterestingWord(6)<cr>
+nnoremap <silent> <leader>7 :call HighlightInterestingWord(7)<cr>
+nnoremap <silent> <leader>8 :call HighlightInterestingWord(8)<cr>
+nnoremap <silent> <leader>9 :call HighlightInterestingWord(9)<cr>
+nnoremap <silent> <leader>0 :call HighlightInterestingWord(0)<cr>
 
 " }}}
 
