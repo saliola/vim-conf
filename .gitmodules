@@ -86,3 +86,6 @@
 [submodule "bundle/vim-scriptease"]
 	path = bundle/vim-scriptease
 	url = https://github.com/tpope/vim-scriptease.git
+[submodule "bundle/seoul256"]
+	path = bundle/seoul256
+	url = git://github.com/junegunn/seoul256.vim
