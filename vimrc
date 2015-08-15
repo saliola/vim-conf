@@ -420,7 +420,7 @@ omap <leader>S <Plug>Sneak_S
 
 autocmd User Startified setlocal cursorline
 
-let g:startify_bookmarks = [ '~/.vimrc' ]
+let g:startify_bookmarks = [ '~/.vim/vimrc' ]
 let g:startify_files_number = 20
 let g:startify_change_to_dir = 1
 
