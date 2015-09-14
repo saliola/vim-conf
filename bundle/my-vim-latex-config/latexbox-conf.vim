@@ -61,7 +61,7 @@ augroup ft_tex
     autocmd FileType tex setlocal iskeyword=@,48-57,_,192-255
 
     " calculate folds when a file is loaded
-    autocmd BufRead *.tex LatexFold
+    " autocmd BufRead *.tex LatexFold
 
     " If a key has not been pressed for some time, stop all latexmk processes.
     " If latexmk is running continuously in two different instances of vim, both
