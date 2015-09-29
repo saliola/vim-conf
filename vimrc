@@ -844,5 +844,8 @@ nnoremap <Leader>*  "zyiw:execute "QuickFixGrep /\\<".@z."\\>/"<CR>
 nnoremap <Leader>g* "zyiw:execute "QuickFixGrep /".@z."/"<CR>
 
 " }}} Quick-fix grep "
+" Count non-space characters {{{ "
+nnoremap <Leader>w :!cat % \| tr '\n' ' ' \| tr --delete ' ' \| wc -c<CR>
+" }}} Count non-space characters "
 
 " }}} Experimental "
