@@ -223,6 +223,7 @@ cmap %% <C-R>=escape(expand("%"),' ')<CR>
 
 map <Leader>tn :tabnew<Space>
 map <Leader>tt :tabnew %<CR>
+map <Leader>ts :tabnew +Startify<CR>
 
 " Scratchpad settings
 command! ScratchPad :tabnew ~/Dropbox/scratchpad.rst
