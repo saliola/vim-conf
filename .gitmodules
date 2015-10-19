@@ -89,3 +89,6 @@
 [submodule "bundle/seoul256"]
 	path = bundle/seoul256
 	url = git://github.com/junegunn/seoul256.vim
+[submodule "bundle/vim-brightest"]
+	path = bundle/vim-brightest
+	url = https://github.com/osyo-manga/vim-brightest.git
