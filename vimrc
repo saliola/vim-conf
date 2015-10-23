@@ -445,6 +445,13 @@ let g:brightest#highlight = {
 let g:brightest#pattern = '\c\k\+'
 
 " }}} vim-brightest "
+" vim-airline {{{ "
+
+let airline#extensions#wordcount#enabled = 0
+let airline#extensions#charcount#enabled = 1
+let airline#extensions#charcount#countspaces = 0
+
+" }}} vim-airline "
 " ------------------------------------------------------------------------- }}}
 " Filetype-specific ------------------------------------------------------- {{{
 
