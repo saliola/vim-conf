@@ -450,6 +450,7 @@ let g:brightest#pattern = '\c\k\+'
 let airline#extensions#wordcount#enabled = 0
 let airline#extensions#charcount#enabled = 1
 let airline#extensions#charcount#countspaces = 0
+let airline#extensions#charcount#filetypes = '\vhelp|markdown|rst|org|text'
 
 " }}} vim-airline "
 " ------------------------------------------------------------------------- }}}
