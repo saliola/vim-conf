@@ -185,6 +185,14 @@ set spellsuggest=5
 set thesaurus+=~/.vim/thesaurus/mthesaur.txt
 
 " }}} Thesaurus "
+" Printing {{{ "
+
+" header:0      Do not print a header.
+" number:y      Include line numbers in the printed output. (default:n)
+" wrap:n        Truncate long lines.
+set printoptions=paper:letter,number:n,header:0,wrap:n,duplex:long
+
+" }}} Printing "
 " Command line mode ------------------------------------------------------- {{{
 
 " wild card settings
