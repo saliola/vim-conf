@@ -69,4 +69,12 @@ augroup ft_tex
     " a compilation loop and each loop creates "conflicted" versions of the file.
     set updatetime=300000
     autocmd CursorHold,CursorHoldI *.tex if !empty(g:latexmk_running_pids) | call LatexBox_LatexmkStop(0) | endif
+
+    " makeprg: set the default makeprg to be compile with latexmk, if there is
+    " no Makefile in the directory
+    if filereadable("./Makefile")
+        set makeprg=make
+    else
+        set makeprg=latexmk\ -g\ -pdf\ -output-directory=latexoutput\ %;\ cp\ latexoutput/%:r.pdf\ .;\ killall\ -s\ SIGHUP\ mupdf
+    endif
 augroup END
