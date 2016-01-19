@@ -88,6 +88,7 @@
 	url = git://github.com/junegunn/seoul256.vim
 [submodule "bundle/vim-brightest"]
 	path = bundle/vim-brightest
+	ignore = dirty
 	url = https://github.com/osyo-manga/vim-brightest.git
 [submodule "bundle/vim-airline"]
 	path = bundle/vim-airline
