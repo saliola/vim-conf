@@ -75,6 +75,6 @@ augroup ft_tex
     if filereadable("./Makefile")
         set makeprg=make
     else
-        set makeprg=latexmk\ -g\ -pdf\ -output-directory=latexoutput\ %;\ cp\ latexoutput/%:r.pdf\ .;\ killall\ -s\ SIGHUP\ mupdf
+        set makeprg=latexmk\ -g\ -pdf\ -output-directory=latexoutput\ %;\ cp\ latexoutput/%:r.pdf\ .;\ killall\ -s\ SIGHUP\ mupdf-x11
     endif
 augroup END
