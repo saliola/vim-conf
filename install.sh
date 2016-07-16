@@ -9,8 +9,4 @@ git clone https://github.com/saliola/dotvim.git ~/.vim
 ln -s ~/.vim/vimrc ~/.vimrc
 ln -s ~/.vim/gvimrc ~/.gvimrc
 
-# Switch to the `~/.vim` directory, and fetch submodules::
-
-cd ~/.vim
-git submodule init
-git submodule update
+# Launch vim and run :PlugInstall
