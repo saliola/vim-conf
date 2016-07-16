@@ -28,7 +28,6 @@
 " :t -- Synonym for copy.
 "
 " ------------------------------------------------------------------------- }}}
-
 " vim-plug ---------------------------------------------------------------- {{{
 
 call plug#begin('~/.vim/plugged')
@@ -49,6 +48,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-vinegar'
     Plug 'tpope/vim-eunuch'
     Plug 'tpope/vim-dispatch'
+    Plug 'justinmk/vim-sneak'
 
     " Git / Mercurial / Subversion
     Plug 'mhinz/vim-signify'
@@ -96,7 +96,7 @@ nnoremap <leader>q q
 " vimrc ------------------------------------------------------------------- {{{
 
 map <leader>vrc :tabnew $HOME/.vim/vimrc<CR>
-map <leader>vb :Texplore $HOME/.vim/bundle/<CR>
+map <leader>vb :Texplore $HOME/.vim/plugged/<CR>
 
 " Source the vimrc file after saving it
 augroup vimrc
