@@ -35,6 +35,47 @@ call plug#begin('~/.vim/plugged')
 
     " Configurations
     Plug 'tpope/vim-sensible'
+    Plug 'tpope/vim-unimpaired'
+    Plug 'tpope/vim-repeat'
+
+    " Appearance
+    Plug 'junegunn/seoul256.vim'
+    Plug 'mhinz/vim-startify'
+    Plug 'bling/vim-airline'
+    Plug 'osyo-manga/vim-brightest'
+
+    " File navigation and System interaction
+    Plug 'tpope/vim-vinegar'
+    Plug 'tpope/vim-eunuch'
+    Plug 'tpope/vim-dispatch'
+
+    " Git / Mercurial / Subversion
+    Plug 'mhinz/vim-signify'
+    Plug 'tpope/vim-fugitive'
+    Plug 'junegunn/gv.vim'
+
+    " Tmux
+    Plug 'christoomey/vim-tmux-navigator'
+    Plug 'tpope/vim-tbone'
+
+    " Editing
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-surround'
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
+    Plug 'junegunn/vim-easy-align'
+    " Plug 'junegunn/vim-peekaboo'
+
+    " LaTeX
+    Plug 'lervag/vimtex'
+
+    " Sage
+    Plug 'saliola/vim-sage', { 'for': 'sage' }
+
+    " Testing: improved searching
+    Plug 'junegunn/vim-pseudocl'
+    Plug 'junegunn/vim-oblique'
+
 
 call plug#end()
 
@@ -292,7 +333,7 @@ nnoremap <Leader><Space> za
 " Appearance -------------------------------------------------------------- {{{
 
 set background=dark
-colorscheme my-solarized
+" colorscheme my-solarized
 
 " ------------------------------------------------------------------------- }}}
 " Plugin settings --------------------------------------------------------- {{{
@@ -541,7 +582,7 @@ augroup END
 " ------------------------------------------------------------------------- }}}
 " Latex ------------------------------------------------------------------- {{{
 
-source ~/.vim/bundle/my-vim-latex-config/latexbox-conf.vim
+" source ~/.vim/bundle/my-vim-latex-config/latexbox-conf.vim
 
 " ------------------------------------------------------------------------- }}}
 " Useful functions -------------------------------------------------------- {{{
@@ -773,7 +814,7 @@ call matchadd('ColorColumn', '\%81v', 100)
 function! RedCursorLine()
     let w:red_cursor = exists('w:red_cursor') ? !w:red_cursor : 0
     if w:red_cursor
-        colorscheme my-solarized
+        " colorscheme my-solarized
         set cursorline
         set cursorcolumn
         call matchadd('ColorColumn', '\%81v', 100)
