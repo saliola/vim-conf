@@ -40,6 +40,7 @@ call plug#begin('~/.vim/plugged')
 
     " Appearance
     Plug 'junegunn/seoul256.vim'
+    Plug 'altercation/vim-colors-solarized'
     Plug 'mhinz/vim-startify'
     Plug 'bling/vim-airline'
     Plug 'osyo-manga/vim-brightest'
@@ -333,7 +334,7 @@ nnoremap <Leader><Space> za
 " Appearance -------------------------------------------------------------- {{{
 
 set background=dark
-" colorscheme my-solarized
+colorscheme my-solarized
 
 " ------------------------------------------------------------------------- }}}
 " Plugin settings --------------------------------------------------------- {{{
@@ -814,7 +815,7 @@ call matchadd('ColorColumn', '\%81v', 100)
 function! RedCursorLine()
     let w:red_cursor = exists('w:red_cursor') ? !w:red_cursor : 0
     if w:red_cursor
-        " colorscheme my-solarized
+        colorscheme my-solarized
         set cursorline
         set cursorcolumn
         call matchadd('ColorColumn', '\%81v', 100)
