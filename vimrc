@@ -583,7 +583,37 @@ augroup END
 " ------------------------------------------------------------------------- }}}
 " Latex ------------------------------------------------------------------- {{{
 
-" source ~/.vim/bundle/my-vim-latex-config/latexbox-conf.vim
+let g:vimtex_latexmk_continuous = 0
+" let g:vimtex_latexmk_build_dir = 'latexoutput'
+let g:vimtex_latexmk_options = '-g -pdf -output-directory=/tmp/latexoutput -interaction=nonstopmode'
+
+let g:vimtex_quickfix_autojump = 0
+let g:vimtex_quickfix_mode = 2
+let g:vimtex_quickfix_ignore_all_warnings = 1
+
+let g:vimtex_view_method = 'mupdf'
+
+let g:vimtex_fold_enabled = 0
+let g:vimtex_fold_manual = 1
+let g:vimtex_fold_envs = 1
+
+augroup ft_tex
+    autocmd!
+
+    " ignore these filenames during tab completion
+    autocmd FileType tex setlocal wildignore+=*.out,*.synctex.gz,*.aux,*.ilg,*.log,*.nls,*.idx,*.ind,*.blg,*.nlo,*.pdf,*.toc
+
+    " set iskeyword (tex syntax file overides this....)
+    autocmd FileType tex setlocal iskeyword=@,48-57,_,192-255
+
+    " makeprg: set the default makeprg to be compile with latexmk, if there is
+    " no Makefile in the directory
+    if filereadable("./Makefile")
+        set makeprg=make
+    else
+        set makeprg=latexmk\ -g\ -pdf\ -output-directory=latexoutput\ -interaction=nonstopmode\ %;\ cp\ latexoutput/%:r.pdf\ .;\ killall\ -s\ SIGHUP\ mupdf-x11
+    endif
+augroup END
 
 " ------------------------------------------------------------------------- }}}
 " Useful functions -------------------------------------------------------- {{{
