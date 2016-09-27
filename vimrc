@@ -584,7 +584,8 @@ augroup END
 " Latex ------------------------------------------------------------------- {{{
 
 let g:vimtex_latexmk_continuous = 0
-let g:vimtex_latexmk_options = "-g -pdf -cd -output-directory=latexoutput -interaction=nonstopmode -bibtex-cond -e \"\\$pdflatex .= ' && cp -v latexoutput/\\%R.pdf .'\""
+let g:vimtex_latexmk_options = "-g -pdf -cd -interaction=nonstopmode -bibtex-cond -e \"\\$pdflatex .= ' && cp -v latexoutput/\\%R.pdf .'\""
+let g:vimtex_latexmk_build_dir = "latexoutput"
 
 let g:vimtex_quickfix_autojump = 0
 let g:vimtex_quickfix_mode = 2
