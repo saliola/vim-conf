@@ -590,7 +590,12 @@ let g:vimtex_quickfix_autojump = 0
 let g:vimtex_quickfix_mode = 2
 let g:vimtex_quickfix_ignore_all_warnings = 1
 
-" let g:vimtex_view_method = 'general'
+if has("unix")
+    let s:uname = system("uname")
+    if s:uname == "Linux\n"
+        let g:vimtex_view_method = 'mupdf'
+    endif
+endif
 
 let g:vimtex_fold_enabled = 0
 let g:vimtex_fold_manual = 1
