@@ -74,9 +74,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'saliola/vim-sage', { 'for': 'sage' }
 
     " Testing: improved searching
-    Plug 'junegunn/vim-pseudocl'
-    Plug 'junegunn/vim-oblique'
-
+    Plug 'junegunn/vim-slash'
 
 call plug#end()
 
