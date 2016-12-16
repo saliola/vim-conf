@@ -337,35 +337,6 @@ colorscheme my-solarized
 " ------------------------------------------------------------------------- }}}
 " Plugin settings --------------------------------------------------------- {{{
 
-" CtrlP ------------------------------------------------------------------- {{{
-
-" Default behaviour : Most Recently Used files
-let g:ctrlp_cmd = 'CtrlPMRU'
-
-" Set this to 1 to set searching by filename (as opposed to full path);
-" toggle with <c-d>
-let g:ctrlp_by_filename = 0
-
-" Set this to 1 to set regexp search as the default;
-" toggle with <c-r>
-let g:ctrlp_regexp = 0
-
-" prompt mappings:
-" - <cr> opens file in new tab;
-" - <c-t> opens file in same window
-let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<c-t>'],
-    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
-    \ }
-
-" mappings
-nmap <C-p> :<C-U>CtrlP<CR>
-nmap <C-p><C-f> :<C-U>CtrlP<CR>
-nmap <C-p><C-r> :<C-U>CtrlPMRU<CR>
-nmap <C-p><C-l> :<C-U>CtrlPLine<CR>
-nmap <C-p><C-n> :<C-U>CtrlP ~/Dropbox/notes<CR>
-
-" ------------------------------------------------------------------------- }}}
 " UltiSnips --------------------------------------------------------------- {{{
 
 let g:snips_author="Franco Saliola"
@@ -413,25 +384,6 @@ omap ac <plug>(signify-motion-outer-pending)
 xmap ac <plug>(signify-motion-outer-visual)
 
 " }}} vim-signify "
-" rainbow parantheses {{{ "
-
-let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-let g:rainbow#colors = {
-\   'dark': [
-\     ['darkyellow',  'orangered3'    ],
-\     ['darkgreen',   'orange2'       ],
-\     ['blue',        'yellow3'       ],
-\     ['darkmagenta', 'olivedrab4'    ],
-\     ['red',         'green4'        ],
-\     ['darkyellow',  'paleturquoise3'],
-\     ['darkgreen',   'deepskyblue4'  ],
-\     ['blue',        'darkslateblue' ],
-\     ['darkmagenta', 'darkviolet'    ]
-\   ]
-\ }
-
-" }}} rainbow parantheses "
 " vim-dispatch {{{ "
 
 nnoremap <Leader>d :Dispatch<CR>
