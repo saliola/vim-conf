@@ -446,6 +446,7 @@ let g:brightest#highlight = {
 \   "group" : "myVimBrightestHighlightGroup"
 \}
 let g:brightest#pattern = '\c\k\+'
+let g:brightest_enable = 0
 
 " }}} vim-brightest "
 " vim-airline {{{ "
