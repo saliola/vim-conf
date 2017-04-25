@@ -438,14 +438,14 @@ hi StartifySpecial ctermfg=240
 " }}} vim-startify "
 " vim-brightest {{{ "
 
-" highlight myVimBrightestHighlightGroup ctermfg=16 ctermbg=137
+highlight myVimBrightestHighlightGroup ctermfg=16 ctermbg=137
 
-" let g:brightest#enable_insert_mode=1
-" let g:brightest#enable_highlight_all_window=1
-" let g:brightest#highlight = {
-" \   "group" : "myVimBrightestHighlightGroup"
-" \}
-" let g:brightest#pattern = '\c\k\+'
+let g:brightest#enable_insert_mode=1
+let g:brightest#enable_highlight_all_window=1
+let g:brightest#highlight = {
+\   "group" : "myVimBrightestHighlightGroup"
+\}
+let g:brightest#pattern = '\c\k\+'
 let g:brightest_enable = 0
 
 " }}} vim-brightest "
