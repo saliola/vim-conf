@@ -437,7 +437,7 @@ hi StartifySpecial ctermfg=240
 
 " }}} vim-startify "
 " vim-brightest {{{ "
-"
+
 highlight myVimBrightestHighlightGroup ctermfg=16 ctermbg=137
 
 let g:brightest#enable_insert_mode=1
@@ -457,6 +457,12 @@ let airline#extensions#charcount#countspaces = 0
 let airline#extensions#charcount#filetypes = '\vhelp|markdown|rst|org|text'
 
 " }}} vim-airline "
+" vim-unimpaired {{{ "
+
+nnoremap ]t :tabnext<CR>
+nnoremap [t :tabprevious<CR>
+
+" }}} vim-unimpaired
 " ------------------------------------------------------------------------- }}}
 " Filetype-specific ------------------------------------------------------- {{{
 
