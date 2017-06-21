@@ -540,13 +540,10 @@ augroup END
 " ------------------------------------------------------------------------- }}}
 " Latex ------------------------------------------------------------------- {{{
 
-let g:vimtex_latexmk_continuous = 0
-let g:vimtex_latexmk_options = "-g -pdf -cd -interaction=nonstopmode -bibtex-cond -e \"\\$pdflatex .= ' && cp -v latexoutput/\\%R.pdf .'\""
-let g:vimtex_latexmk_build_dir = "latexoutput"
-
 let g:vimtex_quickfix_autojump = 0
 let g:vimtex_quickfix_mode = 2
-let g:vimtex_quickfix_ignore_all_warnings = 1
+
+let g:vimtex_quickfix_latexlog = {'default' : 0} " Disable all warnings
 
 if has("unix")
     let s:uname = system("uname")
@@ -558,6 +555,22 @@ endif
 let g:vimtex_fold_enabled = 0
 let g:vimtex_fold_manual = 1
 let g:vimtex_fold_envs = 1
+
+let g:vimtex_compiler_latexmk = {
+\ 'backend' : 'process',
+\ 'background' : 0,
+\ 'build_dir' : 'latexoutput',
+\ 'callback' : 1,
+\ 'continuous' : 0,
+\ 'options' : [
+\   '-g',
+\   '-pdf',
+\   '-cd',
+\   '-interaction=nonstopmode',
+\   '-bibtex-cond',
+\   '-e "\$pdflatex .= '' && cp -v latexoutput/\%R.pdf .''"'
+\ ],
+\}
 
 augroup ft_tex
     autocmd!
