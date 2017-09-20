@@ -41,7 +41,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/seoul256.vim'
     Plug 'altercation/vim-colors-solarized'
     Plug 'mhinz/vim-startify'
-    Plug 'bling/vim-airline'
+    Plug 'saliola/vim-airline', { 'branch': 'charcount' }
     Plug 'osyo-manga/vim-brightest'
 
     " File navigation and System interaction
@@ -451,9 +451,9 @@ let g:brightest_enable = 0
 " }}} vim-brightest "
 " vim-airline {{{ "
 
-let airline#extensions#wordcount#enabled = 0
+let airline#extensions#wordcount#enabled = 1
 let airline#extensions#charcount#enabled = 1
-let airline#extensions#charcount#countspaces = 0
+let airline#extensions#charcount#countspaces = 1
 let airline#extensions#charcount#filetypes = '\vhelp|markdown|rst|org|text'
 
 " }}} vim-airline "
