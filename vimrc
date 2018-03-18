@@ -510,9 +510,10 @@ command! HGRejects :call OpenHGRejectFile()
 " Python {{{
 
 augroup ft_python
-    au!
+    autocmd!
 
-    au FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+    autocmd FileType python,sage setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+    autocmd FileType python,sage setlocal wildignore+=*.pyc
 augroup END
 
 " }}}
