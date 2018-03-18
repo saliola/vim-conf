@@ -14,6 +14,8 @@ Clone repo
 ::
 
     git clone https://github.com/saliola/dotvim.git ~/.vim
+    cd ~/.vim
+    git checkout vim-plug
 
 Create symlinks (for vim version < 7.4)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
