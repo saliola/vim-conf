@@ -580,6 +580,13 @@ augroup ft_tex
 
     " set iskeyword (tex syntax file overides this....)
     autocmd FileType tex setlocal iskeyword=@,48-57,_,192-255
+
+    " if there is no Makefile, then set dispatch command
+    if ! filereadable(expand("Makefile"))
+        echo "setting makeprg to latexmk ..."
+        set makeprg=latexmk\ -f\ -g\ -pdf\ -output-directory=latexoutput\ -interaction=nonstopmode\ -bibtex-cond\ %
+    endif
+
 augroup END
 
 " ------------------------------------------------------------------------- }}}
