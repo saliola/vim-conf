@@ -584,8 +584,8 @@ augroup ft_tex
 
     " if there is no Makefile, then set dispatch command
     if ! filereadable(expand("Makefile"))
-        echo "setting makeprg to latexmk ..."
-        set makeprg=latexmk\ -f\ -g\ -pdf\ -output-directory=latexoutput\ -interaction=nonstopmode\ -bibtex-cond\ %
+        autocmd FileType tex echo "setting makeprg to latexmk ..."
+        autocmd FileType tex setlocal makeprg=latexmk\ -f\ -g\ -pdf\ -output-directory=latexoutput\ -interaction=nonstopmode\ -bibtex-cond\ %
     endif
 
 augroup END
