@@ -78,6 +78,9 @@ call plug#begin('~/.vim/plugged')
     " Testing: improved searching
     Plug 'junegunn/vim-slash'
 
+    " Fun & Games
+    Plug 'vim/killersheep'
+
 call plug#end()
 
 " ------------------------------------------------------------------------- }}}
@@ -333,8 +336,8 @@ nnoremap <Leader><Space> za
 " ------------------------------------------------------------------------- }}}
 " Appearance -------------------------------------------------------------- {{{
 
-set background=dark
-colorscheme challenger_deep
+set background=light
+colorscheme my-solarized
 
 " ------------------------------------------------------------------------- }}}
 " Plugin settings --------------------------------------------------------- {{{
