@@ -40,10 +40,12 @@ call plug#begin('~/.vim/plugged')
     " Appearance
     Plug 'junegunn/seoul256.vim'
     Plug 'altercation/vim-colors-solarized'
+    Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
     Plug 'mhinz/vim-startify'
     Plug 'saliola/vim-airline', { 'branch': 'charcount' }
     Plug 'osyo-manga/vim-brightest'
     Plug 'arcticicestudio/nord-vim'
+
 
     " File navigation and System interaction
     Plug 'tpope/vim-vinegar'
@@ -333,7 +335,6 @@ nnoremap <Leader><Space> za
 " Appearance -------------------------------------------------------------- {{{
 
 set background=light
-" colorscheme my-solarized
 colorscheme my-colorscheme
 
 " ------------------------------------------------------------------------- }}}
