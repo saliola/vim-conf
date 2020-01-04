@@ -102,17 +102,16 @@ nnoremap <silent> <leader>0 :call HighlightInterestingWord(0)<cr>
 
 " Default Highlights {{{
 
-hi def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
-hi def InterestingWord2 guifg=#000000 ctermfg=16 guibg=#aeee00 ctermbg=154
-hi def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#8cffba ctermbg=121
-hi def InterestingWord4 guifg=#000000 ctermfg=16 guibg=#b88853 ctermbg=137
-hi def InterestingWord5 guifg=#000000 ctermfg=16 guibg=#ff9eb8 ctermbg=211
-hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
-hi def InterestingWord7 guifg=#000000 ctermfg=16 guibg=#d75faf ctermbg=169
-hi def InterestingWord8 guifg=#000000 ctermfg=16 guibg=#ff005f ctermbg=197
-hi def InterestingWord9 guifg=#000000 ctermfg=16 guibg=#ffd7ff ctermbg=225
+hi def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=1
+hi def InterestingWord2 guifg=#000000 ctermfg=16 guibg=#aeee00 ctermbg=2
+hi def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#8cffba ctermbg=3
+hi def InterestingWord4 guifg=#000000 ctermfg=16 guibg=#b88853 ctermbg=4
+hi def InterestingWord5 guifg=#000000 ctermfg=16 guibg=#ff9eb8 ctermbg=5
+hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=6
+hi def InterestingWord7 guifg=#000000 ctermfg=16 guibg=#d75faf ctermbg=7
+hi def InterestingWord8 guifg=#000000 ctermfg=16 guibg=#ff005f ctermbg=8
+hi def InterestingWord9 guifg=#000000 ctermfg=16 guibg=#ffd7ff ctermbg=9
 
 " }}}
 
 " ------------------------------------------------------------------------- }}}
-
