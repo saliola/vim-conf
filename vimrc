@@ -68,7 +68,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
     Plug 'junegunn/vim-easy-align'
-    " Plug 'junegunn/vim-peekaboo'
+    Plug 'andymass/vim-matchup'
 
     " LaTeX
     Plug 'lervag/vimtex'
@@ -543,6 +543,9 @@ augroup END
 
 " ------------------------------------------------------------------------- }}}
 " Latex ------------------------------------------------------------------- {{{
+
+let g:matchup_override_vimtex = 1
+let g:matchup_matchparen_enabled = 0
 
 let g:vimtex_quickfix_autojump = 0
 let g:vimtex_quickfix_mode = 2
