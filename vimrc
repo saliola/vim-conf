@@ -28,6 +28,11 @@
 " :t -- Synonym for copy.
 "
 " ------------------------------------------------------------------------- }}}
+" On startup -------------------------------------------------------------- {{{
+" Force version of Python to be used
+if has('python3')
+endif
+" ------------------------------------------------------------------------- }}}
 " vim-plug ---------------------------------------------------------------- {{{
 
 call plug#begin('~/.vim/plugged')
@@ -78,6 +83,9 @@ call plug#begin('~/.vim/plugged')
 
     " Testing: improved searching
     Plug 'junegunn/vim-slash'
+
+    " Fun & Games
+    Plug 'vim/killersheep'
 
 call plug#end()
 
@@ -334,7 +342,6 @@ nnoremap <Leader><Space> za
 " ------------------------------------------------------------------------- }}}
 " Appearance -------------------------------------------------------------- {{{
 
-set background=light
 colorscheme my-colorscheme
 
 " ------------------------------------------------------------------------- }}}
