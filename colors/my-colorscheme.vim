@@ -5,13 +5,13 @@ endif
 
 syntax enable
 
-" Load Solarized {{{ "
+" Load base colorscheme {{{ "
 
 let g:nord_underline=0
 runtime colors/nord.vim
 let g:colors_name = "my-colorscheme"
 
-" }}} Load Solarized "
+" }}} Load base colorscheme "
 
 " Cursorline / CursorColumn {{{ "
 
