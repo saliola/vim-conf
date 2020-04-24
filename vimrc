@@ -464,7 +464,7 @@ let g:brightest_enable = 0
 let airline#extensions#wordcount#enabled = 1
 let airline#extensions#charcount#enabled = 1
 let airline#extensions#charcount#countspaces = 1
-let airline#extensions#charcount#filetypes = '\vhelp|markdown|rst|org|text'
+let airline#extensions#charcount#filetypes = 'help|markdown|rst|org|text'
 
 " }}} vim-airline "
 " vim-unimpaired {{{ "
