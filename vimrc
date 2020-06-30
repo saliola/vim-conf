@@ -464,7 +464,7 @@ let g:brightest_enable = 0
 let airline#extensions#wordcount#enabled = 1
 let airline#extensions#charcount#enabled = 1
 let airline#extensions#charcount#countspaces = 1
-let airline#extensions#charcount#filetypes = '\vhelp|markdown|rst|org|text'
+let airline#extensions#charcount#filetypes = 'help|markdown|rst|org|text'
 
 " }}} vim-airline "
 " vim-unimpaired {{{ "
@@ -607,9 +607,6 @@ augroup END
 " Useful functions -------------------------------------------------------- {{{
 
 " yank / paste from the clipboard ------------------------------------------ {{{
-
-" enable copy/paste on Mac OSX and tmux (see also notes/macosx.notes)
-set clipboard=unnamed
 
 " toggle (no)paste before pasting from the clipboard
 " Reference: http://tilvim.com/2014/03/18/a-better-paste.html
