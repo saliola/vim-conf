@@ -13,36 +13,23 @@ let g:colors_name = "my-colorscheme"
 
 " }}} Load base colorscheme "
 
-" Cursorline / CursorColumn {{{ "
+" General Appearance {{{ "
 
-set cursorline
-set cursorcolumn
+highlight Folded cterm=None ctermbg=0 ctermfg=2
+highlight Comment cterm=None ctermbg=None ctermfg=11
 
-highlight SignColumn        cterm=None ctermfg=239 ctermbg=235 guifg=Yellow
-highlight SignifySignAdd    cterm=bold ctermfg=119 ctermbg=235
-highlight SignifySignDelete cterm=bold ctermfg=167 ctermbg=235
-highlight SignifySignChange cterm=bold ctermfg=227 ctermbg=235
+" }}} General Appearance "
 
-highlight CursorLine ctermbg=8
-highlight CursorColumn ctermbg=8
+" Gutter / SignColumn {{{ "
 
-augroup cursorline
-    autocmd!
-    autocmd WinEnter * setlocal cursorline | setlocal cursorcolumn
-    autocmd WinLeave * setlocal nocursorline | setlocal nocursorcolumn
-    autocmd InsertEnter * highlight CursorLine ctermbg=0 | highlight CursorColumn ctermbg=0
-    autocmd InsertLeave * highlight CursorLine ctermbg=52 | highlight CursorColumn ctermbg=52
-augroup END
+highlight SignColumn        ctermbg=None
+highlight SignifySignAdd    ctermfg=119
+highlight SignifySignDelete ctermfg=167
+highlight SignifySignChange ctermfg=227
 
-" }}} Cursorline / CursorColumn "
+" }}} Gutter / SignColumn "
 
-" Enable ToggleBG to toggle between dark/light background {{{ "
-
-call togglebg#map("")
-
-" }}} "
-
-" Highlight Word ---------------------------------------------------------- {{{
+" Highlight Word {{{
 "
 " Source: Steve Losh
 " This mini-plugin provides a few mappings for highlighting words temporarily.
@@ -114,4 +101,4 @@ hi def InterestingWord9 guifg=#000000 ctermfg=16 guibg=#ffd7ff ctermbg=9
 
 " }}}
 
-" ------------------------------------------------------------------------- }}}
+" }}}
