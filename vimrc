@@ -43,14 +43,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-repeat'
 
     " Appearance
-    Plug 'junegunn/seoul256.vim'
-    Plug 'altercation/vim-colors-solarized'
-    Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
     Plug 'mhinz/vim-startify'
     Plug 'saliola/vim-airline', { 'branch': 'charcount' }
-    Plug 'osyo-manga/vim-brightest'
-    Plug 'arcticicestudio/nord-vim'
-
+    Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
+    Plug 'Yggdroot/indentLine'
 
     " File navigation and System interaction
     Plug 'tpope/vim-vinegar'
@@ -83,9 +79,6 @@ call plug#begin('~/.vim/plugged')
 
     " Testing: improved searching
     Plug 'junegunn/vim-slash'
-
-    " Fun & Games
-    Plug 'vim/killersheep'
 
 call plug#end()
 
@@ -446,19 +439,6 @@ hi StartifyPath    ctermfg=245
 hi StartifySpecial ctermfg=240
 
 " }}} vim-startify "
-" vim-brightest {{{ "
-
-highlight myVimBrightestHighlightGroup ctermfg=16 ctermbg=137
-
-let g:brightest#enable_insert_mode=1
-let g:brightest#enable_highlight_all_window=1
-let g:brightest#highlight = {
-\   "group" : "myVimBrightestHighlightGroup"
-\}
-let g:brightest#pattern = '\c\k\+'
-let g:brightest_enable = 0
-
-" }}} vim-brightest "
 " vim-airline {{{ "
 
 let airline#extensions#wordcount#enabled = 1
@@ -749,18 +729,12 @@ cnoremap <expr> <C-K> GetDigraphWrapper()
 " }}} GetDigraphWrapper "
 " Cursorline {{{ "
 
-" Cursor column : highlight the 81st column of wide lines
-" Source: Damien Conway
-highlight ColorColumn ctermfg=16 ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
-
 function! RedCursorLine()
     let w:red_cursor = exists('w:red_cursor') ? !w:red_cursor : 0
     if w:red_cursor
-        colorscheme my-solarized
+        colorscheme my-colorscheme
         set cursorline
         set cursorcolumn
-        call matchadd('ColorColumn', '\%81v', 100)
     else
         set cursorline
         hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
