@@ -13,9 +13,8 @@ Clone repo
 
 ::
 
-    git clone https://github.com/saliola/dotvim.git ~/.vim
+    git clone git@github.com:saliola/vim-conf.git ~/.vim
     cd ~/.vim
-    git checkout vim-plug
 
 Create symlinks (for vim version < 7.4)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -28,9 +27,17 @@ Create symlinks (for vim version < 7.4)
 Launch vim and install plugins
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-::
+Install plugins::
 
     :PlugInstall
+
+Update plugins::
+
+    :PlugUpdate
+
+Upgrade vim-plug::
+
+    :PlugUpgrade
 
 ------------------------------------------
 Working with plugins/bundles as submodules
