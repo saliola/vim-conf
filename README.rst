@@ -16,14 +16,6 @@ Clone repo
     git clone git@github.com:saliola/vim-conf.git ~/.vim
     cd ~/.vim
 
-Create symlinks (for vim version < 7.4)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-::
-
-    ln -s ~/.vim/vimrc ~/.vimrc
-    ln -s ~/.vim/gvimrc ~/.gvimrc
-
 Launch vim and install plugins
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
