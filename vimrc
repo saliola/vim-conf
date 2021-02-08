@@ -581,6 +581,11 @@ augroup ft_tex
         autocmd FileType tex setlocal makeprg=latexmk\ -f\ -g\ -pdf\ -output-directory=latexoutput\ -interaction=nonstopmode\ -bibtex-cond\ %
     endif
 
+    autocmd FileType tex nnoremap <Leader>d :make<CR>
+    autocmd FileType tex nnoremap <Leader>D :make!<CR>
+    autocmd FileType tex nnoremap <Leader>m :make<CR>
+    autocmd FileType tex nnoremap <Leader>M :make!<CR>
+
 augroup END
 
 " ------------------------------------------------------------------------- }}}
