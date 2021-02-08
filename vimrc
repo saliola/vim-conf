@@ -28,12 +28,59 @@
 " :t -- Synonym for copy.
 "
 " ------------------------------------------------------------------------- }}}
+" On startup -------------------------------------------------------------- {{{
+" Force version of Python to be used
+if has('python3')
+endif
+" ------------------------------------------------------------------------- }}}
+" vim-plug ---------------------------------------------------------------- {{{
 
-" Pathogen ---------------------------------------------------------------- {{{
+call plug#begin('~/.vim/plugged')
 
-let g:pathogen_disabled = ['vim-peekaboo']
+    " Configurations
+    Plug 'tpope/vim-sensible'
+    Plug 'tpope/vim-unimpaired'
+    Plug 'tpope/vim-repeat'
 
-execute pathogen#infect()
+    " Appearance
+    Plug 'mhinz/vim-startify'
+    Plug 'saliola/vim-airline', { 'branch': 'charcount' }
+    Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
+    Plug 'Yggdroot/indentLine'
+
+    " File navigation and System interaction
+    Plug 'tpope/vim-vinegar'
+    Plug 'tpope/vim-eunuch'
+    Plug 'tpope/vim-dispatch'
+    Plug 'justinmk/vim-sneak'
+
+    " Git / Mercurial / Subversion
+    Plug 'mhinz/vim-signify'
+    Plug 'tpope/vim-fugitive'
+    Plug 'junegunn/gv.vim'
+
+    " Tmux
+    Plug 'christoomey/vim-tmux-navigator'
+    Plug 'tpope/vim-tbone'
+
+    " Editing
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-surround'
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
+    Plug 'junegunn/vim-easy-align'
+    Plug 'andymass/vim-matchup'
+
+    " LaTeX
+    Plug 'lervag/vimtex'
+
+    " Sage
+    Plug 'saliola/vim-sage', { 'for': 'sage' }
+
+    " Testing: improved searching
+    Plug 'junegunn/vim-slash'
+
+call plug#end()
 
 " ------------------------------------------------------------------------- }}}
 " Leaders ----------------------------------------------------------------- {{{
@@ -51,7 +98,7 @@ nnoremap <leader>q q
 " vimrc ------------------------------------------------------------------- {{{
 
 map <leader>vrc :tabnew $HOME/.vim/vimrc<CR>
-map <leader>vb :Texplore $HOME/.vim/bundle/<CR>
+map <leader>vb :Texplore $HOME/.vim/plugged/<CR>
 
 " Source the vimrc file after saving it
 augroup vimrc
@@ -288,41 +335,11 @@ nnoremap <Leader><Space> za
 " ------------------------------------------------------------------------- }}}
 " Appearance -------------------------------------------------------------- {{{
 
-set background=dark
-colorscheme my-solarized
+colorscheme my-colorscheme
 
 " ------------------------------------------------------------------------- }}}
 " Plugin settings --------------------------------------------------------- {{{
 
-" CtrlP ------------------------------------------------------------------- {{{
-
-" Default behaviour : Most Recently Used files
-let g:ctrlp_cmd = 'CtrlPMRU'
-
-" Set this to 1 to set searching by filename (as opposed to full path);
-" toggle with <c-d>
-let g:ctrlp_by_filename = 0
-
-" Set this to 1 to set regexp search as the default;
-" toggle with <c-r>
-let g:ctrlp_regexp = 0
-
-" prompt mappings:
-" - <cr> opens file in new tab;
-" - <c-t> opens file in same window
-let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<c-t>'],
-    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
-    \ }
-
-" mappings
-nmap <C-p> :<C-U>CtrlP<CR>
-nmap <C-p><C-f> :<C-U>CtrlP<CR>
-nmap <C-p><C-r> :<C-U>CtrlPMRU<CR>
-nmap <C-p><C-l> :<C-U>CtrlPLine<CR>
-nmap <C-p><C-n> :<C-U>CtrlP ~/Dropbox/notes<CR>
-
-" ------------------------------------------------------------------------- }}}
 " UltiSnips --------------------------------------------------------------- {{{
 
 let g:snips_author="Franco Saliola"
@@ -370,25 +387,6 @@ omap ac <plug>(signify-motion-outer-pending)
 xmap ac <plug>(signify-motion-outer-visual)
 
 " }}} vim-signify "
-" rainbow parantheses {{{ "
-
-let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-let g:rainbow#colors = {
-\   'dark': [
-\     ['darkyellow',  'orangered3'    ],
-\     ['darkgreen',   'orange2'       ],
-\     ['blue',        'yellow3'       ],
-\     ['darkmagenta', 'olivedrab4'    ],
-\     ['red',         'green4'        ],
-\     ['darkyellow',  'paleturquoise3'],
-\     ['darkgreen',   'deepskyblue4'  ],
-\     ['blue',        'darkslateblue' ],
-\     ['darkmagenta', 'darkviolet'    ]
-\   ]
-\ }
-
-" }}} rainbow parantheses "
 " vim-dispatch {{{ "
 
 nnoremap <Leader>d :Dispatch<CR>
@@ -441,26 +439,20 @@ hi StartifyPath    ctermfg=245
 hi StartifySpecial ctermfg=240
 
 " }}} vim-startify "
-" vim-brightest {{{ "
-"
-highlight myVimBrightestHighlightGroup ctermfg=16 ctermbg=137
-
-let g:brightest#enable_insert_mode=1
-let g:brightest#enable_highlight_all_window=1
-let g:brightest#highlight = {
-\   "group" : "myVimBrightestHighlightGroup"
-\}
-let g:brightest#pattern = '\c\k\+'
-
-" }}} vim-brightest "
 " vim-airline {{{ "
 
-let airline#extensions#wordcount#enabled = 0
+let airline#extensions#wordcount#enabled = 1
 let airline#extensions#charcount#enabled = 1
-let airline#extensions#charcount#countspaces = 0
-let airline#extensions#charcount#filetypes = '\vhelp|markdown|rst|org|text'
+let airline#extensions#charcount#countspaces = 1
+let airline#extensions#charcount#filetypes = 'help|markdown|rst|org|text'
 
 " }}} vim-airline "
+" vim-unimpaired {{{ "
+
+nnoremap ]t :tabnext<CR>
+nnoremap [t :tabprevious<CR>
+
+" }}} vim-unimpaired
 " ------------------------------------------------------------------------- }}}
 " Filetype-specific ------------------------------------------------------- {{{
 
@@ -508,9 +500,10 @@ command! HGRejects :call OpenHGRejectFile()
 " Python {{{
 
 augroup ft_python
-    au!
+    autocmd!
 
-    au FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+    autocmd FileType python,sage setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+    autocmd FileType python,sage setlocal wildignore+=*.pyc
 augroup END
 
 " }}}
@@ -538,15 +531,67 @@ augroup END
 " ------------------------------------------------------------------------- }}}
 " Latex ------------------------------------------------------------------- {{{
 
-source ~/.vim/bundle/my-vim-latex-config/latexbox-conf.vim
+let g:matchup_override_vimtex = 1
+let g:matchup_matchparen_enabled = 0
+
+let g:vimtex_quickfix_autojump = 0
+let g:vimtex_quickfix_mode = 2
+
+let g:vimtex_quickfix_latexlog = {'default' : 0} " Disable all warnings
+
+if has("unix")
+    let s:uname = system("uname")
+    if s:uname == "Linux\n"
+        let g:vimtex_view_method = 'mupdf'
+    endif
+endif
+
+let g:vimtex_fold_enabled = 0
+let g:vimtex_fold_manual = 1
+let g:vimtex_fold_envs = 1
+
+let g:vimtex_compiler_latexmk = {
+\ 'backend' : 'process',
+\ 'background' : 0,
+\ 'build_dir' : 'latexoutput',
+\ 'callback' : 1,
+\ 'continuous' : 0,
+\ 'options' : [
+\   '-g',
+\   '-pdf',
+\   '-cd',
+\   '-interaction=nonstopmode',
+\   '-bibtex-cond',
+\   '-e "\$pdflatex .= '' && cp -v latexoutput/\%R.pdf .''"'
+\ ],
+\}
+
+augroup ft_tex
+    autocmd!
+
+    " ignore these filenames during tab completion
+    autocmd FileType tex setlocal wildignore+=*.out,*.synctex.gz,*.aux,*.ilg,*.log,*.nls,*.idx,*.ind,*.blg,*.nlo,*.pdf,*.toc
+
+    " set iskeyword (tex syntax file overides this....)
+    autocmd FileType tex setlocal iskeyword=@,48-57,_,192-255
+
+    " if there is no Makefile, then set dispatch command
+    if ! filereadable(expand("Makefile"))
+        autocmd FileType tex echo "setting makeprg to latexmk ..."
+        autocmd FileType tex setlocal makeprg=latexmk\ -f\ -g\ -pdf\ -output-directory=latexoutput\ -interaction=nonstopmode\ -bibtex-cond\ %
+    endif
+
+    autocmd FileType tex nnoremap <Leader>d :make<CR>
+    autocmd FileType tex nnoremap <Leader>D :make!<CR>
+    autocmd FileType tex nnoremap <Leader>m :make<CR>
+    autocmd FileType tex nnoremap <Leader>M :make!<CR>
+
+augroup END
 
 " ------------------------------------------------------------------------- }}}
 " Useful functions -------------------------------------------------------- {{{
 
 " yank / paste from the clipboard ------------------------------------------ {{{
-
-" enable copy/paste on Mac OSX and tmux (see also notes/macosx.notes)
-set clipboard=unnamed
 
 " toggle (no)paste before pasting from the clipboard
 " Reference: http://tilvim.com/2014/03/18/a-better-paste.html
@@ -668,79 +713,6 @@ hi def IndentGuides guibg=#303030 ctermbg=234
 nnoremap <leader>I :call IndentGuides()<cr>
 
 " ------------------------------------------------------------------------- }}}
-" Highlight Word ---------------------------------------------------------- {{{
-"
-" Source: Steve Losh
-" This mini-plugin provides a few mappings for highlighting words temporarily.
-"
-" Sometimes you're looking at a hairy piece of code and would like a certain
-" word or two to stand out temporarily.  You can search for it, but that only
-" gives you one color of highlighting.  Now you can use <leader>N where N is
-" a number from 1-6 to highlight the current word in a specific color.
-"
-" <leader>0 will clear the highlighting.
-
-function! HighlightInterestingWord(n) " {{{
-    if a:n == 0
-        for m in range(1, 9)
-            let mid = 86750 + m
-            silent! call matchdelete(mid)
-        endfor
-
-    else
-        " Save our location.
-        normal! mz
-
-        " Yank the current word into the z register.
-        normal! "zyiw
-
-        " Calculate an arbitrary match ID.  Hopefully nothing else is using it.
-        let mid = 86750 + a:n
-
-        " Clear existing matches, but don't worry if they don't exist.
-        silent! call matchdelete(mid)
-
-        " Construct a literal pattern that has to match at boundaries.
-        let pat = '\V\<' . escape(@z, '\') . '\>'
-
-        " Actually match the words.
-        call matchadd("InterestingWord" . a:n, pat, 1, mid)
-
-        " Move back to our original location.
-        normal! `z
-    endif
-endfunction " }}}
-
-" Mappings {{{
-
-nnoremap <silent> <leader>1 :call HighlightInterestingWord(1)<cr>
-nnoremap <silent> <leader>2 :call HighlightInterestingWord(2)<cr>
-nnoremap <silent> <leader>3 :call HighlightInterestingWord(3)<cr>
-nnoremap <silent> <leader>4 :call HighlightInterestingWord(4)<cr>
-nnoremap <silent> <leader>5 :call HighlightInterestingWord(5)<cr>
-nnoremap <silent> <leader>6 :call HighlightInterestingWord(6)<cr>
-nnoremap <silent> <leader>7 :call HighlightInterestingWord(7)<cr>
-nnoremap <silent> <leader>8 :call HighlightInterestingWord(8)<cr>
-nnoremap <silent> <leader>9 :call HighlightInterestingWord(9)<cr>
-nnoremap <silent> <leader>0 :call HighlightInterestingWord(0)<cr>
-
-" }}}
-
-" Default Highlights {{{
-
-hi def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
-hi def InterestingWord2 guifg=#000000 ctermfg=16 guibg=#aeee00 ctermbg=154
-hi def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#8cffba ctermbg=121
-hi def InterestingWord4 guifg=#000000 ctermfg=16 guibg=#b88853 ctermbg=137
-hi def InterestingWord5 guifg=#000000 ctermfg=16 guibg=#ff9eb8 ctermbg=211
-hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
-hi def InterestingWord7 guifg=#000000 ctermfg=16 guibg=#d75faf ctermbg=169
-hi def InterestingWord8 guifg=#000000 ctermfg=16 guibg=#ff005f ctermbg=197
-hi def InterestingWord9 guifg=#000000 ctermfg=16 guibg=#ffd7ff ctermbg=225
-
-" }}}
-
-" ------------------------------------------------------------------------- }}}
 " GetDigraphWrapper {{{ "
 
 " Wrap C-k to allow backspace to interrupt digraph insertion;
@@ -762,18 +734,12 @@ cnoremap <expr> <C-K> GetDigraphWrapper()
 " }}} GetDigraphWrapper "
 " Cursorline {{{ "
 
-" Cursor column : highlight the 81st column of wide lines
-" Source: Damien Conway
-highlight ColorColumn ctermfg=16 ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
-
 function! RedCursorLine()
     let w:red_cursor = exists('w:red_cursor') ? !w:red_cursor : 0
     if w:red_cursor
-        colorscheme my-solarized
+        colorscheme my-colorscheme
         set cursorline
         set cursorcolumn
-        call matchadd('ColorColumn', '\%81v', 100)
     else
         set cursorline
         hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
