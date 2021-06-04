@@ -7,16 +7,21 @@ syntax enable
 
 " Load base colorscheme {{{ "
 
-let g:nord_underline=0
-runtime colors/nord.vim
+runtime colors/night-owl.vim
 let g:colors_name = "my-colorscheme"
 
 " }}} Load base colorscheme "
 
 " General Appearance {{{ "
 
+if (has("termguicolors"))
+    set termguicolors
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
 highlight Folded cterm=None ctermbg=0 ctermfg=2
-highlight Comment cterm=None ctermbg=None ctermfg=11
+highlight Comment cterm=italic ctermbg=None ctermfg=11 gui=italic guifg=#ff8700
 
 " }}} General Appearance "
 
