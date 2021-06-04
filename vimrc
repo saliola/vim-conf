@@ -47,6 +47,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'saliola/vim-airline', { 'branch': 'charcount' }
     Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
     Plug 'Yggdroot/indentLine'
+    Plug 'haishanh/night-owl.vim'
 
     " File navigation and System interaction
     Plug 'tpope/vim-vinegar'
