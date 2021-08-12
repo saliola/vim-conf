@@ -315,6 +315,10 @@ nnoremap <silent> N   Nzv:PulseX<cr>
 nnoremap <expr> } foldclosed(search('^$', 'Wn')) == -1 ? "}" : "}j}"
 nnoremap <expr> { foldclosed(search('^$', 'Wnb')) == -1 ? "{" : "{k{"
 
+" set gV to select the most recently changed text (use to select pasted text,
+" like how gv selects the previously-selected text in visual mode)
+nnoremap <expr> gV '`[' . getregtype()[0] . '`]'
+
 " ------------------------------------------------------------------------- }}}
 " Folding ----------------------------------------------------------------- {{{
 
