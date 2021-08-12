@@ -176,7 +176,7 @@ set number
 set relativenumber
 
 " }}} Line numbers "
-" Undo / Backup / Swap {{{ "
+" Undo / Redo / Backup / Swap {{{ "
 
 set undofile
 set undoreload=10000
@@ -188,7 +188,10 @@ set directory=~/.vim/tmp/swap//   " swap files
 
 set noswapfile       " no swap files
 
-" }}} Undo / Backup / Swap "
+" use 'U' for "redo" since 'u' is "undo"
+noremap U <c-r>
+
+" }}} Undo / Redo / Backup / Swap "
 " Windows {{{ "
 
 set splitbelow
