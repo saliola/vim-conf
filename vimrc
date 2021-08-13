@@ -424,14 +424,6 @@ xmap T <Plug>Sneak_T
 omap t <Plug>Sneak_t
 omap T <Plug>Sneak_T
 
-" 2-character Sneak (default)
-nmap <leader>s <Plug>Sneak_s
-nmap <leader>S <Plug>Sneak_S
-xmap <leader>s <Plug>Sneak_s
-xmap <leader>S <Plug>Sneak_S
-omap <leader>s <Plug>Sneak_s
-omap <leader>S <Plug>Sneak_S
-
 " }}} vim-sneak "
 " vim-startify {{{ "
 
