@@ -79,6 +79,7 @@ call plug#begin('~/.vim/plugged')
 
     " Testing: improved searching
     Plug 'junegunn/vim-slash'
+    Plug 'wellle/context.vim'
 
 call plug#end()
 
@@ -508,24 +509,26 @@ augroup END
 " ------------------------------------------------------------------------- }}}
 " Latex ------------------------------------------------------------------- {{{
 
-let g:matchup_override_vimtex = 1
-let g:matchup_matchparen_enabled = 0
-
-let g:vimtex_quickfix_autojump = 0
-let g:vimtex_quickfix_mode = 2
-
-let g:vimtex_quickfix_latexlog = {'default' : 0} " Disable all warnings
-
 if has("unix")
     let s:uname = system("uname")
     if s:uname == "Linux\n"
         let g:vimtex_view_method = 'mupdf'
     endif
+    if s:uname == "Darwin\n"
+        let g:vimtex_view_method = 'skim'
+    endif
 endif
 
-let g:vimtex_fold_enabled = 0
-let g:vimtex_fold_manual = 1
-let g:vimtex_fold_envs = 1
+let g:vimtex_fold_enabled = 1 " -- default value is 0
+let  g:vimtex_fold_types = {
+       \ 'preamble' : {'enabled' : 0},
+       \ 'items' : {'enabled' : 0},
+       \ 'comments' : {'enabled' : 1},
+       \ 'envs' : {
+       \   'blacklist' : [],
+       \   'whitelist' : ['solution'],
+       \ },
+       \}
 
 let g:vimtex_compiler_latexmk = {
 \ 'backend' : 'process',
